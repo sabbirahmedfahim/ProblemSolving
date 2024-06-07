@@ -1,26 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 int main()
 {
     string s;
-    cin >> s;
-    int ascci_storage;
-    cin>>ascci_storage;
+    getline(cin, s);
+    stringstream ss(s);
+    string word;
+    int cnt = 0;
 
-    int revLen = s.size() - 1;
-    int flag = 0;
-    int count_ascci = 0;
-    for (int i = 0; i < s.size() / 2; i++, revLen--)
+    while (ss >> word)
     {
-        if (s[i] != s[revLen])
+        for (int i = 0; i < word.size(); i++)
         {
-            count_ascci = (int) (s[revLen] - s[i]);
+            if (isalpha(word[i]) && !isalpha(word[i + 1]))
+            {
+                cnt++;
+            }
         }
     }
-    
-    cout<<count_ascci;
-
+    cout << cnt;
 
     return 0;
 }
