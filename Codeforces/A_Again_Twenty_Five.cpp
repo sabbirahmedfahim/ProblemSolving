@@ -6,11 +6,14 @@ using namespace std;
 
 int main()
 {
-    double n;
-    cin >> n;
-    double ans = pow(5, n);
-    ll ans2 = static_cast<ll>(ans);
-    cout << ans2 % 100;
+    // double n;
+    // cin >> n;
+    // double ans = pow(5, n);
+    // ll ans2 = static_cast<ll>(ans);
+    // cout << ans2 % 100;
+
+    cin.ignore();
+    cout << 25;
 
     return 0;
 }
