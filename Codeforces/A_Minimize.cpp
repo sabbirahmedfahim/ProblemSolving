@@ -1,25 +1,21 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
-#define nl '\n'
 using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
+    int t; cin >> t;
     while (t--)
     {
-        int mn = 10000;
-        int a, b;
-        cin >> a >> b;
-        for (int i = a; i <= b; i++)
+        int a, b; cin >> a >> b;
+        int c = b-a;
+        if(c == 0)
         {
-            if ((i - a) + (b - i) > -1 && (i - a) + (b - i) < mn)
-                mn = (i - a) + (b - i);
-        }
-        cout << mn << nl;
+            cout << (c-a)+(b-c) << endl; break;
+        } 
+        if(c%2==1) c--;
+        cout << (c-a)+(b-c) << endl;
     }
+    
 
     return 0;
 }
