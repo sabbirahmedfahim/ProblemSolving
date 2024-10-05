@@ -10,16 +10,24 @@ int main()
     while (t--)
     {
         int n; cin >> n;
-        int arr[n];
-        int negativeCount = 0;
-        int positiveCount = 0;
-        for (int i = 0; i < n; i++)
+        int pos = 0, neg = 0;
+        while (n--)
         {
-            cin >> arr[i];
-            if(arr[i] == 1) positiveCount++;
-            else negativeCount++;
+            int data; cin >> data;
+            if(data == 1) pos++;
+            else neg++;
         }
-        cout << abs(positiveCount-negativeCount) << nl;
+        // if(pos == neg || pos > neg) cout << 0 << nl;
+        // else if(neg > pos) cout << neg - pos << nl;
+        int cnt = 0;
+        while (neg > pos)   
+        {
+            neg--;
+            pos++;
+            cnt++;
+        }
+        if(neg%2 == 1) cnt++;
+        cout << cnt << nl;
     }
 
     return 0;
