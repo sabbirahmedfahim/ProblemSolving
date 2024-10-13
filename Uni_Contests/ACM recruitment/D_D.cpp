@@ -1,3 +1,4 @@
+// TLE on test 12
 #include <bits/stdc++.h>
 #define ll long long int
 #define ull unsigned long long int
@@ -6,26 +7,69 @@ using namespace std;
 
 int main()
 {
-    string s; cin >> s;
+    ios::sync_with_stdio(false); 
+    cin.tie(NULL);  
 
-    int cnt = 0;
-    int cnt_6 = 0, cnt_9 = 0, cnt_3 = 0, cnt_E = 0;
-    for (int i = 0; i < s.size(); i++)
+    int n;
+    string s;
+    cin >> n >> s;
+    string temp = s;
+    list<char> l;
+    while (!s.empty())
     {
-        if(s[i] == '4' || s[i] == '7' || s[i] == 'A' || s[i] == 'b' || s[i] == 'C' || s[i] == 'd' || s[i] == 'F')
-        {
-            cnt++;
-        }
-        else if(s[i] == '6') cnt_6++; else if(s[i] == '9') cnt_9++;
-        else if(s[i] == '3') cnt_3++; else if(s[i] == 'E') cnt_E++;
+        l.push_back(s.back());
+        s.pop_back();
     }
-    int _3_E_laghbe = 0;
-    if(cnt_3 > 0 || cnt_E > 0) _3_E_laghbe = abs(cnt_3-cnt_E);
-    int _6_9_laghbe = 0;
-    if(cnt_3 > 0 || cnt_E > 0) _6_9_laghbe = abs(cnt_6-cnt_9);
+    reverse(l.begin(), l.end());
 
-    cout << cnt + _3_E_laghbe + _6_9_laghbe;
-
+    int k = n - 1;
+    while (k--)
+    {
+        int data = l.back();
+        l.pop_back();
+        l.push_front(data);
+        string afterKCycle;
+        for (auto data : l)
+        {
+            afterKCycle.push_back(data);
+        }
+        if (afterKCycle < temp)
+        {
+            cout << "No"; return 0;
+        }
+    }
+    cout << "Yes";
 
     return 0;
 }
+
+
+// Wrong answer on test 6
+// #include <bits/stdc++.h>
+// #define ll long long int
+// #define ull unsigned long long int
+// #define nl '\n'
+// using namespace std;
+
+// int main()
+// {
+//     ios::sync_with_stdio(false); 
+//     cin.tie(NULL);  
+
+//     int n;
+//     string s;
+//     cin >> n >> s;
+//     bool flag = false;
+//     char currentMx = s[0];
+//     for (int i = 1; i < s.size(); i++)
+//     {
+//         if(s[i] < currentMx)
+//         {
+//             flag = true;
+//         }
+//     }
+//     if(flag) cout << "No";
+//     else cout << "Yes";
+
+//     return 0;
+// }
