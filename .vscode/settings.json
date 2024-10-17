@@ -6,6 +6,7 @@
         "algorithm": "cpp",
         "string": "cpp",
         "array": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "valarray": "cpp"
     }
 }
