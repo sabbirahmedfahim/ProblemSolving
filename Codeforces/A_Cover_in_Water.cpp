@@ -1,34 +1,35 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long int
+#define input(v) for(auto &data : v) cin >> data
+#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
 
 int main()
 {
+    FAJR_BOOST()
+
     int t; cin >> t;
     while (t--)
     {
-        int n; cin >> n;
-        string s; cin >> s;
-        int sumDot = 0;
-        int insideCnt = 0;
-        for (int i = 1; i < s.size(); i++)
+        int n; string s; cin >> n >> s;
+        int cnt = 0;
+        int mx = 0;
+        int total_empty = 0;
+        for (int i = 0; i < n; i++)
         {
-            if(s[i-1] == '.' && s[i] == '.') 
+            if(s[i] == '.')
             {
-                insideCnt++;
+                cnt++;
+                total_empty++;
+                mx = max(mx, cnt);
             }
-            else 
-            {
-                sumDot += insideCnt--;
-                insideCnt = 0;
-            }
+            else cnt = 0;
         }
-        if(sumDot == 0) cout <<sumDot << nl;
-        else cout <<sumDot + 1 << nl;
+        if(mx > 2) cout << 2 << nl;
+        else cout << total_empty << nl;
     }
-    
 
     return 0;
 }
