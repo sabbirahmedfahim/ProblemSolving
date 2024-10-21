@@ -1,4 +1,3 @@
-// alhamduliiah ! accepted !!!
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -8,23 +7,16 @@
 using namespace std;
 void solve()
 {
-    int x, k; cin >> x >> k;
-    if(x % k != 0) 
+    int n; cin >> n;
+    n--;
+    vector<int> v(n);
+    int ans = 0;
+    for (int i = 0; i < n; i++)
     {
-        cout << 1 << nl;
-        cout << x << nl;
+        cin >> v[i]; ans += v[i];
     }
-    else if(x-1 % k != 0) 
-    {
-        cout << 2 << nl;
-        cout << x-1 << " " << 1 << nl;
-    }
-    else 
-    {
-        cout << 3 << nl;
-        cout << x-2 << " " << 2 << " " << 1 << nl;
-    }
-}
+    cout << -ans << nl;
+} 
 int main()
 {
     FAJR_BOOST()
