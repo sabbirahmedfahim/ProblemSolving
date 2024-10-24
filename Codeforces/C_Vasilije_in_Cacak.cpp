@@ -7,21 +7,9 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<int> v(n);
-    input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
-    {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
-    }
+    int n, k, x; cin >> n >> k >> x;
+    int mn = (k*(k+1))/2;
+    int mx;
 }
 int main()
 {

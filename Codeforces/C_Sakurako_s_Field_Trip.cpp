@@ -8,19 +8,11 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
-    input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    int arr[n];
+    input(arr);
+    for (int i = 0; i < n-3; i++)
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        if(arr[i] == arr[i+1] && arr[i+1] != arr[i+2] && arr[]) 
     }
 }
 int main()

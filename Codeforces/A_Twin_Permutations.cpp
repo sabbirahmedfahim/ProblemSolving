@@ -1,5 +1,7 @@
+// Up-solved after reviewing others' approaches (YouTube)
 #include <bits/stdc++.h>
 #define nl '\n'
+#define sp " "
 #define ll long long int
 #define input(v) for(auto &data : v) cin >> data
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
@@ -8,20 +10,21 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
-    input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    vector<int> v(n+1);
+    for (int i = 1; i <= n; i++) // 1 - based index
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        cin >> v[i];
     }
+    for (int i = 1; i <= n; i++)
+    {
+        // approach: i -> n - arr[i] + 1
+        v[i] = n - v[i] + 1;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << nl;
 }
 int main()
 {

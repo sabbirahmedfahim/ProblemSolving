@@ -1,3 +1,4 @@
+// easy
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -8,20 +9,14 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
-    input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    string s; cin >> s;
+    list <char> l;
+    for(auto ch : s) l.push_back(ch);
+    while (l.front() == '0' && l.back() == '1' || l.front() == '1' && l.back() == '0')
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        l.pop_front(); l.pop_back();
     }
+    cout << l.size() << nl;
 }
 int main()
 {

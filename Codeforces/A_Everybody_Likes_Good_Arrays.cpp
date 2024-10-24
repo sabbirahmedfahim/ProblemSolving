@@ -5,23 +5,27 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
+/*
+parity: 2 diye vag korle vag shes AKA remainder when divided by 2
+*/
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
+    vector<ll> v(n);
     input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    int cnt = 0;
+    int op = 0;
+    for (int i = 0; i < n-1; i++)
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
+        if(v[i]%2 == v[i+1]%2) cnt++;
+        else
         {
-            cout << v[i] << " ";
+            op += cnt;
+            cnt = 0;
         }
-        cout << nl;
     }
+    if(cnt != 0) op += cnt; // mr corner case
+    cout << op << nl;
 }
 int main()
 {

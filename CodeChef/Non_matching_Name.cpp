@@ -7,21 +7,25 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<int> v(n);
-    input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    int n, m; cin >> n >> m;
+    string a, b; cin >> a >> b;
+    map<char, int> mp;
+    for (int i = 0; i < a.size(); i++)
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        mp[a[i]]++;
     }
+    for (int i = 0; i < b.size(); i++)
+    {
+        mp[b[i]]++;
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        if(mp[i + 'a'] == 0) 
+        {
+            cout << "Yes" << nl; return;
+        }
+    }
+    cout << "No" << nl;
 }
 int main()
 {

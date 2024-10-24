@@ -1,3 +1,4 @@
+// Up-solved after reviewing others' approaches (YouTube)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -8,20 +9,20 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
+    vector<ll> v(n);
     input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    vector<ll> v2;
+    v2.push_back(v[0]); // first index same
+    for (int i = 1; i < n; i++)
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
+        if(v[i-1] > v[i]) 
         {
-            cout << v[i] << " ";
+            v2.push_back(v[i]); v2.push_back(v[i]);
         }
-        cout << nl;
+        else v2.push_back(v[i]);
     }
+    cout << v2.size() << nl;
+    print(v2);
 }
 int main()
 {

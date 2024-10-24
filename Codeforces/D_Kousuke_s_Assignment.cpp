@@ -10,18 +10,16 @@ void solve()
     int n; cin >> n;
     vector<int> v(n);
     input(v);
-    sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    vector<int> pref(n);
+    pref[0] = v[0];
+    int cnt = 0;
+    for (int i = 1; i < n; i++)
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        pref[i] = pref[i-1] + v[i];
+        if(v[i-1] > 0 && v[i] < 0 && pref[i] == 0) cnt++;
+        else pref[i-1] = 0;
     }
+    cout << cnt << nl;
 }
 int main()
 {

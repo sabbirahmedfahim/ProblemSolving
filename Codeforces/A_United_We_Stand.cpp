@@ -1,3 +1,4 @@
+// resolved (editorial) [some confusion remains]
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -5,22 +6,29 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
+/*[shadow code]
+if(all elements same) 
+    cout << -1
+else
+{
+    b -> smallest element
+	c -> remaining elements
+}
+*/
 void solve()
 {
     int n; cin >> n;
     vector<int> v(n);
     input(v);
     sort(v.begin(), v.end());
-    if(v[0] == v.back()) cout << "NO" << nl;
-    else 
+    if(v[0] == v[n-1]) cout << -1 << nl;
+    else
     {
-        cout << "YES" << nl;
-        cout << v[0] << " ";
-        for (int i = n-1; i >= 1; i--)
-        {
-            cout << v[i] << " ";
-        }
-        cout << nl;
+        int i = 0;
+        while (v[i] == v[0]) i++;
+        cout << i << " " << n - i << nl;
+        for(int j = 0; j < i; ++j) cout << v[j] << " ";
+        for(int j = i; j < n; ++j) cout << v[j] << " ";
     }
 }
 int main()
