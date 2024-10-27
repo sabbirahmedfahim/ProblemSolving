@@ -1,4 +1,3 @@
-// Up-solved after reviewing others' approaches (YouTube)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -8,24 +7,29 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector <ll> v(n); input(v);
-    set <ll> s; 
-    s.insert(0);
-    /*
-    Adding 0 helps us find zero-sum segments from the start. Edge case.
-    */ 
-    ll sum = 0, ans = 0;
+    int n; string s; cin >> n >> s;
+    map<char, int> mp;
+    string s1;
     for (int i = 0; i < n; i++)
     {
-        sum += v[i];
-        if(s.count(sum)) // Checks if sum already exists in set s
+        if(mp[s[i]] == 0) 
         {
-            ans++; sum = 0; s.clear(); s.insert(0);
+            s1.push_back(s[i]); mp[s[i]]++;
         }
-        s.insert(sum);
     }
-    cout << ans << nl;
+    sort(s1.begin(), s1.end());
+    // cout << s1 << nl;
+    map<char, char> mp2;
+    for (int i = 0, j = s1.size()-1; i < s1.size()/2+1; i++, j--)
+    {
+        mp2[s1[i]] = s1[j];
+        mp2[s1[j]] = s1[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << mp2[s[i]];
+    }
+    cout << nl;
 }
 int main()
 {
