@@ -7,28 +7,39 @@
 using namespace std;
 void solve()
 {
-    string s; cin >> s;
-    map<char, int> mp;
-    int mx = -1;
-    int pos = -1;
-    for (int i = 0; i < s.size(); i++)
+    string s;
+    cin >> s;
+    bool isInserted = false;
+    for (int i = 0; i < s.size() - 1 && !isInserted; i++)
     {
-        mp[s[i]]++;
-        if(mp[s[i]] > mx) 
+        if (s[i] == s[i + 1])
         {
-            pos = i;
-            mx = mp[s[i]];
+            isInserted = true;
+            char ch = 'a';
+            while (1)
+            {
+                if(ch != s[i]) 
+                {
+                    s.insert(i+1, 1, ch); break;
+                } 
+                ch++;
+            }
         }
     }
-    for (int i = 0; i < 26; i++)
+    if(isInserted) cout << s << nl;
+    else 
     {
-        if(mp[s[i]] == 0) 
+        char ch = 'a';
+        while (1)
         {
-            // cout << pos << " ";
-            s.insert(pos, 1, i+'a'); break;
+            if(s.back() != ch)
+            {
+                s += ch; break;
+            }
+            ch++;
         }
+        cout << s << nl;
     }
-    cout << s << nl;
 }
 int main()
 {

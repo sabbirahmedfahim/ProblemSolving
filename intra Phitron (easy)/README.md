@@ -1,1 +1,0 @@
-- [Intra Phitron Programming Contest - Batch 5 (Easy Level)](https://www.hackerrank.com/contests/intra-phitron-programming-conctest-batch-5-easy-level/challenges)

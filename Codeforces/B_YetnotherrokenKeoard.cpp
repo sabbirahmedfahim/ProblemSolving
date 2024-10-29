@@ -8,38 +8,18 @@ using namespace std;
 void solve()
 {
     string s; cin >> s;
-    stack<int> cap, sml;
-    for (int i = 0; i < s.size(); i++)
+    int cnt_sml = 0, cnt_cap = 0;
+    string ans = "";
+    for (int i = s.size()-1; i >= 0; i--)
     {
-        if(s[i] == 'B')
-        {
-            s[i] = '#';
-            if(!cap.empty())
-            {
-                s[cap.top()] = '#';
-                cap.pop();
-            }
-        }
-        else if(s[i] == 'b')
-        {
-            s[i] = '#';
-            if(!sml.empty()) 
-            {
-                s[sml.top()] = '#';
-                sml.pop();
-            }
-        }
-        else
-        {
-            if(s[i] >= 'A' && s[i] <= 'Z') cap.push(i);
-            else sml.push(i);
-        }
+        if(s[i] == 'b') cnt_sml++;
+        else if(s[i] == 'B') cnt_cap++;
+        else if(islower(s[i]) && cnt_sml) cnt_sml--;
+        else if(isupper(s[i]) && cnt_cap) cnt_cap--;
+        else ans += s[i];
     }
-    for(auto data : s)
-    {
-        if(data != '#') cout << data;
-    }
-    cout << nl;
+    reverse(ans.begin(), ans.end());
+    cout << ans << nl;
 }
 int main()
 {
