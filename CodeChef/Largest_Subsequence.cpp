@@ -4,6 +4,17 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
+/*
+|      Substring         |     Subsequence        |
+|------------------------|------------------------|
+| Must be contiguous     | Can be non-contiguous  |
+| "he", "ell" in "hello" | "hlo", "ho" in "hello" |
+
+All substrings are subsequence but all subsequence are not substrings.
+
+case-1: aba -> ab = 1, ba = 1
+case-2: aaa -> ab = 0, ba = 0
+*/
 void solve()
 {
     int n; string s; cin >> n >> s;

@@ -4,15 +4,17 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
+ll fact(int n)
+{
+    if(n==0 || n==1) return 1;
+    return fact(n-1)*n;
+}
 void solve()
 {
-    ll n, k, x; cin >> n >> k >> x; // 1 ≤ X ≤ 4⋅10^10
-    ll mnSum = (k*(k+1))/2;
-    ll totalSum = (n*(n+1))/2;
-    ll diff = n-k;
-    ll mxSum = totalSum - ((diff*(diff+1))/2); 
-    if(mnSum > x || mxSum < x) cout << "NO" << nl;
-    else cout << "YES" << nl;
+    ll n, d; cin >> n >> d; 
+    if(n >= d && n%d == 0) cout << "YES" << nl;
+    else if(fact(n)%d == 0) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {
