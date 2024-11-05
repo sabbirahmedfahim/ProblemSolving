@@ -1,3 +1,4 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,13 +7,15 @@
 using namespace std;
 void solve()
 {
-    int n, k; string s; cin >> n >> k >> s;
-    map<char, int> mp;
-    for (int i = 0; i < s.size(); i++) mp[s[i]-'a']++;
-    int cnt_odd = 0;
-    for (int i = 0; i < 26; i++) if(mp[i]%2) cnt_odd++;
-    
-    cout << ((cnt_odd-k <= 1)? "YES" : "NO") << nl;
+    int n, k; cin >> n >> k;
+    vector<int> v(n);
+    ll sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i]; sum += v[i];
+    }
+    if(sum < n || sum%n && k == 0) cout << "NO" << nl; // ***
+    else cout << "YES" << nl; 
 }
 int main()
 {

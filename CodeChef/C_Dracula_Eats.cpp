@@ -6,13 +6,15 @@
 using namespace std;
 void solve()
 {
-    int n, k; string s; cin >> n >> k >> s;
-    map<char, int> mp;
-    for (int i = 0; i < s.size(); i++) mp[s[i]-'a']++;
-    int cnt_odd = 0;
-    for (int i = 0; i < 26; i++) if(mp[i]%2) cnt_odd++;
-    
-    cout << ((cnt_odd-k <= 1)? "YES" : "NO") << nl;
+    int n; cin >> n;
+
+    int cnt = 0, data = 2;
+    while (true)
+    {
+        if(data > n) break;
+        cnt++; data += 7;
+    }
+    cout << cnt << nl;
 }
 int main()
 {

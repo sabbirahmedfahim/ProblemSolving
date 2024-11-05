@@ -7,45 +7,23 @@
 using namespace std;
 void solve()
 {
-    string s;
-    cin >> s;
-    bool isInserted = false;
-    for (int i = 0; i < s.size() - 1 && !isInserted; i++)
+    string s; cin >> s;
+    for (int i = 0; i < s.size() - 1; i++)
     {
         if (s[i] == s[i + 1])
         {
-            isInserted = true;
-            char ch = 'a';
-            while (1)
-            {
-                if(ch != s[i]) 
-                {
-                    s.insert(i+1, 1, ch); break;
-                } 
-                ch++;
-            }
+            (s[i] != 'a')? s.insert(i+1, 1, 'a') : s.insert(i+1, 1, 'b');
+            cout << s << nl; return;
         }
     }
-    if(isInserted) cout << s << nl;
-    else 
-    {
-        char ch = 'a';
-        while (1)
-        {
-            if(s.back() != ch)
-            {
-                s += ch; break;
-            }
-            ch++;
-        }
-        cout << s << nl;
-    }
+    (s.back() != 'a')? s += 'a' : s += 'b';
+    cout << s << nl;
 }
 int main()
 {
     FAJR_BOOST()
 
-    int t; cin >> t; 
+    int t; cin >> t;
     while (t--) solve();
 
     return 0;

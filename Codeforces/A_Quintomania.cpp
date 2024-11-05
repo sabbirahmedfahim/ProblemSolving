@@ -6,13 +6,18 @@
 using namespace std;
 void solve()
 {
-    int n, k; string s; cin >> n >> k >> s;
-    map<char, int> mp;
-    for (int i = 0; i < s.size(); i++) mp[s[i]-'a']++;
-    int cnt_odd = 0;
-    for (int i = 0; i < 26; i++) if(mp[i]%2) cnt_odd++;
-    
-    cout << ((cnt_odd-k <= 1)? "YES" : "NO") << nl;
+    int n; cin >> n;
+    vector<int> v(n);
+    for(auto &data : v) cin >> data;
+    bool isPossible = true;
+    for (int i = 0; i < n-1; i++)
+    {
+        if(abs(v[i] - v[i+1]) != 5 && abs(v[i] - v[i+1]) != 7) 
+        {
+            isPossible = false; break;
+        }
+    }
+    cout << ((isPossible)? "YES" : "NO" ) << nl;
 }
 int main()
 {

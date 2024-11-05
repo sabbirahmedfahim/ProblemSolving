@@ -6,13 +6,8 @@
 using namespace std;
 void solve()
 {
-    int n, k; string s; cin >> n >> k >> s;
-    map<char, int> mp;
-    for (int i = 0; i < s.size(); i++) mp[s[i]-'a']++;
-    int cnt_odd = 0;
-    for (int i = 0; i < 26; i++) if(mp[i]%2) cnt_odd++;
-    
-    cout << ((cnt_odd-k <= 1)? "YES" : "NO") << nl;
+    int x, y, z; cin >> x >> y >> z;
+    cout << ((x*y <= z * 24 * 60)? "YES" : "NO") << nl;
 }
 int main()
 {

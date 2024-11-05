@@ -1,3 +1,4 @@
+// Resolved: Must watch the resolved video for better understanding.
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -7,49 +8,37 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<ll> A(n), B(n), vA(n), vB(n);
-    for(auto &data : A) cin >> data;
-    for(auto &data : B) cin >> data;
-    vA = A; vB = B;
-    sort(vA.begin(), vA.end());
-    sort(vB.begin(), vB.end());
-    set<ll> distictNumbers;
-    // print(vA);
-    // print(vB);
-
-    ll mnCost = 0;
+    vector<ll> v1(n), v2(n);
+    for(auto &data : v1) cin >> data;
+    for(auto &data : v2) cin >> data;
+    int cnt = 0, idx = -1;
     for (int i = 0; i < n; i++)
     {
-        bool vis = false;
-        if(A[i] <= B[i])
+        if(min(v1[i], v2[i]) != v2[i]) 
         {
-            cout << "A[i] = " << A[i] << " ---> " << "B[i] = " << B[i] << nl;
-            for (int i = 0; i < n && !vis; i++)
-            {
-                if(!distictNumbers.count(vA[i]))
-                {
-                    mnCost += vA[i];
-                    cout << "original : " << mnCost << nl;
-                    distictNumbers.insert(vA[i]);
-                    vis = true;
-                }
-            }
-        }
-        else if(!distictNumbers.count(A[i]))
-        {
-            cout << "A[i] = " << A[i] << " ---> " << "B[i] = " << B[i] << nl;
-            mnCost += B[i];
-            distictNumbers.insert(A[i]);
-            cout << "Second : " << mnCost << nl;
-        }
-        else 
-        {
-            cout << "A[i] = " << A[i] << " ---> " << "B[i] = " << B[i] << nl;
-            mnCost += A[i];
-            cout << "original : " << mnCost << nl;
+            cnt++; idx = i;
         }
     }
-    cout << mnCost << nl << nl;
+
+    ll ans = 0;
+    if(cnt != 1) 
+    {
+        for (int i = 0; i < n; i++) ans += min(v1[i], v2[i]);
+    }
+    else // just ekta value regular price e min thakle corner case e porbe
+    {
+        for (int i = 0; i < n; i++) ans += v2[i];
+        ll res = ans;
+        for (int i = 0; i < n; i++)
+        {
+            if(i != idx) 
+            {
+                ll currVal = res - v2[idx] - v2[i] + v1[idx] + v1[i];
+                ans = min(ans, currVal);
+            }
+        }
+    }
+    cout << ans << nl;
 }
 int main()
 {
