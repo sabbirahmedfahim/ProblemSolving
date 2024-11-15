@@ -7,17 +7,20 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
+    int n, k; string s; cin >> n >> k >> s;
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
+    int ans, cnt = 0;
+
+    for (int i = 0; i < k; i++) if(s[i] == 'W') cnt++;
+    ans = cnt;
+    for (int i = k, j = 0; i < n; i++, j++)
     {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
+        if(s[i] == 'W') cnt++;
+        if(s[j] == 'W') cnt--;
+        ans = min(ans, cnt);
     }
     
-    cout << cnt << nl;
+    cout << ans << nl;
 }
 int main()
 {

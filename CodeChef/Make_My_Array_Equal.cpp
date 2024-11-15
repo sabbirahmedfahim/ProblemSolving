@@ -7,17 +7,16 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
-
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
+    int n; cin >> n; 
+    vector<ll> v(n);
+    set<ll> s;
+    for (int i = 0; i < n; i++)
     {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
+        cin >> v[i];
+        if(v[i] > 0 && !s.count(v[i])) s.insert(v[i]); 
     }
     
-    cout << cnt << nl;
+    cout << ((s.size() <= 1)? "YES" : "NO") << nl;
 }
 int main()
 {

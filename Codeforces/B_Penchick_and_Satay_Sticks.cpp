@@ -8,16 +8,16 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    string s; cin >> s;
+    vector<int> v(n), v2;
+    for(auto &data : v) cin >> data;
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
+    for (int i = 1; i <= n; i++) v2.push_back(i);
+    for (int i = 0; i < n-1; i++)
     {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
+        if(v[i] > v[i+1] && abs(v[i]-v[i+1]) == 1) swap(v[i], v[i+1]);
     }
     
-    cout << cnt << nl;
+    cout << ((v == v2)? "YES" : "NO") << nl;
 }
 int main()
 {

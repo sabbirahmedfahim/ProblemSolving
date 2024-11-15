@@ -8,15 +8,17 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    string s; cin >> s;
+    vector<int> v(n);
+    for(auto &data : v) cin >> data;
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
-    {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
-    }
-    
+    map<int, int> mp;
+    for(auto data : v) mp[data]++;
+    int mx_occurance_key = -1;
+    // for(auto [key, val] : mp) cout << key << " " << val << nl;
+    for(auto [key, val] : mp) if(val > mp[mx_occurance_key]) mx_occurance_key = key;
+    int cnt = 0;
+    for(auto data : v) if(data != mx_occurance_key) cnt++;
+
     cout << cnt << nl;
 }
 int main()

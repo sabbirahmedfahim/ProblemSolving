@@ -7,17 +7,8 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
-
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
-    {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
-    }
-    
-    cout << cnt << nl;
+    int n, k; cin >> n >> k;
+    cout << ((n*10 <= k && n*12 >= k)? "YES" : "NO" ) << nl; 
 }
 int main()
 {

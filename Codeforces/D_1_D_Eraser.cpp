@@ -7,16 +7,18 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
-
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
-    {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
-    }
+    int n, k; string s; cin >> n >> k >> s;
     
+    int i = 0;
+    int cnt = 0;
+    while (i < n)
+    {
+        if(s[i] == 'B') 
+        {
+            cnt++; i += k;
+        }
+        else i++;
+    }
     cout << cnt << nl;
 }
 int main()

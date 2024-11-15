@@ -8,16 +8,17 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    string s; cin >> s;
+    vector<ll> v(n);
+    for(auto &data : v) cin >> data;
+    sort(all(v));
+    // print(v);
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
-    {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
-    }
+    ll mn = 1e9;
+    mn = min(mn, v[n-1] - v[2]);
+    mn = min(mn, v[n-2] - v[1]);
+    mn = min(mn, v[n-3] - v[0]);
     
-    cout << cnt << nl;
+    cout << mn << nl;
 }
 int main()
 {

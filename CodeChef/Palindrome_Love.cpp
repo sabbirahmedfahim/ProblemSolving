@@ -1,3 +1,4 @@
+// wrong approach
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -7,17 +8,20 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
+    int n; string s; cin >> n >> s;
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
+    int op = 0;
+    for (int i = 0, j = s.size()-1; i <= j; i++, j--)
     {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
+        if(s[i] != s[j]) op++;
     }
     
-    cout << cnt << nl;
+    if(s.size()%2 == 1)
+    {
+        if(op*2 + 1 == s.size()) cout << -1 << nl;
+        else cout << op << nl;
+    }
+    else cout << ((op*2 == s.size())? -1 : op) << nl;
 }
 int main()
 {

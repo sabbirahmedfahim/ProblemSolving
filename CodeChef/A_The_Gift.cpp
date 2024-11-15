@@ -5,26 +5,13 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-void solve()
-{
-    int n; cin >> n;
-    string s; cin >> s;
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
-    {
-        if(s[i] != s[j]) cnt -= 2;
-        else break;
-    }
-    
-    cout << cnt << nl;
-}
 int main()
 {
     iOS
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int x, n, m; cin >> x >> n >> m;
+    cout << ((x+m >= n)? "YES" : "NO") << nl;
 
     return 0;
 }
