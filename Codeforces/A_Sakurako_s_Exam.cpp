@@ -1,17 +1,33 @@
+// resolved
 #include <bits/stdc++.h>
+#define nl '\n'
+#define ll long long int
+#define all(v) v.begin(),v.end()
+#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-
+void solve()
+{
+    int a, b; cin >> a >> b;
+    if(a%2 == 0 && b%2 == 0) cout << "YES" << nl;
+    else if(b%2)
+    {
+        if(a >= 2) 
+        {
+            a -= 2;
+            if(a%2 == 0) cout << "YES" << nl;
+            else cout << "NO" << nl;
+        }
+        else cout << "NO" << nl;
+    }
+    else cout << "NO" << nl;
+}
 int main()
 {
-    int t; cin >> t;
-    while (t--) 
-    {
-        int a, b; cin >> a >> b;
-        if(b%2 == 0) b = 0;
-        else b = 2;
-        if(abs(a-b) == 0 || a%2 == 0 && b == 0) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    }
+    iOS
+
+    int t; cin >> t; 
+    while (t--) solve();
 
     return 0;
 }

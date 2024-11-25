@@ -1,36 +1,29 @@
+// resolved -> https://www.youtube.com/watch?v=tRmhBKjLmF0
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
+#define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
 void solve()
 {
     int n; cin >> n;
-    deque<char> dq;
-    dq.push_back('3');
-    dq.push_back('6');
-    dq.push_back('3');
-    dq.push_back('6');
-    dq.push_back('6');
     if(n == 1 || n == 3) cout << -1 << nl;
-    else if(n == 2) cout << 66 << nl;
-    else if(n == 4) cout << 3366 << nl;
-    else
+    else if(n%2==0)
     {
-        int k = n-5;
-        for (int i = 0; i < k; i++)
-        {
-            dq.push_front('3');
-        }
-        for(auto data : dq) cout << data;
-        cout << nl;
+        string s = ""; s.insert(0, n-2, '3');
+        cout << s << "66" << nl;
+    }
+    else 
+    {
+        string s = ""; s.insert(0, n-5, '3');
+        cout << s << "36366" << nl;
     }
 }
 int main()
 {
-    FAJR_BOOST()
+    iOS
 
     int t; cin >> t; 
     while (t--) solve();

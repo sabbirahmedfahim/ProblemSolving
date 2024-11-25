@@ -1,49 +1,42 @@
-// wrong answer on pre-test 2
+// upsolved
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long int
+#define all(v) v.begin(),v.end()
+#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
+/*
+Strategy:
+If members of the same family sit together, then both(2 person) are happy.
+If a row is empty and only one person sits there, they are also happy.
+*/
 void solve()
 {
     int n, r; cin >> n >> r;
     vector<int> v(n);
-    int doubleHappy = 0;
-    int singleHappy = 0;
-    int extra = 0;
-    for (int i = 0; i < n; i++) 
+    for(auto &data : v) cin >> data;
+
+    int ans = 0, remaining_members = 0;
+    for (int i = 0; i < n; i++)
     {
-        cin >> v[i];
-        if(v[i] == 1) singleHappy++;
-        else if(v[i] > 1) 
-        {
-            if(v[i]%2 == 0) 
-            {
-                doubleHappy += v[i]; r -= v[i]/2;
-            }   
-            else 
-            {
-                doubleHappy += (v[i] - 1); r -= v[i]/2; extra++; // extra means single person
-            }
-        }
+        ans += (v[i]/2)*2;
+        remaining_members += v[i]%2;
+        r -= (v[i]/2);
     }
-    int ans = doubleHappy;
-    if(extra > 0)
-    {
-        if(extra%2 == 0) r -= (extra/2);
-        else r -= (extra/2)+1;
-    }
-    if(r >= singleHappy) ans += singleHappy;
-    else ans += r;
+
+    if(r > remaining_members) ans += remaining_members;
+    else ans += (r*2-remaining_members);
+
     cout << ans << nl;
+
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    iOS
 
-    int t; cin >> t;
-    while(t--) solve();
+    int t; cin >> t; 
+    while (t--) solve();
 
     return 0;
 }

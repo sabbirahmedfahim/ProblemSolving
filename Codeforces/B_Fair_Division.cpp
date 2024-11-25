@@ -1,31 +1,48 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long int
+#define all(v) v.begin(),v.end()
+#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-
-int main()
+void solve()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    int n; cin >> n;
+    vector<int> v(n);
+    int two = 0, one = 0, sum = 0;
+    for (int i = 0; i < n; i++)
     {
-        int n;
-        cin >> n;
-        int arr[n];
-        int cnt1 = 0, cnt2 = 0;
-        for (int i = 0; i < n; i++)
+        cin >> v[i];
+        (v[i]%2)? one++ : two++;
+        sum += v[i];
+    }
+
+    if(sum%2) cout << "NO" << nl;
+    else
+    {
+        int half = sum/2, cur = 0;
+        while (true)
         {
-            cin >> arr[i];
-            if (arr[i] == 2)
-                cnt2++;
-            else
-                cnt1++;
+            if(two && cur + 2 <= half) 
+            {
+                cur += 2; two--;
+            }
+            else if(one && cur + 1 <= half)
+            {
+                cur++; one--;
+            }
+            else break;
         }
-        if (cnt1 % 2 == 0 && cnt2 % 2 == 0) cout << "YES" << nl;
-        else if (cnt1 % 2 == 0 && cnt2 % 2 != 0) cout << "YES" << nl;
+        if(two * 2 + one == half) cout << "YES" << nl;
         else cout << "NO" << nl;
     }
+}
+int main()
+{
+    iOS
+
+    int t; cin >> t; 
+    while (t--) solve();
 
     return 0;
 }
