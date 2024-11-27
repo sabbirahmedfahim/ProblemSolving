@@ -5,16 +5,24 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 #define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-
+void solve()
+{
+    int n; string a, b, c; cin >> n >> a >> b >> c;
+    for (int i = 0; i < n; i++)
+    {
+        if(a[i] != c[i] && b[i] != c[i])
+        {
+            cout << "YES" << nl; return;
+        }
+    }
+    cout << "NO" << nl;
+}
 int main()
 {
     iOS
 
-    ll n, k; cin >> n >> k;
-
-    ll odd;
-    n%2 ? odd = (n/2)+1 : odd = n/2;
-    cout << (k <= odd ? (k*2)-1 : (k-odd)*2 ) << nl;
+    int t; cin >> t; 
+    while (t--) solve();
 
     return 0;
 }
