@@ -4,39 +4,43 @@
 #define ll long long int
 #define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<ll> v(n);
-    for(auto &data : v) cin >> data;
-    
-    ll ans = 0;
-    if (n % 2 == 0) 
+    int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
+    if(n%2 == 0)
     {
-        for (int i = 0; i < n; i += 2) ans = max(ans, v[i + 1] - v[i]);
+        ll mx = 0;
+        for (int i = 0; i < n; i+=2) mx = max(mx, v[i+1]-v[i]);
+        cout << mx << nl;
     }
     else 
     {
-        ans = 1e18;
-        for (int i = 0; i < n; i += 2) 
+        /* every time ekta element exclude kore jei maximum ta minimum hobe sheta amader answer */
+        ll ans = 1E18;
+        for (int i = 0; i < n; i++)
         {
-            ll res = 0;
-            for (int j = 0; j < n; j += 2) 
+            ll mx = 1;
+            if(i%2 == 0)
             {
-                if (j == i) j--;
-                else res = max(res, v[j + 1] - v[j]);
+                for (int j = 0; j < n; j+=2)
+                {
+                    if(i == j) // exclude an element
+                    {
+                        j--; continue;
+                    } 
+                    // cout << i << " - " << j << nl;
+                    mx = max(mx, v[j+1] - v[j]);
+                }
+                ans = min(ans, mx);
             }
-            ans = min(ans, res);
         }
+        cout << ans << nl;
     }
-    ans = max(ans, 1LL);
-    cout << ans << nl;
 }
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t; 
     while (t--) solve();

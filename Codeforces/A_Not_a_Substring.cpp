@@ -5,8 +5,10 @@
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 using namespace std;
 /*
-Observation: if the string is () and size is n, we cannot make 2*n lenth string
-that has no contegenous substring () && valid (according to statement) at a time
+Observation: If the string is "()" and its size is n, we cannot create a string of 
+length 2n that satisfies both conditions:
+1. It contains no contiguous substring "()" 
+2. It is valid (according to the problem statement).
 */
 void solve()
 {
@@ -23,7 +25,7 @@ void solve()
         }
         for (int i = 0; i < s.size(); i++) y += ')';
         auto it = x.find(s);
-        if(it == string::npos) cout << x << nl;
+        if(it == -1) cout << x << nl;
         else cout << y << nl;
     }
 }
