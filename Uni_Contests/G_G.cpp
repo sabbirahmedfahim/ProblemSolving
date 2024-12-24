@@ -9,28 +9,27 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t;
-    set<ll> s;
-    while (t--)
+    int n, q; cin >> n >> q; 
+    map<string, int> mp;
+    while (n--)
     {
-        int cmd; cin >> cmd;
-        ll data; cin >> data;
+        string s; int data; cin >> s >> data;
+        mp[s] = data;
+    }
+    while (q--)
+    {
+        int cmd; string s; cin >> cmd >> s;
         if(cmd == 1)
         {
-            s.insert(data);
-        }
-        else if(cmd == 2)
-        {
-            auto it = s.find(data);
-            if(it != s.end()) s.erase(data);
+            int data; cin >> data; 
+            if(mp.count(s)) mp[s] = mp[s] + data;
+            else mp[s] = data;
         }
         else 
         {
-            if(s.count(data)) cout << "Yes" << nl;
-            else cout << "No" << nl;
+            cout << mp[s] << nl;
         }
     }
     
-
     return 0;
 }

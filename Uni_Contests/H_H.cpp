@@ -3,40 +3,37 @@
 #define ll long long int
 #define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-int stringToInt(string x)
-{
-    int target = 0;
-    for(auto data : x)
-    {
-        target = target * 10 + (data - '0');
-    }
-    return target;
-}
+
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    string s; cin >> s;
-    string a, b;
-    bool isLeft = true;
-    char op;
-    for(auto data : s)
+    int n,q; cin >> n >> q;
+    multiset<ll> ml;
+    while (n--)
     {
-        if(data == '+' || data == '-' || data == '*' || data == '/') 
-        {
-            isLeft = !isLeft; op = data;
-        }
-        else if(isLeft) a += data;
-        else b += data;
+        ll data; cin >> data; ml.insert(data);
     }
-    if(op == '+') cout << stringToInt(a) + stringToInt(b) << nl;
-    else if(op == '-') cout << stringToInt(a) - stringToInt(b) << nl;
-    else if(op == '*') cout << stringToInt(a) * stringToInt(b) << nl;
-    else cout << stringToInt(a) / stringToInt(b) << nl;
+    while (q--)
+    {
+        int cmd; cin >> cmd;
+        if(cmd == 0)
+        {
+            ll data; cin >> data; ml.insert(data);
+        }
+        else if(cmd == 1)
+        {
+            cout << *ml.begin() << nl;
+            ml.erase(ml.begin());
+        }
+        else 
+        {
+            cout << *--ml.end() << nl;
+            ml.erase(--ml.end());
+        }
+    }
     
-
 
     return 0;
 }

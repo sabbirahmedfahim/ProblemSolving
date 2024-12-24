@@ -10,27 +10,22 @@ int main()
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t;
-    set<ll> s;
+    map<string, int> mp;
     while (t--)
     {
-        int cmd; cin >> cmd;
-        ll data; cin >> data;
+        int cmd; string s; cin >> cmd >> s;
         if(cmd == 1)
         {
-            s.insert(data);
+            int data; cin >> data; 
+            if(mp.count(s)) mp[s] = mp[s] + data;
+            else mp[s] = data;
         }
         else if(cmd == 2)
         {
-            auto it = s.find(data);
-            if(it != s.end()) s.erase(data);
+            if(mp.count(s)) mp.erase(s);
         }
-        else 
-        {
-            if(s.count(data)) cout << "Yes" << nl;
-            else cout << "No" << nl;
-        }
+        else cout << mp[s] << nl;
     }
     
-
     return 0;
 }
