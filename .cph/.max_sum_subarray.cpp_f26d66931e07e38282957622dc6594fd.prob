@@ -1,1 +1,0 @@
-{"name":"Local: max_sum_subarray","url":"x:\\Coding\\C-progrmming\\Contests\\max_sum_subarray.cpp","tests":[{"id":1731319562929,"input":"9\n9479 488 2374 1583 5863 7811 6916 1685 3960\n5","output":"26235"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"x:\\Coding\\C-progrmming\\Contests\\max_sum_subarray.cpp","group":"local","local":true}
