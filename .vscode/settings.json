@@ -37,6 +37,7 @@
         "typeindex": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "numeric": "cpp"
     }
 }
