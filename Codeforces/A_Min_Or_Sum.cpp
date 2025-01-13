@@ -1,21 +1,20 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
 #define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
 using namespace std;
+/*
+let, we're initializing the values of the array 0(after doing OR), 
+adding ans variable to the last index.
+*/
 void solve()
 {
-    int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
-    sort(all(v));
-
-    ll sum = accumulate(all(v), 0);
-    for (int i = 0; i < n/2+1; i++)
-    {
-        sum -= v[i];
-    }
-    cout << sum << nl;
-    
+    int n; cin >> n; vector<int> vec(n); for(auto &c : vec) cin >> c;
+    int ans = 0;
+    for(auto data : vec) ans |= data; 
+    cout << ans << nl;
 }
 int main()
 {

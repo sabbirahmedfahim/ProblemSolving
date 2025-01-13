@@ -7,15 +7,9 @@ using namespace std;
 void solve()
 {
     int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
-    sort(all(v));
-
-    ll sum = accumulate(all(v), 0);
-    for (int i = 0; i < n/2+1; i++)
-    {
-        sum -= v[i];
-    }
-    cout << sum << nl;
-    
+    ll AND = v[0];
+    for(auto data : v) AND &= data;
+    cout << AND << nl;
 }
 int main()
 {

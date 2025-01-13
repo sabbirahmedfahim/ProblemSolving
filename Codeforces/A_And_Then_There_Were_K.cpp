@@ -6,16 +6,16 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
-    sort(all(v));
+    int n; cin >> n;
+    int ans = 0, on = 0;
 
-    ll sum = accumulate(all(v), 0);
-    for (int i = 0; i < n/2+1; i++)
+    // turn off msb
+    for (int k = 31; k >= 0; k--)
     {
-        sum -= v[i];
+        if(on == 1) ans += (1<<k);
+        if((n >> k) & 1) on = 1;
     }
-    cout << sum << nl;
-    
+    cout << ans << nl;
 }
 int main()
 {

@@ -6,23 +6,28 @@
 using namespace std;
 void solve()
 {
-    int n; string s; cin >> n >> s; 
-    int a = 0, b = 0, c = 0, d = 0;
-    for(auto data : s)
+    int n; string s; cin >> n >> s;
+    int a = 0, b = 0, c = 0, d = 0; 
+    for(auto data : s) 
     {
         if(data == 'A') a++;
-        if(data == 'B') b++;
-        if(data == 'C') c++;
-        if(data == 'D') d++;
+        else if(data == 'B') b++;
+        else if(data == 'C') c++;
+        else if(data == 'D') d++;
     }
-    cout << min(n, a) + min(n, b) + min(n, c) + min(n, d) << nl;
+    cout << min(a, n) + min(b, n) + min(c, n) + min(d, n) << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t; 
-    while (t--) solve();
+    for (int i = 1; i <= t; i++)
+    {
+        // cout << "tc:" << i << nl;
+        solve();
+    }
+    
 
     return 0;
 }

@@ -6,23 +6,17 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
-    sort(all(v));
-
-    ll sum = accumulate(all(v), 0);
-    for (int i = 0; i < n/2+1; i++)
-    {
-        sum -= v[i];
-    }
-    cout << sum << nl;
-    
+    ll n, m; cin >> n >> m;
+    // if(m == 1) cout << n + 1 << nl;
+    // else cout << m + 1 << nl;
+    cout << max(n, m) + 1 << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t; 
-    while (t--) solve();
+    while (t--) solve();    
 
     return 0;
 }

@@ -7,15 +7,21 @@ using namespace std;
 void solve()
 {
     int n; cin >> n; vector<ll> v(n); for(auto &data : v) cin >> data;
-    sort(all(v));
-
-    ll sum = accumulate(all(v), 0);
-    for (int i = 0; i < n/2+1; i++)
+    if(n == 1) 
     {
-        sum -= v[i];
+        cout << "NO" << nl; return;
     }
-    cout << sum << nl;
-    
+
+    ll one = 0;
+    ll sum = 0; 
+    for(auto data : v) 
+    {
+        sum += data;
+        if(data == 1) one++;
+    }
+    ll need = (one * 2) + (n-one);
+    if(sum >= need) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {
