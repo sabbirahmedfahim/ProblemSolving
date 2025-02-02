@@ -3,21 +3,26 @@
 #define ll long long int
 #define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
 
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    string s; cin >> s;
-    for(auto data : s)
+    ll n; cin >> n;
+
+    ll x = -1, y = -1;
+    for (ll i = 1; i <= sqrt(n); i++)
     {
-        if(data >= 'A' && data <= 'Z') cout << (char) (data + 32);
-        else if(data >= 'a' && data <= 'z') cout << (char) (data - 32);
-        else cout << " ";
+        if(n%i == 0)
+        {
+            x = i, y = i;
+            if(i != n/i) y = n/i;
+        }
     }
-    cout << nl;
+    
+    // cout << x << " " << y << nl;
+    cout << x + y - 2 << nl;
 
     return 0;
 }

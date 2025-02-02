@@ -9,28 +9,22 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t;
-    set<ll> s;
-    while (t--)
+    ll n; cin >> n;
+    
+    vector<ll> ans;
+
+    for (ll i = 1; i*i <= n; i++)
     {
-        int cmd; cin >> cmd;
-        ll data; cin >> data;
-        if(cmd == 1)
+        if(n%i == 0)
         {
-            s.insert(data);
-        }
-        else if(cmd == 2)
-        {
-            auto it = s.find(data);
-            if(it != s.end()) s.erase(data);
-        }
-        else 
-        {
-            if(s.count(data)) cout << "Yes" << nl;
-            else cout << "No" << nl;
+            ans.push_back(i);
+            if(i != n/i) ans.push_back(n/i);
         }
     }
+
+    sort(all(ans));
     
+    for(auto data : ans) cout << data << nl;
 
     return 0;
 }

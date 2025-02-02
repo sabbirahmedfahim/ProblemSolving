@@ -3,21 +3,41 @@
 #define ll long long int
 #define all(v) v.begin(),v.end()
 #define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
-
+const int N = 1E6;
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    string a, b; cin >> a >> b;
-    cout << a.size() << " " << b.size() << nl; // done
-    cout << a+b << nl; // done
-    cout << b.front();
-    for (int i = 1; i < a.size(); i++) cout << a[i];
-    cout << " ";
-    cout << a.front();
-    for (int i = 1; i < b.size(); i++) cout << b[i];
+    bool comp[N+1] = {0};
+    for (int i = 2; i <= N; i++)
+    {
+        if(comp[i]) continue;
+        
+        for (int j = i+i; j <= N; j+=i)
+        {
+            comp[j] = true;
+        }
+    }
+    comp[1] = true;
+
+    // pre-calculate
+    vector<int> primeNumbers;
+    for (int i = 2; i <= N; i++)
+    {
+        if(!comp[i] && !comp[(i+1)/2]) primeNumbers.push_back(i);
+    }
+    
+    int queries; cin >> queries; 
+    while (queries--)
+    {
+        int x, y, cnt = 0; cin >> x >> y;
+        for(auto data : primeNumbers)
+        {
+            if(data >= x && data <= y) cnt++;
+        }
+        cout << cnt << nl;
+    }
 
     return 0;
 }

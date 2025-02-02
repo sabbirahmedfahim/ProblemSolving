@@ -9,27 +9,14 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int n; cin >> n; vector<int> v(n); for(auto &data : v) cin >> data;
-    int cur = 1, cnt = 0;
-    while (1)
+    ll n; cin >> n; ll tmp = n-1;
+    ll sum = 0; 
+    while (tmp--)
     {
-        bool only_zero = true;
-        for (int i = 0; i < n; i++)
-        {
-            if(v[i] == 0) continue;
-            else
-            {
-                only_zero = false;
-                if(v[i] == cur)
-                {
-                    v[i] = 0; cur++;
-                }
-            }
-        }
-        if(only_zero) break;
-        cnt++;
+        int data; cin >> data; sum += data;
     }
-    cout << cnt << nl;
+    
+    cout << ((n*(n+1))/2) - sum << nl;
 
     return 0;
 }
