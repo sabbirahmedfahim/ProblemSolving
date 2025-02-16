@@ -6,18 +6,14 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<int> v(n); for(auto &e : v) cin >> e;
-    int OR = 0, AND = v.front();
-
-    set<int> s;
-    for(auto e : v) 
+    string s; cin >> s;
+    string ans;
+    for (int i = 0; i < s.size()-2; i++)
     {
-        OR |= e;
-        s.insert(e);
-        AND &= e;
+        ans += s[i];
     }
-
-    cout << OR - AND << nl;
+    ans += "i";
+    cout << ans << nl;
 }
 int main()
 {

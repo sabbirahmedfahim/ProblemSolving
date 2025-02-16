@@ -6,18 +6,21 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<int> v(n); for(auto &e : v) cin >> e;
-    int OR = 0, AND = v.front();
+    int n; cin >> n; 
+    vector<int> a(n), b(n);
+    for(auto &e : a) cin >> e;
+    for(auto &e : b) cin >> e;
 
-    set<int> s;
-    for(auto e : v) 
+    ll a_mn= *min_element(all(a));
+    ll b_mn= *min_element(all(b));
+
+    ll ans = 0;
+    for (int i = 0; i < n; i++)
     {
-        OR |= e;
-        s.insert(e);
-        AND &= e;
+        ans += max(a[i]-a_mn, b[i]-b_mn);
     }
-
-    cout << OR - AND << nl;
+    
+    cout << ans << nl;
 }
 int main()
 {

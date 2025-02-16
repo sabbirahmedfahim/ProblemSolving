@@ -6,18 +6,20 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<int> v(n); for(auto &e : v) cin >> e;
-    int OR = 0, AND = v.front();
-
-    set<int> s;
-    for(auto e : v) 
+    string s; cin >> s;
+    if(s.size() == 1)
     {
-        OR |= e;
-        s.insert(e);
-        AND &= e;
+        cout << 1 << nl; return;
     }
 
-    cout << OR - AND << nl;
+    bool isDuplicate = false;
+    for (int i = 0; i < s.size()-1 && !isDuplicate; i++)
+    {
+        if(s[i] == s[i+1]) isDuplicate = true;
+    }
+    
+    if(isDuplicate) cout << 1 << nl;
+    else cout << s.size() << nl;
 }
 int main()
 {

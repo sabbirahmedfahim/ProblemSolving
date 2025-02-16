@@ -1,3 +1,4 @@
+// solution
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,18 +7,17 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<int> v(n); for(auto &e : v) cin >> e;
-    int OR = 0, AND = v.front();
-
-    set<int> s;
-    for(auto e : v) 
+    int n; cin >> n;
+    int a = 1;
+    for (int i = 2; i*i <= n; i++)
     {
-        OR |= e;
-        s.insert(e);
-        AND &= e;
+        if(n % i == 0) 
+        {
+            a = n/i; break;
+        }
     }
-
-    cout << OR - AND << nl;
+    
+    cout << a << " " << n - a << nl;
 }
 int main()
 {
@@ -25,7 +25,7 @@ int main()
 
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
-    {
+    {   
         // cout << "TEST CASE-" << tt << nl;
         solve();
     }
