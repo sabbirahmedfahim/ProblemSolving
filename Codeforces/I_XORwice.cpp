@@ -6,22 +6,8 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
-
-    for (int mask = 0; mask < (1<<n); mask++)
-    {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if((mask>>i) & 1) sum += a[i];
-        }
-        if(sum == target)
-        {
-            cout << "YES" << nl; return;
-        }
-    }
-    cout << "NO" << nl;
+    int a, b; cin >> a >> b;
+    cout << (a^b) << nl;
 }
 int main()
 {

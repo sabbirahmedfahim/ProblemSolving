@@ -1,3 +1,4 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,23 +7,16 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
+    string s; cin >> s;
 
-    for (int mask = 0; mask < (1<<n); mask++)
+    if(s.front() != s.back()) 
     {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if((mask>>i) & 1) sum += a[i];
-        }
-        if(sum == target)
-        {
-            cout << "YES" << nl; return;
-        }
+        if(s.back() == 'a') s.back() = 'b';
+        else s.back() = 'a';
     }
-    cout << "NO" << nl;
-}
+    
+    cout << s << nl;
+} 
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);

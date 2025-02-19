@@ -1,3 +1,4 @@
+// resolved from the editorial
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,22 +7,15 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
+    int n, x, y; cin >> n >> x >> y;
+    x--, y--; // 0-based
 
-    for (int mask = 0; mask < (1<<n); mask++)
-    {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if((mask>>i) & 1) sum += a[i];
-        }
-        if(sum == target)
-        {
-            cout << "YES" << nl; return;
-        }
-    }
-    cout << "NO" << nl;
+    vector<int> ans(n);
+    for (int i = 0; i < n; i++) ans[(x+i)%n] = i%2; // zero or one
+
+    if(n&1 || ((x-y)%2 == 0)) ans[x] = 2;
+    
+    print(ans);
 }
 int main()
 {

@@ -6,22 +6,23 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
+    int n, m; cin >> n >> m;
+    string a, b; cin >> a >> b;
 
-    for (int mask = 0; mask < (1<<n); mask++)
+    int cnt = 0;
+    for (int i = 0, j = 0; i < n && j < m; )
     {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
+        while (j < m && a[i] != b[j])
         {
-            if((mask>>i) & 1) sum += a[i];
+            j++; if(j == m) break;
         }
-        if(sum == target)
+        if(a[i] == b[j]) 
         {
-            cout << "YES" << nl; return;
+            cnt++, i++, j++;
         }
     }
-    cout << "NO" << nl;
+
+    cout << cnt << nl;
 }
 int main()
 {

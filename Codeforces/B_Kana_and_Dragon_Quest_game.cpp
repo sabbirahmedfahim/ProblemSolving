@@ -6,22 +6,19 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
+    int x, n, m; cin >> x >> n >> m;
 
-    for (int mask = 0; mask < (1<<n); mask++)
+    while (x > 10 && n--)
     {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if((mask>>i) & 1) sum += a[i];
-        }
-        if(sum == target)
-        {
-            cout << "YES" << nl; return;
-        }
+        x = (x/2)+10;
     }
-    cout << "NO" << nl;
+    while (m--)
+    {
+        x -= 10;
+    }
+    
+    if(x > 0) cout << "NO" << nl;
+    else cout << "YES" << nl;
 }
 int main()
 {

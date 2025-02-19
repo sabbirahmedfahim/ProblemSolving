@@ -6,22 +6,28 @@
 using namespace std;
 void solve()
 {
-    int target, n; cin >> target >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
-
-    for (int mask = 0; mask < (1<<n); mask++)
+    ll n; cin >> n;
+    if(__builtin_popcount(n) == 1)
     {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
+        cout << 1 << nl << n << nl; return;
+    }
+
+    vector<ll> ans;
+    
+    ans.push_back(n);
+    for (ll bit = 0; bit <= 60; bit++)
+    {
+        if((n>>bit) & 1)
         {
-            if((mask>>i) & 1) sum += a[i];
-        }
-        if(sum == target)
-        {
-            cout << "YES" << nl; return;
+            // cout << bit << nl;
+            ans.push_back(n ^ (1ll<<bit));
         }
     }
-    cout << "NO" << nl;
+
+    reverse(all(ans));
+
+    cout << ans.size() << nl;
+    print(ans);
 }
 int main()
 {
