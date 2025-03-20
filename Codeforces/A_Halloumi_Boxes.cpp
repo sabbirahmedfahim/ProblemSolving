@@ -1,25 +1,29 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+void solve()
+{
+    int n, k; cin >> n >> k;
+    vector<int> a(n); for(auto &e : a) cin >> e;
 
+    if(is_sorted(all(a)) || k > 1)
+    {
+        cout << "YES" << nl;
+    }
+    else cout << "NO" << nl;
+}
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t;
-    while (t--)
+    for(int tt = 1; tt <= t; tt++)
     {
-        int n, k; cin >> n >> k;
-        vector<ll> v(n);
-        input(v);
-        vector<ll> v2 = v;
-        sort(v2.begin(), v2.end());
-        if(v == v2 || k > 1) cout << "YES" << nl;
-        else cout << "NO" << nl;
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
     }
 
     return 0;

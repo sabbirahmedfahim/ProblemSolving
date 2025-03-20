@@ -1,27 +1,39 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long int
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+void solve()
+{
+    int n; cin >> n;
+    vector<int> a(n); for(auto &e : a) cin >> e;
+
+    for (int k = 0; k < 100; k++)
+    {
+        for (int i = 1; i < n-1; i++)
+        {
+            if(a[i-1] < a[i] && a[i] > a[i+1]) 
+            {
+                swap(a[i], a[i+1]); 
+            }
+        }
+        // print(a);
+    }
+
+    // print(a);
+    if(is_sorted(all(a))) cout << "YES" << nl;
+    else cout << "NO" << nl;
+}
 int main()
 {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
     int t; cin >> t;
-    while (t--)
+    for(int tt = 1; tt <= t; tt++)
     {
-        int n; cin >> n;
-        vector<int> v(n+1);
-        int freq[n+1] = {0};
-        bool flag = true;
-        int mn = INT_MAX;
-        for (int i = 1; i < n+1; i++)
-        {
-            cin >> v[i];
-            if(v[i] < mn) mn = v[i];
-            freq[v[i]]++;
-            if(freq[v[i]] > 1 || v[i] > n || v[i] < 1) flag = false;
-        }
-        if(v[1] == mn && flag) cout << "YES" << nl;
-        else cout << "NO" << nl;
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
     }
 
     return 0;

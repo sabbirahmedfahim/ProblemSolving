@@ -1,3 +1,4 @@
+// unsolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,51 +7,22 @@
 using namespace std;
 void solve()
 {
-    ll n, x, k; string s; cin >> n >> x >> k >> s;
+    ll n, x, k; cin >> n >> x >> k;
+    string s; cin >> s;
 
-    ll cnt = 0;
-
-    // calculate if is psbl to reach 0th coordinate at first
+    // how many time it takes to zero
+    ll time = 0;
     for(auto e : s)
     {
         if(e == 'L') x--;
         else x++;
-        // cout << x << nl;
-        k--;
-        if(x == 0)
-        {
-            cnt = 1; break;
-        }
-        if(k == 0) break;
+        time++;
+        
+        if(x == 0) break;
     }
-    if(cnt == 0 || k == 0)
-    {
-        cout << cnt << nl; return;
-    }
-
-    // is there any sequence of same R, L
-    ll l = 0, r = 0, movesForEach = 0;
-    bool isPossible = false;
-    for(auto e : s)
-    {
-        if(e == 'L') l++;
-        else r++;
-        if(l != 0 && l == r)
-        {
-            isPossible = true;
-            break;
-        }
-        movesForEach++;
-    }
-    if(!isPossible)
-    {
-        cout << 1 << nl; return;
-    }
-
-    cnt += (k/movesForEach);
-    if(cnt & 1) cnt++;
-
-    cout << cnt/2 << nl;
+    
+    if(k < time || x != 0) cout << 0 << nl;
+    else cout << k/time << nl;
 }
 int main()
 {

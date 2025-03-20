@@ -1,46 +1,44 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<ll> v(n);
+    int n; cin >> n; 
     map<int, int> mp;
-    // int cnt = 0; // unnessesary
-    // int mx = 0; // unnessesary
     for (int i = 0; i < n; i++)
     {
-        cin >> v[i];
-        mp[v[i]]++;
-        // if(mp[v[i]] == 1) cnt++; // do not need to count, map STL has a function for counting
-        // mx = max(mp[v[i]], mx); // do not need
+        int data; cin >> data;
+        mp[data]++;
     }
-    // number theory
-    // if(cnt >= 3) cout << "No" << nl; // replace with mp.size()
-    if(mp.size() >= 3) cout << "No" << nl;
-    else if(mp.size() == 1) cout << "Yes" << nl;
-    // else if(cnt == 1 || cnt - mx == 1 || cnt - mx == 0) cout << "Yes" << nl; // wrong approach
-    // else cout << "No" << nl; // wrong approach    
+
+    if(mp.size() == 1) cout << "Yes" << nl;
+    else if(mp.size() > 2) cout << "No" << nl;
     else 
     {
-        vector<int> v1;
-        for(auto data : mp) v1.push_back(data.second);
-        if(abs(v1[0]-v1[1]) <= 1) cout << "Yes" << nl;
+        int a = -1, b = -1;
+        for(auto [key, val] : mp)
+        {
+            if(a == -1) a = val;
+            else b = val;
+        }
+        // cout << a << " " << b << nl;
+        if(abs(a-b) <= 1) cout << "Yes" << nl;
         else cout << "No" << nl;
     }
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t;
-    cin >> t;
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
