@@ -6,12 +6,26 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; n--;
-    vector<int> a(n);
+    int n; cin >> n; 
+    vector<ll> a(n); // 1E18
     for(auto &e : a) cin >> e;
 
-    ll sum = accumulate(all(a), 0ll);
-    cout << -sum << nl;
+    sort(all(a));
+
+    ll GCD = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if(a[i]%a[0] == 0)
+        {
+            GCD = __gcd(GCD, a[i]);
+            if(GCD == a[0])
+            {
+                cout << "Yes" << nl; return;
+            }
+        }
+    }
+    
+    cout << "No" << nl;
 }
 int main()
 {
