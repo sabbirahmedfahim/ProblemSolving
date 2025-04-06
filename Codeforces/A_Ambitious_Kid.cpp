@@ -1,20 +1,33 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long int
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-
-int main()
+void solve()
 {
     int n; cin >> n;
-    int mn = INT_MAX;
-    for (int i = 0; i < n; i++)
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+
+    int res = INT_MAX;
+    for(auto e : a)
     {
-        int data;
-        cin >> data;
-        mn = min(abs(data), mn);
+        res = min(abs(e), res);
     }
-    cout << mn << nl;
+
+    cout << res << nl;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    int t = 1;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

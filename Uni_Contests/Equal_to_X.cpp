@@ -6,30 +6,23 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; 
-    vector<int> a(n); for(auto &e : a) cin >> e;
+    int l, r, x; cin >> l >> r >> x;
 
-    sort(all(a));
-    if(a[0] == a.back())
-    {
-        cout << -1 << nl; return;
-    }
+    ll hi = r, lo = l;
 
-    vector<int> x, y;
-    int idx = -1;
-    for (int i = 0; i < n; i++)
+    while (lo <= hi)
     {
-        if(a[i] == a.back())
+        ll mid = lo + (hi-lo)/2;
+        ll data = mid + x;
+        if(data >= l && data <= r)
         {
-            idx = i; break;
+            cout << data << " " << mid << nl; return;
         }
-        x.push_back(a[i]);
+        else if(data > hi) hi = mid - 1;
+        else lo = mid + 1;
     }
-    for (int i = idx; i < n; i++) y.push_back(a[i]);
-
-    cout << x.size() << ' ' << y.size() << nl;
-    print(x);
-    print(y);
+    
+    cout << -1 << " " << -1 << nl;
 }
 int main()
 {
