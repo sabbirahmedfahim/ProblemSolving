@@ -1,23 +1,27 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
     ll n, k; cin >> n >> k;
-    // 2X + kY = n
-    cout << ((k%2 == 0 && n%2 != 0) ? "NO" : "YES" ) << nl;
+    if((n & 1) && (k%2 == 0)) 
+    {
+        cout << "NO" << nl; return;
+    }
+
+    cout << "YES" << nl;
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t;
-    while (t--)
+    for(int tt = 1; tt <= t; tt++)
     {
+        // cout << "TEST CASE-" << tt << nl;
         solve();
     }
 

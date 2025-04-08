@@ -1,60 +1,37 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v)         \
-    for (auto &data : v) \
-    cin >> data
-#define print(v)             \
-    for (auto data : v)      \
-        cout << data << " "; \
-    cout << nl
-#define FAJR_BOOST()                  \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<ll> v(n);
-    input(v);
+    int n; cin >> n; vector<int> a(n); for(auto &e : a) cin >> e;
 
-    bool isSorted = true;
-    for (int i = 0; i < n - 1; i++)
+    if(!is_sorted(all(a)))
     {
-        if (v[i] > v[i + 1]) isSorted = false;
+        cout << 0 << nl; return;
     }
-    ll minOp = 1e18;
-    if(!isSorted) cout << 0 << nl;
-    else
+
+    // i am sure the array is sorted
+    int mn = INT_MAX;
+    for (int i = 0; i < n-1; i++)
     {
-        // youtube
-        for (int i = 0; i < n-1; i++)
-        {
-            // {(l-r)/2} + 1 [formulla]
-            minOp = min(((abs(v[i]-v[i+1]))/2)+1, minOp);
-        }
-        cout << minOp << nl;
+        mn = min(mn, a[i+1] - a[i]);
     }
     
-    // my approach
-    // ll minOp = 1e18;
-    // bool isSorted = true;
-    // for (int i = 0; i < n - 1; i++)
-    // {
-    //     if (v[i] > v[i + 1]) isSorted = false;
-    //     minOp = min(minOp, v[i+1] - v[i]);
-    // }
-    // if (!isSorted) cout << 0 << nl;
-    // else cout << ((minOp > 0) ? minOp : 1 ) << nl;
+    cout << (mn/2) + 1 << nl;
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t;
-    cin >> t;
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

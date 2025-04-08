@@ -1,30 +1,37 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    string s; cin >> s;
+    int n; string s; cin >> n >> s;
+    deque<char> dq;
+    for(auto e : s) dq.push_back(e);
 
-    int cnt = n;
-    for (int i = 0, j = n-1; i < n/2; i++, j--)
+    while (!dq.empty() && dq.size() > 1)
     {
-        if(s[i] != s[j]) cnt -= 2;
+        if(dq.front() != dq.back())
+        {
+            dq.pop_front();
+            dq.pop_back();
+        } 
         else break;
     }
-    
-    cout << cnt << nl;
+
+    cout << dq.size() << nl;
 }
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

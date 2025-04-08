@@ -1,4 +1,4 @@
-// resolved
+// resolved (there is a simple observation)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -10,18 +10,23 @@ void solve()
     int n, k; cin >> n >> k;
     vector<int> a(n); for(auto &e : a) cin >> e;
 
-    if(k > 1)
+    if(k == 1) // edge case
     {
-        sort(all(a)); reverse(all(a));
-        ll sum = accumulate(a.begin(), a.begin() + k + 1, 0ll);
-        cout << sum << nl;
+        ll ans1 = a[0], ans2 = a[n-1];
+        ans1 += *max_element(a.begin() + 1, a.end());
+        ans2 += *max_element(a.begin(), a.begin() + n - 1);
+        cout << max(ans1, ans2) << nl;
+        return;
     }
-    else
+
+    sort(all(a)); reverse(all(a));
+    ll sum = 0;
+    for (int i = 0; i < k+1; i++)
     {
-        ll x = *max_element(a.begin(), a.end()-1);
-        ll y = *max_element(a.begin()+1, a.end());
-        cout << max(x+a.back(), y+a[0]) << nl;
+        sum += a[i];
     }
+    
+    cout << sum << nl;
 }
 int main()
 {

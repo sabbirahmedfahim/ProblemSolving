@@ -7,21 +7,9 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> a(n); for(auto &e : a) cin >> e;
 
-    int res = 0;
-    for (int i = 0; i < n; i++)
-    {
-        int cnt = 0;
-        while (i < n && a[i] == 0)
-        {
-            cnt++;
-            i++;
-        }
-        res = max(cnt, res);
-    }
-    
-    cout << res << nl;
+    if(n & 1) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {
