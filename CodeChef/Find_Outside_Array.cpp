@@ -1,3 +1,4 @@
+// unsolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -7,22 +8,19 @@ using namespace std;
 void solve()
 {
     int n; cin >> n; 
-    deque<int> dq(n); for(auto &e : dq) cin >> e;
-    sort(all(dq)); reverse(all(dq));
+    vector<int> a(n); for(auto &e : a) cin >> e;
 
-    while (dq.size() > 1)
+    set<int> st;
+    for(auto e : a) st.insert(e);
+
+    if(!st.count(0)) cout << a[0] << " " << a[0] << nl;
+    else 
     {
-        if(dq[0] == dq[1])
-        {
-            dq.pop_front();
-            dq.pop_front();
-        }
-        else break;
-    }
+        sort(all(a)); reverse(all(a));
 
-    // cout << dq.size() << nl;
-    if(dq.empty()) cout << "NO" << nl;
-    else cout << "YES" << nl;
+        if(st.count(a[0]+a[0])) cout << -1 << nl;
+        else cout << a[0] << " " << a[0] << nl;
+    }
 }
 int main()
 {

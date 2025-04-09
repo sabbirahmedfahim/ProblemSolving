@@ -6,23 +6,15 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; 
-    deque<int> dq(n); for(auto &e : dq) cin >> e;
-    sort(all(dq)); reverse(all(dq));
+    int n; cin >> n; vector<int> a(n); for(auto &e : a) cin >> e;
 
-    while (dq.size() > 1)
+    int res = 0;
+    for(auto e : a)
     {
-        if(dq[0] == dq[1])
-        {
-            dq.pop_front();
-            dq.pop_front();
-        }
-        else break;
+        res += (e-1);
     }
 
-    // cout << dq.size() << nl;
-    if(dq.empty()) cout << "NO" << nl;
-    else cout << "YES" << nl;
+    cout << res << nl;
 }
 int main()
 {
