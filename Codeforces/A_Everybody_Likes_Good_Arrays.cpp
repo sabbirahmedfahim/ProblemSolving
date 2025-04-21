@@ -1,38 +1,47 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-/*
-parity: 2 diye vag korle vag shes AKA remainder when divided by 2
-*/
 void solve()
 {
     int n; cin >> n;
-    vector<ll> v(n);
-    input(v);
+    vector<int> a(n); for(auto &e : a) cin >> e;
+
     int cnt = 0;
-    int op = 0;
-    for (int i = 0; i < n-1; i++)
+    for (int i = 0; i < n;)
     {
-        if(v[i]%2 == v[i+1]%2) cnt++;
-        else
+        if(a[i] & 1)
         {
-            op += cnt;
-            cnt = 0;
+            i++;
+            while (i < n && (a[i] & 1))
+            {
+                cnt++, i++;
+            }
+        }
+        else 
+        {
+            i++;
+            while (i < n && (a[i]%2 == 0))
+            {
+                cnt++, i++;
+            }
         }
     }
-    if(cnt != 0) op += cnt; // mr corner case
-    cout << op << nl;
+    
+    cout << cnt << nl;
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

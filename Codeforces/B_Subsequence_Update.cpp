@@ -1,59 +1,55 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n, l, r; cin >> n >> l >> r; l--, r--;
-    vector<ll> v(n); 
-    for (int i = 0; i < n; i++) cin >> v[i];
-
-    set<vector<ll>> s;
-    int q = n, idx = 0;
-    while (q--)
+    int n, l, r; cin >> n >> l >> r;
+    vector<int> a(n + 1); // 1-based
+    for (int i = 1; i <= n; i++)
     {
-        vector<ll> tmp = v;
-        reverse(tmp.begin()+idx, tmp.end()); // complexity ache :()
-
-        s.insert(tmp);
-        idx++;
-    }
-
-    q = n, idx = n-1;
-    while (q--)
-    {
-        vector<ll> tmp = v;
-        reverse(tmp.begin(), tmp.end()-idx); // complexity ache :()
-
-        s.insert(tmp);
-        idx--;
+        cin >> a[i];
     }
     
-    ll candidateAns = 0;
-    for(int i = l; i <= r; i++) candidateAns += v[i];
-    for(auto e : s)
+    if(r - l + 1 == n)
     {
-        // print(e);
-
-        ll data = 0;
-        for(int i = l; i <= r; i++)
-        {
-            data += e[i];
-        }
-
-        candidateAns = min(candidateAns, data);
+        ll sum = accumulate(all(a), 0ll);
+        cout << sum << nl; return;
+    }
+    
+    vector<int> L, R;
+    for (int i = 1; i < l; i++) L.push_back(a[i]);
+    for (int i = r + 1; i <= n; i++) R.push_back(a[i]);
+    for (int i = l; i <= r; i++) 
+    {
+        L.push_back(a[i]);
+        R.push_back(a[i]);
     }
 
-    cout << candidateAns << nl;
+    sort(all(L));
+    sort(all(R));
+    ll x = 0, y = 0;
+    for (int i = 0; i < r-l+1; i++)
+    {
+        x += L[i], y += R[i];
+    }
+    
+    cout << min(x, y) << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
+

@@ -1,31 +1,38 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-/*
-Why is the output of the test case 3(-2 -1 1 1) is -1? I initially thought it should be 3 because the steps are:
- -1, 0 -> 0, 1. Oh, I get it now! The point is that 1, 2 is not possible.
-*/
 void solve()
 {
     ll a, b, c, d; cin >> a >> b >> c >> d;
-    if(b > d || (d-b+a) < c) cout << -1 << nl;
-    else
+
+    if(b > d)
     {
-        ll ans = d-b;
-        a += ans;
-        cout << ans + abs(a-c) << nl;
+        cout << -1 << nl; return;
     }
+
+    ll op = (d-b);
+    a += op;
+    if(a >= c) op += a - c;
+    else 
+    {
+        cout << -1 << nl; return;
+    }
+
+    cout << op << nl;
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int t; cin >> t;
-    while (t--) solve();
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

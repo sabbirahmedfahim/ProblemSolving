@@ -1,41 +1,48 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define input(v) for(auto &data : v) cin >> data
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define FAJR_BOOST() ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> v(n);
+    vector<int> a(n); for(auto &e : a) cin >> e;
+
     int two = 0;
-    for (int i = 0; i < n; i++)
+    for(auto e : a) 
     {
-        cin >> v[i];
-        if(v[i] == 2) two++;
+        if(e == 2) two++;
     }
-    int two_searching = 0;
-    int k = 0;
-    if(two != 0 && two%2 == 0)
+
+    if(two & 1)
     {
+        cout << -1 << nl; return;
+    }
+    if(two >= 2)
+    {
+        int ordhek = two/2, cnt = 0;
         for (int i = 0; i < n; i++)
         {
-            if(two_searching == two/2) break;
-            if(v[i] == 2) two_searching++;
-            k++; // shortest index
+            if(a[i] == 2) cnt++;
+            if(cnt == ordhek)
+            {
+                cout << i + 1 << nl; return;
+            }
         }
     }
-    if(two%2) cout << -1 << nl;
-    else if(two == 0) cout << 1 << nl;
-    else cout << k << nl;
+    cout << 1 << nl; 
 }
 int main()
 {
-    FAJR_BOOST()
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

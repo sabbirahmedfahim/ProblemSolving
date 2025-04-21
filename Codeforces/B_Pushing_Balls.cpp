@@ -5,81 +5,65 @@
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 const int N = 55;
-char mat[N][N];
-int vis[N][N];
+vector<vector<char>> mat(N, vector<char>(N));
+vector<vector<bool>> vis(N, vector<bool>(N));
 void solve()
 {
-    int n, m; cin >> n >> m;
+    int row, col; cin >> row >> col;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < row; i++)
     {
         string x; cin >> x;
         for (int j = 0; j < x.size(); j++)
         {
             mat[i][j] = x[j];
+
+            vis[i][j] = false; // reset vis after every tc
         }
     }
-
-    memset(vis, -1, sizeof(vis));
-    for (int row = 0; row < n; row++)
+    
+    // column fixed
+    for (int i = 0; i < row; i++)
     {
-        for (int col = 0; col < m-1; col++)
+        if(mat[i][0] == '1')
         {
-            if(mat[row][col] == '0' && mat[row][col+1] == '1')
+            int j = 0; // column
+            while (j < col && mat[i][j] == '1')
             {
-                if(vis[row][col] == -1) vis[row][col] = -5;
+                vis[i][j] = true;
+                j++;
             }
         }
     }
-    for (int col = 0; col < m; col++)
+    
+    // row fixed
+    for (int i = 0; i < col; i++)
     {
-        for (int row = 0; row < n-1; row++)
+        if(mat[0][i] == '1')
         {
-            // cout << mat[row][col] << ' ';
-            if(mat[row][col] == '0' && mat[row+1][col] == '1')
+            int j = 0; // row
+            while (j < row && mat[j][i] == '1')
             {
-                if(vis[row][col] == -1) vis[row][col] = -5;
-            }
-        }
-        // cout << nl;
-    }
-
-    /*##########################################################*/
-
-    // code here
-    for (int row = 0; row < n; row++)
-    {
-        for (int col = 0; col < m-1; col++)
-        {
-            if(mat[row][col] == '0' && mat[row][col+1] == '1')
-            {
-                if(vis[row][col] == -1) vis[row][col] = -5;
+                vis[j][i] = true;
+                j++;
             }
         }
     }
-    for (int col = 0; col < m; col++)
+    
+    for (int i = 0; i < row; i++)
     {
-        for (int row = 0; row < n-1; row++)
+        for (int j = 0; j < col; j++)
         {
-            // cout << mat[row][col] << ' ';
-            if(mat[row][col] == '0' && mat[row+1][col] == '1')
+            if(mat[i][j] == '1' && !vis[i][j])
             {
-                if(vis[row][col] == -1) vis[row][col] = -5;
+                cout << "NO" << nl; return;
             }
         }
-        // cout << nl;
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            // cout << mat[i][j] << ' ';
-            cout << vis[i][j] << ' ';
-        }
-        cout << nl;
-    }
-    cout << nl;
+    cout << "YES" << nl;
+
+    // mat.clear(); // got runtime error for the line, i.e it's inaccurate
 }
 int main()
 {

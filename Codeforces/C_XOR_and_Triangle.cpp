@@ -6,28 +6,17 @@
 using namespace std;
 void solve()
 {
-    int x; cin >> x; 
+    int x; cin >> x;
 
     if(__builtin_popcount(x) == 1)
     {
         cout << -1 << nl; return;
     }
 
+    int mx_bit = __lg(x);
+    int y = (1ll << mx_bit) - 1;
+    int z = (x ^ y);
 
-    int y = 0;
-    bool skipFirst = true;
-    for (int bit = 30; bit >= 0; bit--)
-    {
-        if(skipFirst && ((x >> bit) & 1))
-        {
-            skipFirst = false; continue;
-        }
-        if(skipFirst == false) y += (1<<bit);
-    }
-
-    // cout << y << nl;
-    
-    int z = (x^y);
     if(x+y > z && y+z > x && x+z > y) cout << y << nl;
     else cout << -1 << nl; 
 }
