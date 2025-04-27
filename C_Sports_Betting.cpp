@@ -7,34 +7,42 @@ using namespace std;
 void solve()
 {
     int n; cin >> n; vector<int> a(n); for(auto &e : a) cin >> e;
-    
+    sort(all(a));
+    // print(a);
+    set<int> st;
     map<int, int> mp;
-    for(auto e : a)
+    for(auto e : a) 
     {
+        st.insert(e);
         mp[e]++;
-        if(mp[e] == 4)
+    }
+    
+    for(auto [key, val] : mp)
+    {
+        if(val >= 4) 
         {
             cout << "Yes" << nl; return;
         }
     }
-    mp.clear();
 
-    for(auto e : a)
+    for (int i = 0; i < n; i++)
     {
-        mp[e]++;
-        mp[e + 1]++;
-        mp[e + 2]++;
-    }
-    for(auto [key, val] : mp)
-    {
-        // cout << key << " --> " << val << nl;
-        int x = key, y = key-1, z = key + 1;
-        if(mp[x] >= 5 && mp[y] >= 3 && mp[z] >= 3)
+        int x = a[i], y = a[i] + 1, z = a[i] + 2;
+        if(mp.count(x) && mp.count(y) && mp.count(z))
         {
-            cout << "Yes" << nl; return;
-        } 
+            bool flag = true;
+            if(mp[x] >= 2 && mp[y] >= 1 && mp[z] >= 2);
+            // else if(mp[x] >= 1 && mp[y] >= 2 && mp[z] >= 2);
+            else if(mp[x] >= 2 && mp[y] >= 2 && mp[z] >= 1);
+            // else if(mp[x] + mp[y] + mp[z] >= 5);
+            else flag = false;
+            if(flag)
+            {
+                cout << "Yes" << nl; return;
+            }
+        }
     }
-
+    
     cout << "No" << nl;
 }
 int main()
@@ -44,7 +52,7 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        // cout << "###__" << tt << nl;
+        // cout << "TEST CASE-" << tt << nl;
         solve();
     }
 

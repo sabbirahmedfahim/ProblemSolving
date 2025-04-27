@@ -1,3 +1,4 @@
+/* This statement is a textbook example of why reading comprehension is necessary */
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
@@ -6,28 +7,58 @@
 using namespace std;
 void solve()
 {
-    int k, n, m; cin >> k >> n >> m;
-    vector<int> a(n), b(m);
+    int lineNum, n, m; cin >> lineNum >> n >> m;
+    deque<int> a(n), b(m);
     for(auto &e : a) cin >> e;
     for(auto &e : b) cin >> e;
 
-    if(a[0] != 0 && b[0] != 0)
-    {
-        cout << -1 << nl; return;
-    }
+    vector<int> res;
 
-    if(a[0] == 0)
+    while (!a.empty() || !b.empty())
     {
-        for(auto e : a) cout << e << " ";
-        for(auto e : b) cout << e << " ";
-        cout << nl;
+        if(!a.empty() && !b.empty())
+        {
+            if(a.front() == 0) res.push_back(a.front()), a.pop_front(), lineNum++;
+            else if(b.front() == 0) res.push_back(b.front()), b.pop_front(), lineNum++;
+            else if(a.front() <= b.front()) 
+            {
+                if(a.front() <= lineNum) res.push_back(a.front()), a.pop_front();
+                else 
+                {
+                    cout << -1 << nl; return;
+                }
+            }
+            else 
+            {
+                if(b.front() <= lineNum) res.push_back(b.front()), b.pop_front();
+                else 
+                {
+                    cout << -1 << nl; return;
+                }
+            }
+        }
+        else if(!a.empty())
+        {
+            if(a.front() == 0) res.push_back(a.front()), a.pop_front(), lineNum++;
+            else if(a.front() <= lineNum) res.push_back(a.front()), a.pop_front();
+            else
+            {
+                cout << -1 << nl; return;
+            }
+        }
+        else 
+        {
+            if(b.front() == 0) res.push_back(b.front()), b.pop_front(), lineNum++;
+            else if(b.front() <= lineNum) res.push_back(b.front()), b.pop_front();
+            else
+            {
+                cout << -1 << nl; return;
+            }
+        }
     }
-    else 
-    {
-        for(auto e : b) cout << e << " ";
-        for(auto e : a) cout << e << " ";
-        cout << nl;
-    }
+    
+    // cout << "Ok" << nl;
+    print(res);
 }
 int main()
 {
