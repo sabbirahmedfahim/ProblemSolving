@@ -1,45 +1,71 @@
-// unsolved
+// resolved from the editorial (the observation is every node has exactly two degree)
 #include <bits/stdc++.h>
-#define nl '\n'
 #define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ull unsigned long long int
+#define nl '\n'
 using namespace std;
-void solve()
+const int N = 2e5 + 5;
+int parent[N];
+vector<int> adj[N];
+void dsu_initialize(int n)
 {
-    string s; cin >> s; int n = s.size();
-    int cnt_ = count(all(s), '_');
-
-    int ans = 0;
-
-    for (int i = 0, j = n-1; i < n && i < j; )
+    for (int i = 0; i <= n; i++)
     {
-        if(cnt_ == 0) break;
-        while (s[i] != '^' && i < n-2 && i < j-1) 
-        {
-            i++; 
-        }
-        while (s[j] != '^' && j > 1 && j > i+1) 
-        {
-            j--; 
-        }
-        if(s[i] == '^' && s[j] == '^' && cnt_ > 0) ans++;
-
-        i++, j--; cnt_--;
+        parent[i] = -1;
     }
-
-    cout << ans << nl;
+}
+int dsu_find(int node)
+{
+    if(parent[node] == -1) return node;
+    int leader = dsu_find(parent[node]);
+    parent[node] = leader; // path compression
+    return leader;
+}
+void dsu_union(int node1, int node2) 
+{
+    int leaderA = dsu_find(node1); 
+    int leaderB = dsu_find(node2); 
+    if(leaderA != leaderB) parent[leaderA] = leaderB; 
 }
 int main()
 {
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-    int t; cin >> t; 
-    for (int tt = 1; tt <= t; tt++)
+    int n, e; cin >> n >> e;
+    dsu_initialize(n); // step-1 : initialize the node with n
+    
+    int cntCycle = 0;
+    while (e--)
     {
-        cout << "Case " << tt << ": ";
-        solve();
+        int u, v; cin >> u >> v;
+
+        dsu_union(u, v);
+        
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    map<int, vector<int> > owLeaderErUnderEAsoin;
+    for (int i = 1; i <= n; i++)
+    {
+        int leaderShab = dsu_find(i);
+        owLeaderErUnderEAsoin[leaderShab].push_back(i);
     }
     
+    for(auto [key, val] : owLeaderErUnderEAsoin)
+    {
+        bool isCycle = true;
+        for(auto data : val)
+        {
+            if(adj[data].size() != 2) 
+            {
+                isCycle = false; break;
+            }
+        }
+        if(val.size() <= 2) isCycle = false;
+
+        if(isCycle) cntCycle++;
+    }
+    
+    cout << cntCycle << nl; 
+
     return 0;
 }

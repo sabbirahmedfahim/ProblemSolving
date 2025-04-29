@@ -1,26 +1,27 @@
-#include <bits/stdc++.h>
-#define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#include <bits/stdc++.h> 
 using namespace std;
-int n, m;
-const int N = 1E4+5;
-bool vis[N][N];
+const int N = 1e4+5;
 char mat[N][N];
-vector<pair<int, int> > directionArr = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-bool isValid(int ci, int cj)
+bool vis[N][N];
+int n, m;
+int si, sj, di, dj;
+vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+bool is_valid(int ci, int cj)
 {
-    return (ci >= 0 && ci < n && cj >= 0 && cj < m);
+    if (ci >= n || ci < 0 || cj >= m || cj < 0)
+        return false;
+    return true;
 }
+bool isFound = false;
 void dfs(int si, int sj)
 {
     vis[si][sj] = true;
     for (int i = 0; i < 4; i++)
     {
-        int ci = si + directionArr[i].first;
-        int cj = sj + directionArr[i].second;
-        if(isValid(ci, cj) && !vis[ci][cj] && mat[ci][cj] == '.')
+        int ci = si + d[i].first;  
+        int cj = sj + d[i].second; 
+
+        if (is_valid(ci, cj) && !vis[ci][cj] && mat[ci][cj] != '#')
         {
             dfs(ci, cj);
         }
@@ -28,30 +29,30 @@ void dfs(int si, int sj)
 }
 int main()
 {
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-    cin >> n >> m; int cnt = 0;
-
+    cin >> n >> m;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            cin >> mat[i][j];
+            cin >> mat[i][j]; 
         }
     }
     memset(vis, false, sizeof(vis));
-    
+
+    int cnt = 0;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            if(!vis[i][j] && mat[i][j] == '.')
+            if(mat[i][j] == '.' && !vis[i][j])
             {
-                cnt++; dfs(i, j);
+                cnt++;
+                dfs(i, j);
             }
         }
     }
-    cout << cnt << nl;
+
+    cout << cnt << endl;
 
     return 0;
 }
