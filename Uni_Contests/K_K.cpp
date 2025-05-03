@@ -1,43 +1,64 @@
 #include <bits/stdc++.h>
-#define nl '\n'
 #define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ull unsigned long long int
+#define nl '\n'
 using namespace std;
-const int N = 1E6;
-int main()
+const int N = 1e5 + 5;
+int parent[N];
+void dsu_initialize(int n)
 {
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-    bool comp[N+1] = {0};
-    for (int i = 2; i <= N; i++)
+    for (int i = 0; i <= n; i++)
     {
-        if(comp[i]) continue;
-        
-        for (int j = i+i; j <= N; j+=i)
-        {
-            comp[j] = true;
-        }
+        parent[i] = -1;
     }
-    comp[1] = true;
+}
+int dsu_find(int node)
+{
+    if(parent[node] == -1) return node;
+    int leader = dsu_find(parent[node]);
+    parent[node] = leader; // path compression
+    return leader;
+}
+void dsu_union(int node1, int node2) 
+{
+    int leaderA = dsu_find(node1); 
+    int leaderB = dsu_find(node2);
+    if(leaderA != leaderB) parent[leaderA] = leaderB; 
+}
+int cs = 1;
+void solve()
+{
+    cout << "Case " << cs++ << ":" << nl;
 
-    // pre-calculate
-    vector<int> primeNumbers;
-    for (int i = 2; i <= N; i++)
-    {
-        if(!comp[i] && !comp[(i+1)/2]) primeNumbers.push_back(i);
-    }
+    int n, queries; cin >> n >> queries;
+    dsu_initialize(n); // step-1 : initialize the node with n
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; i++) cin >> a[i];
     
-    int queries; cin >> queries; 
     while (queries--)
     {
-        int x, y, cnt = 0; cin >> x >> y;
-        for(auto data : primeNumbers)
+        int cmd; cin >> cmd;
+        if(cmd == 1)
         {
-            if(data >= x && data <= y) cnt++;
+            int x, y; cin >> x >> y;
+            dsu_union(x, y);
         }
-        cout << cnt << nl;
+        else 
+        {
+            int idx; cin >> idx; // 1-based
+            int data = dsu_find(a[idx]);
+            cout << data << nl;
+        }
     }
+}
+int main()
+{
+    int t; cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+    
 
     return 0;
 }
