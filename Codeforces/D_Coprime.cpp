@@ -1,59 +1,59 @@
+// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+map<pair<int,int>, int> coprimes;
+void preCalc() // 304192
+{
+    for (int i = 1; i <= 1000; i++)
+    {
+        for (int j = 1; j <= 1000; j++)
+        {
+            if(__gcd(i, j) == 1 && !coprimes.count({j, i}))
+            {
+                coprimes[{i, j}] = 1;
+            }
+        }
+    }
+}
 void solve()
 {
-    int n; cin >> n; 
-    vector<int> v(n); for(auto &data : v) cin >> data;
-
-    int mx = -1;
-    for (int i = n-1; i >= 0; i--)
+    int n; cin >> n;
+    map<int, int> idx;
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = n-1; j >= 0; j--)
-        {
-            if(__gcd(v[i], v[j]) == 1)
-            {
-                mx = max(mx, i+j+2);
-            }
-        }
-        if(mx >= i+i+2) break;
+        int data; cin >> data;
+        idx[data] = i;
     }
-    cout << mx << nl;
-}
-void solve2()
-{
-    int n; cin >> n; 
-    vector<int> v(n); for(auto &data : v) cin >> data;
-
-    // 1000 disticnt element, wanna use set/map and eliminate some? remember index matters
-    map<int, int> mp;
-    vector<int> distinctEle;
-    for (int i = 0; i < n; i++) mp[v[i]] = i+1;
-    for(auto [key, val] : mp) distinctEle.push_back(key);
-
-    int mx = -1;
-    for (int i = distinctEle.size()-1; i >= 0; i--)
+    
+    int res = -1;
+    for(auto e : coprimes)
     {
-        for (int j = distinctEle.size()-1; j >= 0; j--)
+        int x = e.first.first, y = e.first.second;
+        if(idx.count(x) && idx.count(y))
         {
-            if(__gcd(distinctEle[i], distinctEle[j]) == 1)
-            {
-                mx = max(mx, mp[distinctEle[i]]+mp[distinctEle[j]]);
-            }
+            res = max(res, idx[x] + idx[y]);
         }
-        // if(mx >= i+i) break;
     }
-    cout << mx << nl;
+
+    cout << res << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve2();
+    preCalc();
+    // cout << coprimes.size() << nl;
+
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
