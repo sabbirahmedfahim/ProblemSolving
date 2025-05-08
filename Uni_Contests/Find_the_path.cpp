@@ -1,77 +1,74 @@
 #include <bits/stdc++.h>
+#define nl '\n'
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-const int N = 1E5 + 7;
-vector<pair<int, int>> v[N];
-const int inf = 1E6 + 6;
-int dist[N]; /* dist == cost */
-int parent[N]; // track parent node
-void dijkstra(int source) // O(logV(V+E)) -> O(VlogV + ElogV) -> O(VlogV + ElogE)
+const int N = 2E5 + 5;
+const int inf = 1E6;
+vector<pair<int, int>> adjList[N];
+int dis[N];
+int parent[N];
+void dijkstra(int src)
 {
-    /* PUSH {COST, SOURCE}, NOT {source, cost} *** */
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // Min-heap by default
-    pq.push({0, source});
-    dist[source] = 0;
-    parent[source] = -1; // track parent node
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, src});
+    dis[src] = 0;
+
     while (!pq.empty())
     {
-        pair<int, int> par = pq.top();
+        int node = pq.top().second;
+        int cost = pq.top().first;
         pq.pop();
-        int cost = par.first; // or parentCost
-        int node = par.second;  // or parentNode
-        for (pair<int, int> child : v[node]) // range based for loop
+        for(auto child : adjList[node])
         {
-            int childNode = child.first; // don't confuse, we took input as {node, cost} format
-            int childCost = child.second; // don't confuse, we took input as {node, cost} format
-            if (cost + childCost < dist[childNode])
+            int childNode = child.first;
+            int childCost = child.second;
+            if(dis[node] + childCost < dis[childNode])
             {
-                // path relax
-                dist[childNode] = cost + childCost;
-                parent[childNode] = node; // track parent node
-                pq.push({dist[childNode], childNode}); // {COST, SOURCE}
+                dis[childNode] = dis[node] + childCost;
+                parent[childNode] = node;
+                
+                pq.push({dis[childNode], childNode});
             }
         }
     }
 }
 int main()
 {
-    int n, e;
-    cin >> n >> e;
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    int n, e; cin >> n >> e;
     while (e--)
     {
-        int a, b, c; // c => cost
-        cin >> a >> b >> c;
-        v[a].push_back({b, c});
-        v[b].push_back({a, c}); // undirected
+        int u, v, w; cin >> u >> v >> w;
+        adjList[u].push_back({v, w});
     }
-    
-    // memset(dist, inf, sizeof(dist));
-    for (int i = 0; i < N; i++)
+
+    for (int i = 1; i <= n; i++)
     {
-        dist[i] = inf;
+        dis[i] = inf;
     }
-    
-    memset(parent, -1, sizeof(parent)); // parent tracking
+    memset(parent, -1, sizeof(parent));
 
-    int source, destination; cin >> source >> destination;
-    dijkstra(source);
+    int src, des; cin >> src >> des;
+    dijkstra(src);
 
-    int tmp = destination;
+    if(dis[des] == inf)
+    {
+        cout << -1 << nl; return 0;
+    }
+
+    int tmp = des;
     vector<int> path;
-    while (tmp != -1) 
+    while (tmp != -1)
     {
         path.push_back(tmp);
         tmp = parent[tmp];
     }
-    
-    if(dist[destination] == inf)
-    {
-        cout << -1 << endl; return 0;
-    }
-    reverse(path.begin(), path.end());
-
-    // shortest path
-    cout << dist[destination] << endl;
-    for(auto e : path) cout << e << " "; cout << endl;
+    reverse(all(path));
+    cout << dis[des] << nl;
+    print(path);
 
     return 0;
 }
