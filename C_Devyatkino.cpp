@@ -6,20 +6,16 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<ll> a(n); for(auto &e : a) cin >> e;
+    ll n; cin >> n;
+    cout << n << " -->" << nl;
 
-    ll cur_mx = 0, cur_sum = 0;
     int cnt = 0;
-    for(auto e : a)
+    for (int i = 0; i < 10; i++)
     {
-        cur_sum += e;
-        cur_mx = max(cur_mx, e);
-        // cout << cur_sum << " " << cur_mx << nl;
-        if(cur_sum - cur_mx == cur_mx) cnt++; 
+        n += 99;
+        cout << n << " ";
     }
-
-    cout << cnt << nl;
+    cout << nl;
 }
 int main()
 {
@@ -28,7 +24,7 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        // cout << "TEST CASE-" << tt << nl;
+        cout << "TEST CASE-" << tt << nl; 
         solve();
     }
 

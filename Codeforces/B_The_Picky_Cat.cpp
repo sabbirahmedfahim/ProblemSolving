@@ -6,25 +6,28 @@
 using namespace std;
 void solve()
 {
-    int n, m, k; cin >> n >> m >> k;
+    int n; cin >> n;
+    vector<int> a(n); for(auto &e: a) cin >> e;
+    for(auto &e : a) if(e < 0) e = abs(e);
+    // print(a);
 
-    if(m == 1 || k == n-1)
-    {
-        cout << "NO" << nl; return;
-    }
-
-    if(m > 2 && k <= n-2)
+    if(n <= 2)
     {
         cout << "YES" << nl; return;
     }
-    if(m == 2)
-    {
-        if(n/2 <= k) cout << "NO" << nl;
-        else cout << "YES" << nl;
-        return;
-    }
 
-    cout << "NO" << nl;
+    int mid = a[0];
+    sort(all(a));
+    int cnt = 0, pos = (n+1)/2; 
+    for (int i = 0; i < n; i++)
+    {
+        if(a[i] < mid) cnt++;
+    }
+    
+    int len = n-pos;
+    // cout << len << nl;
+    if(cnt <= len) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {

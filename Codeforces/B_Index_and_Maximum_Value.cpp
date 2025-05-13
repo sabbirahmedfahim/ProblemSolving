@@ -1,4 +1,3 @@
-// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,23 +6,24 @@
 using namespace std;
 void solve()
 {
-    int a, b, c; cin >> a >> b >> c;
+    int n, q; cin >> n >> q;
+    vector<int> a(n); for(auto &e : a) cin >> e;
+    int cur = *max_element(all(a));
 
-    // for a
-    if(b == c) cout << 1 << " ";
-    else if(abs(b-c)%2 == 0) cout << 1 << " ";
-    else cout << 0 << " ";
-
-    // for b
-    if(a == c) cout << 1 << " ";
-    else if(abs(a-c)%2 == 0) cout << 1 << " ";
-    else cout << 0 << " "; 
-
-    // for c
-    if(b == a) cout << 1 << " ";
-    else if(abs(b-a)%2 == 0) cout << 1 << " ";
-    else cout << 0 << " ";  
-
+    while (q--)
+    {
+        char c; int l, r; cin >> c >> l >> r;
+        if(c == '+')
+        {
+            if(cur >= l && cur <= r) cur++;
+            cout << cur << " ";
+        }
+        else 
+        {   
+            if(cur >= l && cur <= r) cur--;
+            cout << cur << " ";
+        }
+    }
     cout << nl;
 }
 int main()

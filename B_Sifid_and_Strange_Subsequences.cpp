@@ -6,19 +6,28 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<ll> a(n); for(auto &e : a) cin >> e;
+    int n; cin >> n; vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+    // print(a);
 
-    ll cur_mx = 0, cur_sum = 0;
-    int cnt = 0;
-    for(auto e : a)
+    int cnt = 0, idx = 0;
+    for (int i = 0; i < n; i++)
     {
-        cur_sum += e;
-        cur_mx = max(cur_mx, e);
-        // cout << cur_sum << " " << cur_mx << nl;
-        if(cur_sum - cur_mx == cur_mx) cnt++; 
+        if(a[i] <= 0) cnt++;
+        else 
+        {
+            idx = i; break;
+        }
     }
 
+    // if(idx > 0) idx--;
+
+    for (int i = idx; i < n-1; i++)
+    {
+        if(abs(a[i] - a[i + 1]) < a[i + 1]) cnt++;
+    }
+    
     cout << cnt << nl;
 }
 int main()
