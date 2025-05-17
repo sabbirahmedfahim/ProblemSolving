@@ -1,3 +1,4 @@
+// Resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -11,7 +12,14 @@ void solve()
 {
     int n, m, p, q; cin >> n >> m >> p >> q;
 
+    if(n%p == 0)
+    {
+        if((n/p) * q == m) cout << "YES" << nl;
+        else cout << "NO" << nl;
+        return;
+    }
     
+    cout << "YES" << nl; // fractions gave the freedom to make true!
 }
 int main()
 {

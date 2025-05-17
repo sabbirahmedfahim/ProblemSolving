@@ -6,29 +6,26 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n; vector<int> a(n);
-    for(auto &e : a) cin >> e;
-    sort(all(a));
-    // print(a);
+    int n; cin >> n;
+    string s; cin >> s;
+    int cntA = count(all(s), 'A');
+    if(cntA == n || cntA == 0)
+    {
+        cout << 0 << nl; return;
+    }
 
-    int cnt = 0, idx = 0;
+    int l = -1, r = -1;
     for (int i = 0; i < n; i++)
     {
-        if(a[i] <= 0) cnt++;
-        else 
-        {
-            idx = i; break;
-        }
-    }
-
-    // if(idx > 0) idx--;
-
-    for (int i = idx; i < n-1; i++)
-    {
-        if(abs(a[i] - a[i + 1]) < a[i + 1]) cnt++;
+        if(l == -1 && s[i] == 'A') l = i;
+        if(s[i] == 'B') r = i;
     }
     
-    cout << cnt << nl;
+    if(r < l)
+    {
+        cout << 0 << nl; return;
+    }
+    cout << r-l << nl;
 }
 int main()
 {
