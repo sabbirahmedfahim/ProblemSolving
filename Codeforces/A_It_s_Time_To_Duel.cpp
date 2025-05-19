@@ -1,4 +1,3 @@
-// took hints from TLE (a smaaaaaall observation)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,21 +6,27 @@
 using namespace std;
 void solve()
 {
-    int n; string s; cin >> n >> s;
-    
-    ll res = 0;
-    set<int> st;
+    int n; cin >> n;
+    vector<int> a(n); for(auto &e : a) cin >> e;
 
-    for (int i = 0; i < n; i++)
+    int one = 0;
+    for (int i = 0; i < n-1; i++)
     {
-        if(!st.count(s[i])) 
+        if(a[i] == 0 && a[i + 1] == 0)
         {
-            res += n-i; 
-            st.insert(s[i]);
+            cout << "YES" << nl; return;
         }
+
+        if(a[i] == 1) one++;
     }
+
+    if(a[n-1] == 1) one++;
     
-    cout << res << nl;
+    if(one == n)
+    {
+        cout << "YES" << nl; return;
+    }
+    cout << "NO" << nl;
 }
 int main()
 {

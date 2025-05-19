@@ -1,44 +1,59 @@
+// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-/*
-if you got a TLE on tc 3, read the editorial for soem hints and then work on it. Pretty simple question.
-One thing you should remember, do not sort the array's, think differently. 
-Hmmmm... 1<=Xi<=30 is the key...
-*/
 void solve()
 {
     int n, q; cin >> n >> q;
-    deque<ll> a(n), b(q); 
-    for(auto &data : a) cin >> data; for(auto &data : b) cin >> data;
-    set<ll> s; vector<ll> c;
-    for(auto data : b) 
-    {
-        if(!s.count(data)) 
-        {
-            c.push_back(data); s.insert(data);
-        }
-    }
+    vector<int> a(n), x(q);
+    for(auto &e : a) cin >> e;
+    for(auto &e : x) cin >> e;
+
     
-    for(auto &data : a)
+    set<int> st; vector<int> vec;
+    for(auto e : x) 
     {
-        for (int i = 0; i < c.size(); i++)
+        // reducing tot op O(q) to max. O(30)
+        if(!st.count(e)) vec.push_back(e);
+        st.insert(e);   
+    }
+
+    // TLE O(n * n)
+    // for(auto e : x) 
+    // {
+    //     int data = pow(2, e);
+
+    //     for(auto &val : a) 
+    //     {
+    //         if(val%data == 0) val += pow(2, e-1);    
+    //     }
+    // }
+    
+    // O(n * 30)
+    for (int i = 0; i < vec.size(); i++)
+    {
+        int data = pow(2, vec[i]);
+        for (int j = 0; j < n; j++)
         {
-            ll toPowerData = pow(2, c[i]), replaceData = pow(2, c[i]-1);
-            if(data%toPowerData == 0) data += replaceData;
+            if(st.count(vec[i]) && a[j] % data == 0) a[j] += pow(2, vec[i]-1);
         }
     }
-    print(a); 
+ 
+    print(a);
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
