@@ -4,27 +4,35 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-void solve()
+int cnt(vector<int> &a, int v, int x)
 {
-    int n, k, q; cin >> n >> k >> q;
-    vector<int> a(n); for(auto &e : a) cin >> e;
-
-    ll res = 0;
-    for (int i = 0; i < n; )
+    int cur = 0;
+    for (int i = 0; i < a.size(); i++)
     {
-        int j = i;
-        ll cur = 1, cnt = -1;
-        while (i < n && a[i] <= q)
-        {
-            if(i - j + 1 == k) cur++, cnt = 1;
-            if(i - j + 1 > k) cnt += cur++;
-            i++;
-        }
-
-        if(cnt != -1) res += cnt;
-        if(i < n && a[i] == a[j]) i++; 
+        if(abs(v-a[i]) > x) cur++;
     }
     
+    return cur;
+}
+void solve()
+{
+    int n, x; cin >> n >> x;
+    vector<int> a(n); for(auto &e : a) cin >> e;
+
+    int hi = 1E9, lo = 0, res = 1E9;
+
+    while (lo <= hi)
+    {
+        int mid = lo + (hi-lo)/2;
+
+        if(cnt(a, mid, x) < res)
+        {
+            res = cnt(a, mid, x);
+            hi = mid - 1;
+        }
+        else lo = mid + 1;
+    }
+
     cout << res << nl;
 }
 int main()
