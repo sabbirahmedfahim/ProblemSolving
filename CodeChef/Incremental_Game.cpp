@@ -1,18 +1,31 @@
-// it might not work, just curious
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-int LCM(int x, int y)
-{
-    return (x / __gcd(x, y)) * y;
-}
 void solve()
 {
-    int n; cin >> n;
+    int x, y, k; cin >> x >> y >> k;
 
+    int cur = -1;
+    if(x >= y)
+    {
+        cur = min(x, k);
+        x -= cur;
+    }
+    else cur = min(y, k), y -= cur;
+
+    if(x >= y)
+    {
+        if(x > cur) cout << "Bob" << nl;
+        else cout << "Alice" << nl;
+    }
+    else 
+    {
+        if(y > cur) cout << "Bob" << nl;
+        else cout << "Alice" << nl;
+    }
 }
 int main()
 {
