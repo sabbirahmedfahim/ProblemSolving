@@ -1,9 +1,0 @@
-| Day/Time       | 08:55-10:10AM          | 10:10-11:25AM          | 11:25-12:40PM          | 12:40-1:10PM       | 1:10-2:25PM           | 2:25-3:40PM           | 3:40-4:55PM | OL Class 7:00pm-8:20pm |
-|----------------|------------------------|------------------------|------------------------|--------------------|-----------------------|-----------------------|-------------|------------------------|
-| Saturday       |                        |                        |                        |                    |                       |                       |             |                        |
-| Sunday         |                        |                        |                        |                    |                       |                       |             |                        |
-| Monday         |                        |                        |                        |                    |                       |                       |             |                        |
-| Tuesday        | CSE-3111 AFR (G2)      | CSE-3112 AFR (ACL-2)   | CSE-3121 PRP (RAB-109) | <span style="color:red">BREAK</span> | CSE-3113 TNA (***)   | CSE-3113 TNA (ACL-1)   |             |                        |
-| Wednesday      |                        |                        |                        |                    |                       |                       |             |                        |
-| Thursday       | CSE-3111 AFR (RAB-401) | CSE-3112 AFR (ACL-3)   | CSE-2201 NDK (RAB-401) | <span style="color:red">BREAK</span> |                       |                       |             |                        |
-| Friday         | CSE-3113 TNA (RAB-111) | CSE-3114 TNA (ACL-1)   | CSE-3121 PRP (RAB-304) | <span style="color:red">BREAK</span> | CSE-2201 NDK (RKB-304)|                       |             |                        |
