@@ -9,7 +9,14 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    string s; cin >> s;
+    string x; cin >> x;
+
+    string s = x;
+    // for(auto e : x)
+    // {
+    //     if(e == '\"') continue;
+    //     else s += e;
+    // }
 
     int res = 0;
     set<int> st;
@@ -22,14 +29,13 @@ int main()
         }
         else 
         {
-            while (s[i] != s[j])
+            while (j < s.size() && j <= i && s[i] != s[j])
             {
                 st.erase(s[j]);
                 j++;
             }
-            st.erase(s[j]);
             j++;
-            st.insert(s[i]);
+            if(j < s.size()) res = max(res, i - j + 1);
         }
     }
     
