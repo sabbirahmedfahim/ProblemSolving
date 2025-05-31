@@ -9,6 +9,7 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
+    int x; cin >> x; cout << x << nl;
     cout << "hello worLD" << nl;
 
     return 0;
