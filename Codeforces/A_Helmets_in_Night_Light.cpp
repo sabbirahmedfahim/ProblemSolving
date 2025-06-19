@@ -1,45 +1,43 @@
-// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+bool cmp(pair<ll, ll> i, pair<ll, ll> j)
+{
+    if(i.second != j.second) return i.second < j.second;
+    return i.first > j.first;
+}
 void solve()
 {
-    int n, p; cin >> n >> p;
+    ll n, p; cin >> n >> p;
+    vector<ll> a(n), b(n);
+    for(auto &e : a) cin >> e;
+    for(auto &e : b) cin >> e;
 
-    vector<int> x(n),y(n);
-    map<int, int> mp;
-    for(auto &e : x) cin >> e;
-    for(auto &e : y) cin >> e;
-
+    vector<pair<ll, ll>> x(n);
     for (int i = 0; i < n; i++)
     {
-        mp[y[i]] += x[i];
+        x[i].first = a[i];
+        x[i].second = b[i];
     }
     
-    int need = n;
-    ll res = 0;
-    for(auto [cost, person] : mp)
+    sort(x.begin(), x.end(), cmp);
+
+    ll cost = 0; cost += p;
+    ll person = 0, need = n;
+    need--;
+
+    for(auto [i, j] : x)
     {
-        // cout << cost << " " << person << nl;
+        cost += min(p, j) * min(need, i);
+        need -= min(need, i);
 
-        res += p; need--;
-        if(need == 0) break;
-
-        if(p <= cost)
-        {
-            res += 1ll * p * need;
-            cout << res << nl; return;
-        }
-
-        res += (cost * min(person, need));
-        need -= min(need, person);
         if(need == 0) break;
     }
-
-    cout << res << nl;
+    // cout << nl;
+    cout << cost << nl;
 }
 int main()
 {
