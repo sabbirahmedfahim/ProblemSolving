@@ -1,4 +1,3 @@
-// took hints (eta completely nije kora uchit, even without getting hints from tc >= 2)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -9,72 +8,42 @@ void solve()
 {
     int n; cin >> n;
     vector<int> a(n + 1), b(n + 1);
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> a[i];
-    }
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> b[i];
-    }
-    
+    set<int> st;
+    for (int i = 1; i <= n; i++) cin>>a[i], st.insert(a[i]);
+    for (int i = 1; i <= n; i++) cin>>b[i], st.insert(b[i]);
 
-    map<int, int> aOcc, bOcc;
-    for (int i = 1; i <= 2 * n; i++)
-    {
-        aOcc[i] = 0, bOcc[i] = 0;
-    }
-    
-    for (int i = 1; i <= n;)
+    map<int, int> x, y;
+
+    for (int i = 1; i <= n; )
     {
         int j = i;
-        while (i <= n && a[j] == a[i])
+        while (j <= n && a[i] == a[j])
         {
-            if(i == n) break;
-            i++;
+            j++;
         }
 
-        // if(a[j] == 1) cout << "#Huh#" << aOcc[a[j]] << nl;
-        
-        if(aOcc[a[j]] < i - j + 1) 
-        {
-            aOcc[a[j]] = i - j + 1; 
-            if(a[i] != a[j]) aOcc[a[j]]--;
-        }
-
-        if(i <= n && a[i] != a[j]);
-        else i++;
+        x[a[i]] = max(x[a[i]], j - i);
+        i = j;
     }
 
-    for (int i = 1; i <= n;)
+    for (int i = 1; i <= n; )
     {
         int j = i;
-        while (i <= n && b[j] == b[i])
+        while (j <= n && b[i] == b[j])
         {
-            if(i == n) break;
-            i++;
-        }
-        // if(b[j] == 2) cout << "#Huh#" << bOcc[b[j]] << nl;
-
-        if(bOcc[b[j]] < i - j + 1) 
-        {
-            bOcc[b[j]] = i - j + 1; 
-            if(b[i] != b[j]) bOcc[b[j]]--;
+            j++;
         }
 
-        if(i <= n && b[i] != b[j]);
-        else i++;
-
-        // if(b[j] == 2) cout << "#Huh#" << bOcc[b[j]] << nl;
+        y[b[i]] = max(y[b[i]], j - i);
+        i = j;
     }
-
+    
     int res = 0;
-    for (int i = 1; i <= 2 * n; i++)
+    for(auto e : st)
     {
-        // cout << i << "# " << aOcc[i] << " " << bOcc[i] << nl;
-        res = max(res, aOcc[i] + bOcc[i]);
+        res = max(res, x[e] + y[e]);
     }
-    
+ 
     cout << res << nl;
 }
 int main()

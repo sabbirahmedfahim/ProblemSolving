@@ -1,4 +1,3 @@
-// question vul porsi
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,18 +6,18 @@
 using namespace std;
 void solve()
 {
-    string s; cin >> s;
-    int one = count(all(s), '1'), zero = count(all(s), '0');
+    ll balls, poolSideLen; cin >> balls >> poolSideLen;
 
-    int cost = s.size();
-    for(auto e : s)
+    ll res = 0;
+    while (balls--)
     {
-        if(e == '1' && zero) zero--, cost--;
-        else if(e == '0' && one) one--, cost--;
-        else break;
+        ll a, b, c, d;
+        cin >> a >> b >> c >> d;
+        if(c == d && (c + d) == poolSideLen) res++;
+        else if(a > b && c < d && (c + d) == poolSideLen) res++;
+        else if(a < b && c > d && (c + d) == poolSideLen) res++;
     }
-
-    cout << cost << nl;
+    cout << res << nl;
 }
 int main()
 {
