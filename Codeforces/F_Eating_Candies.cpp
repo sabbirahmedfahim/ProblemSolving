@@ -1,3 +1,4 @@
+// tool test case as hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -6,32 +7,39 @@
 using namespace std;
 void solve()
 {
-    int n, c; cin >> n >> c;
-    vector<int> a(n+1);
+    int n; cin >> n;
+    vector<int> a(n + 1);
+    map<int, int> mp1, mp2;
     for (int i = 1; i <= n; i++)
     {
-        cin >> a[i];
+        cin>>a[i];
     }
     
-    vector<ll> costArray;
+    ll sum = 0;
     for (int i = 1; i <= n; i++)
     {
-        costArray.push_back(i + a[i]);
-    }
-    sort(all(costArray));
-    // print(costArray);
+        sum += a[i];
 
-    int res = 0;
-    for (int i = 0; i < costArray.size(); i++)
+        mp1[sum] = i;
+    }
+
+    sum = 0; 
+    int idx = 1;
+    for (int i = n; i >= 1; i--)
     {
-        if(costArray[i] <= c)
-        {
-            res++;
-            c -= costArray[i];
-        }
-        else break;
+        sum += a[i];
+
+        mp2[sum] = idx++;
     }
     
+    int res = 0;
+    for(auto [x, y] : mp1)
+    {
+        if(mp2.count(x) && (mp1[x] + mp2[x]) <= n)
+        {
+            res = max(res, mp1[x] + mp2[x]);
+        }
+    }
     cout << res << nl;
 }
 int main()

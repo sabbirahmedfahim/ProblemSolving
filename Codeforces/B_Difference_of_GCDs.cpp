@@ -1,4 +1,3 @@
-// Resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,28 +6,30 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<ll> a(n + 1);
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> a[i];
-    }
-    sort(all(a));
-    
-    vector<ll> pref(n + 1);
-    pref[1] = a[1];
-    for (int i = 2; i <= n; i++)
-    {
-        pref[i] = pref[i - 1] + a[i];
-    }
-    // print(pref);
+    int n, l, r; cin >> n >> l >> r;
 
-    for (int i = 1; i <= n; i++)
-    {
-        ll sum = pref[i];
+    set<int> GCDS;
 
+    if(r - l + 1 < n)
+    {
+        cout << "NO" << nl; return;
+    }
+
+    for (int i = 1, j = l; j <= r; j++)
+    {
+        if(!GCDS.count(__gcd(i, j)))
+        {
+            GCDS.insert(__gcd(i, j)); i++;
+        }
+        if(GCDS.size() == n) break;
     }
     
+    if(GCDS.size() == n)
+    {
+        cout << "YES" << nl;
+        print(GCDS);
+    }
+    else cout << "NO" << nl;
 }
 int main()
 {
