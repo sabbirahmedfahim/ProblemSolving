@@ -1,4 +1,4 @@
-// took hints from the editorial
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,27 +7,29 @@
 using namespace std;
 void solve()
 {
-    int n, l, r; cin >> n >> l >> r;
-    
-    vector<int> res;
-
-    for (int i = 1; i <= n && l <= r; l++)
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+    if(a[0] != 1)
     {
-        if(res.size() == n) break;
+        cout << "NO" << nl; return;
+    }
 
-        if(l % i == 0)
+    // trick bro, trick
+
+    ll sum = 1;
+    for (int i = 1; i < n; i++)
+    {
+        if(sum < a[i])
         {
-            res.push_back(l);
-            i++;
+            cout << "NO" << nl; return;
         }
+
+        sum += a[i];
     }
     
-    if(res.size() == n)
-    {
-        cout << "YES" <<nl;
-        print(res);
-    }
-    else cout << "NO" << nl;
+    cout << "YES" << nl;
 }
 int main()
 {

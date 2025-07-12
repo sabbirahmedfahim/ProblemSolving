@@ -1,4 +1,4 @@
-// adhoc + took hints from the editorial
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,29 +7,29 @@
 using namespace std;
 void solve()
 {
-    int n, k; cin >> n >> k;
+    int n; cin >> n;
     vector<int> a(n);
-    for(auto &e : a) cin>>e;
-    sort(all(a)); 
-
-    map<int, int> mp;
-    for(auto e : a) mp[e]++;
-
-    for (int i = 0; i < n; i++)
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+    if(a[0] != 1)
     {
-        int target = a[i] + abs(k);
-        if(target < 0) continue;
+        cout << "NO" << nl; return;
+    }
 
-        mp[a[i]]--;
-        if(mp[a[i]] == 0) mp.erase(a[i]);
+    // trick bro, trick
 
-        if(mp.count(target)) 
+    int sum = 1;
+    for (int i = 1; i < n; i++)
+    {
+        if(sum < a[i])
         {
-            cout << "YES" << nl; return;
+            cout << "NO" << nl; return;
         }
+
+        sum += a[i];
     }
     
-    cout << "NO" << nl;
+    cout << "YES" << nl;
 }
 int main()
 {
