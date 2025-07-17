@@ -4,23 +4,17 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-int gcd(int a, int b) { while (b != 0) { int temp = b; b = a % b; a = temp; } return a; }
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n);
-    for(auto &e : a) cin>>e;
-    sort(all(a));
-
-    if(a[0] == 0) 
+    int n, m; cin >> n >> m;
+    set<int> st;
+    while (n--)
     {
-        cout << 0 << nl; return;
+        int data; cin >>data;
+        st.insert(data);
     }
-   
-    int GCD = 0;
-    for(auto e : a) GCD = gcd(GCD, e);
-
-    cout << GCD << nl;
+    
+    cout << m - st.size() << nl;
 }
 int main()
 {

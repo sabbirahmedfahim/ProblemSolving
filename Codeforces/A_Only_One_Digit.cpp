@@ -6,13 +6,10 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n), b(n), c(n);
-    for (int i = 0; i < n; i++) cin >> a[i];
-    for (int i = 0; i < n; i++) cin >> b[i];
-    for (int i = 0; i < n; i++) cin >> c[i];
+    string s; cin >> s;
+    sort(all(s));
 
-    
+    cout << s[0] << nl;
 }
 int main()
 {
