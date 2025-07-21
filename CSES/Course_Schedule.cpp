@@ -1,74 +1,62 @@
+// https://cses.fi/problemset/task/1679/
+
+/* kahn's algorithm */
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
-#define all(c) c.begin(), c.end()
-#define print(c) for (auto e : c) cout << e << " "; cout << nl
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-const int N = 1E5 + 5;
-vector<int> adj[N];
-int vis[N];
-stack<int> topsort_res;
-/* 0 --> unvisited, 1 --> visiting, 2 --> visited */
-bool dfs(int node)
+void topoSortBFS(int n, vector<vector<int>> &adjList)
 {
-    if (vis[node] == 1) return false;
-    if (vis[node] == 2) return true;
-
-    vis[node] = 1;
-    for (int child : adj[node])
+    queue<int> nodes;
+    // priority_queue<int> nodes; // picks largest node first
+    vector<int> inDeg(n + 1, 0);
+    vector<int> res;
+    
+    for (int i = 1; i <= n; i++) 
     {
-        if (!dfs(child)) return false;
+        for (auto e : adjList[i]) inDeg[e]++;
     }
-    vis[node] = 2;
-    topsort_res.push(node);
-    return true;
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    int n, e;
-    cin >> n >> e;
-    while (e--)
+    
+    for (int i = 1; i <= n; i++) 
     {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
+        if (inDeg[i] == 0) nodes.push(i);
     }
-
-    memset(vis, 0, sizeof(vis));
-    for (int i = 1; i <= n; i++)
+    
+    while (!nodes.empty()) 
     {
-        if (vis[i] == 0)
+        int curr = nodes.front();
+        res.push_back(curr);
+        nodes.pop();
+        for (int i : adjList[curr]) 
         {
-            if (!dfs(i))
-            {
-                cout << "IMPOSSIBLE" << nl;
-                return 0;
-            }
+            inDeg[i]--;
+            if (inDeg[i] == 0) nodes.push(i);
         }
     }
 
-    while (!topsort_res.empty())
+    /* If Topological Sort does not exist then the vector size will be less than the number of vertices */ 
+    if (res.size() < n)
+        cout << "IMPOSSIBLE" << endl;
+    else 
     {
-        cout << topsort_res.top() << " ";
-        topsort_res.pop();
+        print(res);
     }
-    cout << nl;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+ 
+    int n, e; cin >> n >> e;
+    vector<vector<int>> adjList(n + 1);
+    while (e--)
+    {
+        int u, v; cin >> u >> v;
+        adjList[u].push_back(v);
+    }
 
+    topoSortBFS(n, adjList);
+ 
     return 0;
 }
-/*
-Input: (understanding cycle detection using recursion)
-4 4
-1 2
-2 3
-3 4
-4 1
-
-Expected Output:
-IMPOSSIBLE
-
-*/
