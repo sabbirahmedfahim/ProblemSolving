@@ -1,7 +1,6 @@
-// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
+#define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
@@ -10,52 +9,59 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    ll n, m, k; cin >> n >> m >> k;
+    int n, m, k; cin >> n >> m >> k;
 
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++)
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; i++) 
     {
         cin >> a[i];
     }
-    vector<tuple<ll, ll, ll> > op(m + 1);
-    for (ll i = 1; i <= m; i++)
+    vector<tuple<int, int, int>> op(m + 1);
+    for (int i = 1; i <= m; i++)
     {
-        ll l, r, data; cin >> l >> r >> data;
-        op[i] = {l, r, data};
-    }
-
-    vector<ll> diff(n + 2), diffQuery(m + 2), pref(m + 2); // don't mix n, m size confusiton
-    while (k--)
-    {
-        ll x, y; cin >> x >> y;
-        diffQuery[x] += 1;
-        diffQuery[y + 1] -= 1;
-
-        // for (int i = x; i <= y; i++) // TLE
-        // {
-        //     auto ele = op[i];
-        //     auto [l, r, data] = ele;
-        //     diff[l] += data;
-        //     diff[r + 1] -= data;
-        // }
-    }
-    for (ll i = 1; i <= m; i++)
-    {
-        pref[i] = pref[i-1] + diffQuery[i];
-    }
-    for (ll i = 1; i <= m; i++) // added the loop instead of TLE
-    {
-        auto ele = op[i];
-        auto[l, r, data] = ele;
-        diff[l] += (data * pref[i]);
-        diff[r + 1] -= (data * pref[i]);
+        int l,r,d; cin >> l >> r >> d;
+        op[i] = {l, r, d};
     }
     
-    vector<ll> res(n + 1);
-    for (ll i = 1; i <= n; i++)
+    vector<ll> freqOfOperations(m + 2, 0), diffArray(n + 2, 0);
+
+    while (k--)
     {
-        res[i] = res[i-1] + diff[i];
-        cout << (res[i] + a[i]) << " ";
+        int x, y; cin >> x >> y;
+        freqOfOperations[x]++;
+        freqOfOperations[y + 1]--;
+        // int l, r, data;
+        // cin >> l >> r >> data;
+        // freqOfOperations[l] += data;
+        // freqOfOperations[r + 1] -= data;
+    }
+
+    ll curr = 0;
+    for (int i = 1; i <= m; i++) 
+    {
+        curr += freqOfOperations[i];
+        freqOfOperations[i] = curr;
+        // cout << freqOfOperations[i] << " ";
+    }
+
+    for (int i = 1; i <= m; i++)
+    {
+        auto [l, r, d] = op[i];
+        diffArray[l] += 1ll * d * freqOfOperations[i];
+        diffArray[r + 1] -= 1ll * d * freqOfOperations[i];
+    }
+
+    curr = 0;
+    for (int i = 1; i <= n; i++) 
+    {
+        curr += diffArray[i];
+        diffArray[i] = curr;
+        // cout << diffArray[i] << " ";
+    }
+
+    for (int i = 1; i <= n; i++) 
+    {
+        cout << a[i] + diffArray[i] << " ";
     }
     cout << nl;
 
