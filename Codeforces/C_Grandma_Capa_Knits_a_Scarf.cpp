@@ -1,48 +1,62 @@
-// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n; string s; cin >> n >> s;
-    int ans = 2E6;
-    for (char ch = 'a'; ch <= 'z'; ch++)
+    int n; cin >> n;
+    string s; cin >> s;
+    string x = s; reverse(all(x));
+    if(s == x)
     {
-        int l = 0, r = n-1, cnt = 0;
-        while (l <= r)
+        cout << 0 << nl; return;
+    }
+
+    // i have to erase at least one letter, though still chance for impossible
+
+    int mn = 1E6;
+    for (char c = 'a'; c <= 'z'; c++)
+    {
+        bool ok = true; 
+        int cnt = 0;
+        for (int l = 0, r = n-1; l <= r && ok; )
         {
-            if(s[l] == s[r])
+            if(s[l] == s[r]) 
             {
-                l++, r--;
+                l++, r--; continue;
             }
-            else if(s[l] == ch) 
+
+            while (l < r && s[l] != s[r])
             {
-                l++; cnt++;
-            }
-            else if(s[r] == ch) 
-            {
-                r--; cnt++;
-            }
-            else 
-            {
-                cnt = 2E6; break;
+                if(s[l] == c) l++, cnt++;
+                else if(s[r] == c) r--, cnt++;
+                else 
+                {
+                    ok = false; break;
+                }
             }
         }
-        ans = min(ans, cnt);
+        if(ok)
+        {
+            mn = min(mn, cnt);
+        }
     }
-    if(ans == 2E6) cout << -1 << nl;
-    else cout << ans << nl;
-    
+
+    if(mn == 1E6) cout << -1 << nl;
+    else cout << mn << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }

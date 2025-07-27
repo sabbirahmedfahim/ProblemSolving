@@ -16,7 +16,7 @@ struct SparseTable
 
     ll op(ll p1, ll p2) // Change this function according to the problem.
     {
-        return min(p1, p2); // <===
+        return p1 + p2; // <===
     }
     void build(int n, const vector<ll> &a) // O(N * logN)
     { 
@@ -64,7 +64,7 @@ int main()
     {
         int l, r; cin >> l >> r;
         --l, --r;
-        cout << spt.queryConstTime(l, r) << nl;
+        cout << spt.queryRange(l, r) << nl;
     }
 
     return 0;

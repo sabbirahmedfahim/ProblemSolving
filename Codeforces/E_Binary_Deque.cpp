@@ -1,39 +1,59 @@
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
-#define iOS ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n, s; cin>> n >> s;
-    vector<int> v(n);
-    for(auto &data : v) cin >> data;
+    int n, s; cin >> n >> s;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    
+    int one = 0;
+    for(auto e : a) 
+    {
+        if(e & 1) one++;
+    }
+    if(one < s)
+    {
+        cout << -1 << nl; return;
+    }
 
-    int ans = 0, sum = 0;
+    int mnOp = 1E9;
+    int curr = 0;
     for (int l = 0, r = 0; r < n; r++)
     {
-        sum += v[r];
-        if(sum == s)
+        while (r < n && curr < s)
         {
-            ans = max(ans, r-l+1); continue;
+            curr += a[r];
+            r++;
         }
-        while (sum > s)
+        while (r < n && a[r] == 0) r++;
+        r--;
+        // cout << l << " -- " << r << nl;
+        if(curr == s)
         {
-            sum -= v[l]; l++;
+            mnOp = min(mnOp, n - (r - l + 1) + (r == n));
         }
-        ans = max(ans, r-l+1);
+        while (curr == s)
+        {
+            curr -= a[l];
+            l++;
+        }
     }
-    if(sum < s) cout << -1 << nl;
-    else cout << n - ans << nl;
+    cout << mnOp << nl;
 }
 int main()
 {
-    iOS
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
