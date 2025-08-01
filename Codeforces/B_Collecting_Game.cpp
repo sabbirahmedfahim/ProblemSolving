@@ -1,4 +1,3 @@
-// Resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -8,29 +7,42 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<ll> a(n + 1);
-    for (int i = 1; i <= n; i++)
+    vector<int> a(n);
+    map<int, int> freq;
+    for (int i = 0; i < n; i++)
     {
         cin >> a[i];
-    }
-    sort(all(a));
-    
-    vector<ll> pref(n + 1);
-    pref[1] = a[1];
-    for (int i = 2; i <= n; i++)
-    {
-        pref[i] = pref[i - 1] + a[i];
-    }
-    // print(pref);
-
-    for (int i = 1; i <= n; i++)
-    {
-        ll sum = pref[i];
-
+        freq[a[i]]++;
     }
     
+    vector<int> b = a;
+    sort(all(b));
+
+    vector<int> ans;
+    for (int i = 0; i < n; i++)
+    {
+        int data = a[i];
+        int lo = 0, hi = n-1, res = -1;
+        while (lo <= hi)
+        {
+            int mid = (lo + hi)/2;
+            if(b[mid] <= data) // b sorted
+            {
+                res = mid;
+                lo = mid + 1;
+            }
+            else hi = mid - 1;
+        }
+        if(res == -1) ans.push_back(0);
+        else 
+        {
+            if(freq[data] > 1) res--;
+            ans.push_back(res + 1);
+        }
+    }
+    print(ans);
 }
-int main()
+int_fast32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
