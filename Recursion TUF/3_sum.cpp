@@ -1,3 +1,6 @@
+/*
+Compute the sum of numbers from 1 to n recursively.
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long

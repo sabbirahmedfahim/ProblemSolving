@@ -1,3 +1,6 @@
+/*
+Reverse an array recursively.
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long

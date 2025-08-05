@@ -1,3 +1,6 @@
+/*
+Check if a string is a palindrome using recursion.
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long

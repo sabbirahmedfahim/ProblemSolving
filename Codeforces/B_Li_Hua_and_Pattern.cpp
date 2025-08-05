@@ -1,43 +1,51 @@
-// resolved - i misread, they said -- "exactly k operations". no more, no less!! [easy easy]
+// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+/*
+. . . . .
+. . . . .
+. . . . .
+. . . . .
+. . . . .
+*/
 const int N = 1E3 + 5;
-int n, k;
 int mat[N][N];
 void solve()
 {
-    cin >> n >> k;
-    for (int i = 1; i <= n; i++)
+    int n, k; cin >> n >> k;
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 1; j <= n; j++)
+        for (int j = 0; j < n; j++)
         {
             cin >> mat[i][j];
         }
     }
     
-    int cnt = 0;
-    for (int i = 1; i <= n; i++)
+    int mismatch = 0;
+    for (int i = 0, ni = n - 1; i <= ni; i++, ni--) // rows
     {
-        for (int j = 1; j <= n; j++)
+        for (int j = 0, nj = n - 1; j < n; j++, nj--) // cols
         {
-            // if(i > n - i + 1 || (i == n - i + 1 && j > n - j + 1)) break;
-            if(i > (n - i + 1) || (i == n - i + 1 && j > n - j + 1)) continue;
-            if(mat[i][j] != mat[n - i + 1][n - j + 1]) cnt++;
+            // if(i == ni && j == nj) continue; // it will not count
+            if(i == ni && j > nj) continue; // because i do not wanna count this two times
+            if(mat[i][j] != mat[ni][nj]) mismatch++;
         }
     }
 
-    if(k < cnt)
+    cerr << mismatch << nl;
+
+    if(k < mismatch) cout << "NO" << nl;
+    else 
     {
-        cout << "NO" << nl; return;
+        k -= mismatch;
+        if(n & 1) cout << "YES" << nl;
+        else if(k & 1) cout << "NO" << nl;
+        else cout << "YES" << nl;
     }
- 
-    if(n & 1) cout << "YES" << nl; // here's another trick, if n is odd, then we can cng the middle row to fix k
-    else if((k - cnt) & 1) cout << "NO" << nl;
-    else cout << "YES" << nl;
 }
 int main()
 {

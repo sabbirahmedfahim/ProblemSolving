@@ -1,3 +1,6 @@
+/*
+Compute the nth Fibonacci number using simple recursion (exponential time).
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long

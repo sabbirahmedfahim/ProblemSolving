@@ -1,3 +1,6 @@
+/*
+Count subsequences with sum equal to target using recursion (O(2ⁿ)).
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -12,9 +15,11 @@ int f(vector<int> a, int target, int sum, int curr) // O(2ⁿ)
         return 0;
     }
 
+    // nibo
     sum += a[curr];
     int nibo = f(a, 2, sum, curr + 1);
     
+    // nibona
     sum -= a[curr];
     int nibona = f(a, 2, sum, curr + 1);
 

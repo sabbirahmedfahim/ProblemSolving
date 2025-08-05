@@ -1,3 +1,6 @@
+/*
+Find and store all subsequences with sum equal to the target using recursion.
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long

@@ -1,3 +1,7 @@
+/*
+Find and return one subsequence whose sum equals the target using recursion.
+Returns as soon as such a subsequence is found.
+*/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
