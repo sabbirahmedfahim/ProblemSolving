@@ -10,7 +10,7 @@ using namespace __gnu_pbds;
 
 using namespace std;
 
-template <typename T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
+template <typename T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
 
 int main() 
 { 
@@ -18,25 +18,23 @@ int main()
 
     int n; cin >> n;
     vector<int> a(n);
-    for(auto &e : a) cin>>e;
+    for(auto &e : a) cin >> e;
 
-    pbds<int> o_mulset, curr; 
-    /* Unique Values, Don't need a Map */
-    for(auto e : a) o_mulset.insert(e);
+    pbds<int> L, R;
+    for (int i = 0; i < n; i++) R.insert(a[i]);
 
-    ll cnt = 0;
+    ll ans = 0;
     for (int i = 0; i < n; i++)
     {
-        int l = curr.size() - curr.order_of_key(a[i] + 1);
-        int r = o_mulset.order_of_key(a[i]) - curr.order_of_key(a[i]);
+        R.erase(a[i]); // since the elements are distinct, don't worry
 
-        if(min(l, r) > 0) cnt += 1ll * l * r;
-        // cout << a[i] << " " << cnt << nl;
+        int l = L.size() - L.order_of_key(a[i] + 1), r = R.order_of_key(a[i] + 1);
+        if(l != 0 && r != 0) ans += 1ll * l * r;
 
-        curr.insert(a[i]);
+        L.insert(a[i]);
     }
     
-    cout << cnt << nl;
+    cout << ans << nl;
 
     return 0;
 }

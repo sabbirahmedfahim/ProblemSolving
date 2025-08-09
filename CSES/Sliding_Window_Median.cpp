@@ -1,3 +1,4 @@
+// https://cses.fi/problemset/task/1076/
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -10,30 +11,29 @@ using namespace __gnu_pbds;
 
 using namespace std;
 
-template <typename T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
+template <typename T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
 
 int main() 
 { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
     int n, k; cin >> n >> k;
-
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    pbds<pair<int, int>> o_set;
+    pbds<int> o_mulset;
     for (int l = 0, r = 0; r < n; r++)
     {
-        o_set.insert({a[r], r});
+        o_mulset.insert(a[r]);
         if(r - l + 1 == k)
         {
-            auto it = o_set.find_by_order((k-1)/2);
-            cout << it->first << " ";
+            cout << *o_mulset.find_by_order((k-1)/2) << " ";
 
-            o_set.erase({a[l], l});
-            l++;
+            // since we can delete elements from multiset even if it contains duplicates, don't need a pair
+            o_mulset.erase(o_mulset.find_by_order(o_mulset.order_of_key(a[l++])));
         }
     }
+    cout << nl;
 
     return 0;
 }

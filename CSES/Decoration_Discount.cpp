@@ -6,23 +6,20 @@
 using namespace std;
 void solve()
 {
-    int n, k; cin >> n >> k;
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
 
-    if(n%2 == 0)
+    int curr = 1E9;
+    for (int i = 1; i < n; i++)
     {
-        if(k > n) k %= n;
-
-        if((n - k) == 0) cout << n << nl;
-        else cout << n - k << nl;
-
-        cerr << k << nl;
-        // return;
+        curr = min(curr, a[i - 1] + (a[i] / 2));
     }
+    
+    sort(all(a));
+    curr = min(curr, a[0] + a[1]);
 
-    // n is odd, interfare will be happened surely 
-    int kombe = k/n;
-    k %= n;
-    cerr << kombe + k << nl;
+    cout << curr << nl;
 }
 int main()
 {

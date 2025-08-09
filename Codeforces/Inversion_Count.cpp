@@ -11,29 +11,32 @@ using namespace __gnu_pbds;
 using namespace std;
 
 template <typename T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
+
 void solve()
 {
-    int n; cin >> n; /* distinct values */
+    int n; cin >> n; 
     vector<int> a(n); for(auto &e : a) cin >> e;
-    pbds<int> o_set;
-    for(auto e : a) o_set.insert(e);
 
-    ll cnt = 0;
-    for(auto e : a)
+    ll ans = 0;
+    pbds<int> p;
+    for (int i = 0; i < n; i++)
     {
-        cnt += o_set.order_of_key(e);
-        o_set.erase(e);
+        ans += p.size() - p.order_of_key(a[i] + 1);
+
+        p.insert(a[i]);
     }
-    cout << cnt << nl;
+    
+    cout << ans << nl;
 }
 int main() 
 { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; while (t--)
+    int t; cin >> t;
+    while (t--)
     {
         solve();
     }
-
+    
     return 0;
 }
