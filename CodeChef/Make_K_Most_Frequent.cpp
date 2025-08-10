@@ -1,68 +1,71 @@
-// unsolved
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n, k; cin >> n >> k; vector<int> v(n); for(auto &c : v) cin >> c;
-    map<int, int> leftFreq, rightFreq;
-    int kFreq = 0;
-    for(auto data : v) 
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    vector<int> freq(25, 0), L(25, 0), R(25, 0);
+    for(auto e : a) freq[e]++;
+
+    bool ok = true;
+    for (int i = 1; i <= 20; i++)
     {
-        if(data == k) kFreq++;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if(v[i] == k) break;
-        leftFreq[v[i]]++;
-    }
-    for (int i = n-1; i >= 0; i--)
-    {
-        if(v[i] == k) break;
-        rightFreq[v[i]]++;
+        if(i != k && freq[i] > freq[k]) ok = false;
     }
     
+    if(ok)
+    {
+        cout << 0 << nl; return;
+    }
 
-    priority_queue<int> pq, tmp; int cnt = 0;
-    if(leftFreq.empty() && rightFreq.empty())
+    // cout << "1 or 2" << nl;
+    int curr = 0, mx = 0;
+    ok = false;
+    for (int i = 0; i < n; i++)
     {
-        cout << 0 << nl; return;
+        L[a[i]]++;
+        if(a[i] == k) curr = L[a[i]];
+        else mx = max(mx, L[a[i]]);
+
+        if(mx <= curr && curr > 0) ok = true;
     }
-    if(leftFreq.empty())
+    if(ok)
     {
-        cout << 0 << nl; return;
+        cout << 1 << nl; return;
     }
-    else 
+
+    curr = 0, mx = 0;
+    ok = false;
+    for (int i = n-1; i >= 0; i--)
     {
-        for(auto [key, val] : leftFreq) 
-        {
-            // cout << key << " " << val << nl;
-            if(val > kFreq) cnt++;
-        }
+        R[a[i]]++;
+        if(a[i] == k) curr = R[a[i]];
+        else mx = max(mx, R[a[i]]);
+
+        if(mx <= curr && curr > 0) ok = true;
     }
-    if(rightFreq.empty())
+    if(ok)
     {
-        cout << 0 << nl; return;
+        cout << 1 << nl; return;
     }
-    else 
-    {
-        for(auto [key, val] : rightFreq) 
-        {
-            // cout << key << " " << val << nl;
-            if(val > kFreq) cnt++;
-        }
-    }
-    cout << cnt << nl;
+
+    cout << 2 << nl;
 }
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t; 
-    while (t--) solve();
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
