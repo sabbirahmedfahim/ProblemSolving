@@ -27,23 +27,25 @@ void solve()
     }
     
     sort(all(a), cmp);
+    // for(auto [x, y] : a) cout << x << " " << y << nl;
     pbds<int> L, R;
 
     for (int i = 0; i < n; i++)
     {
-        L.insert(a[i].second);
         R.insert(a[i].first);
     }
 
-    ll res = 1E9;
+    int res = 1E9;
     for (int i = 0; i < n; i++)
     {
-        ll l =  n - L.order_of_key(a[i].first), r = n - R.order_of_key(a[i].second);
+        R.erase(R.find_by_order(R.order_of_key(a[i].first)));
+
+        int l = L.order_of_key(a[i].first), r = R.size() - R.order_of_key(a[i].second + 1);
         res = min(res, l + r);
 
-        // L.erase(L.find_by_order(L.order_of_key(a[i].second)));
+        L.insert(a[i].second);
     }
-    
+
     cout << res << nl;
 }
 int main() 
