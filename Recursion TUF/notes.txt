@@ -1,2 +1,0 @@
-- print one answer -> TRUE/FALSE & avoid further recursion calls
-- count -> return 1 | 0
