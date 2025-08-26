@@ -1,37 +1,34 @@
-// used test case
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-
-bool isPrime(int n)
-{
-    for (int i = 2; i * i <= n; i++)
-    {
-        if(n % i == 0) return false;
-    }
-    return true;
-}
 void solve()
 {
     int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
 
-    if(n <= 3)
+    ll res = 0;
+    if(n & 1)
     {
-        cout << -1 << nl; return;
+        for (int i = 1; i < n; i += 2)
+        {
+            res += max(a[i], a[i + 1]);
+        }
+        res += a[0];
+    }
+    else
+    {
+        for (int i = 0; i < n; i += 2)
+        {
+            res += max(a[i], a[i + 1]);
+        }
     }
 
-    int tot_div = n / 4;
-    if(n % 4 != 0)
-    {
-        int extra = n % 4;
-        int data = 4 + extra;
-        if(isPrime(data)) tot_div--;
-    }
-
-    cout << tot_div << nl;
+    cout << res << nl;
 }
 int main()
 {

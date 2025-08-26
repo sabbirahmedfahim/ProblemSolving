@@ -7,9 +7,19 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-
-    if((n / 4) == 0) cout << -1 << nl;
-    else cout << n / 4 << nl;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+    
+    for (int i = 0; i < n-1; i++)
+    {
+        if(a[i] == a[i + 1])
+        {
+            cout << "YES" << nl; return;
+        }
+    }
+    
+    cout << "NO" << nl;
 }
 int main()
 {
