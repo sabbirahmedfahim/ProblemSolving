@@ -6,7 +6,20 @@
 using namespace std;
 void solve()
 {
+    int n; cin >> n;
+    deque<ll> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+
+    ll mnPsblMxDiff = 0;
+    while (!a.empty())
+    {
+        int data = a.front(); a.pop_front();
+        mnPsblMxDiff = max(a.front() - data, mnPsblMxDiff);
+        a.pop_front();
+    }
     
+    cout << mnPsblMxDiff << nl;
 }
 int main()
 {

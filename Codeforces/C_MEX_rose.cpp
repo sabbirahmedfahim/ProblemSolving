@@ -6,7 +6,23 @@
 using namespace std;
 void solve()
 {
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+
+    map<int, int> freq;
+
+    for(auto e : a) freq[e]++;
+
+    int tot_cnt = 0;
+    for (int i = 0; i < k; i++)
+    {
+        if(!freq.count(i)) tot_cnt++;
+    }
     
+    tot_cnt = max(tot_cnt, freq[k]);
+
+    cout << tot_cnt << nl;
 }
 int main()
 {

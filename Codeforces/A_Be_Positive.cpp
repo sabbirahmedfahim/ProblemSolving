@@ -6,7 +6,25 @@
 using namespace std;
 void solve()
 {
-    
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+
+    int res = 0;
+    for(auto e : a) 
+    {
+        if(e == 0) res++;
+    }
+
+    int tot_minus = 0;
+    for(auto e : a)
+    {
+        if(e == -1) tot_minus++;
+    }
+
+    if(tot_minus & 1) res += 2;
+
+    cout << res << nl;
 }
 int main()
 {
