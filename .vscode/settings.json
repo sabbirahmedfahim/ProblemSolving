@@ -21,7 +21,12 @@
         "iomanip": "cpp",
         "__locale": "cpp",
         "ios": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "queue": "cpp",
+        "span": "cpp",
+        "string_view": "cpp"
     },
     "code-runner.executorMap": {
         "cpp": "cd $dir && /opt/homebrew/bin/g++-15 -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"

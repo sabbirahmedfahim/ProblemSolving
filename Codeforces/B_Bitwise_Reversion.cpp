@@ -6,31 +6,24 @@
 using namespace std;
 void solve()
 {
-    int cmd, n; cin >> cmd >> n;
-    string s; cin >> s;
+    int x, y, z; cin >> x >> y >> z;
 
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
+    int mx = max(__lg(x), max(__lg(y), __lg(z)));
 
-    set<int> resSt;
-    for(auto e : a) resSt.insert(e);
-
-    for (int i = 0; i < cmd; i++)
+    for (int i = mx; i >= 0; i--)
     {
-        for (int j = 0; j <= i; j++)
+        int currOnBits = 0;
+        currOnBits += (x >> i) & 1;
+        currOnBits += (y >> i) & 1;
+        currOnBits += (z >> i) & 1;
+
+        if(currOnBits == 2)
         {
-            if(s[j] == 'A') 
-            {
-                resSt.insert(j + 1);
-            }
-            else 
-            {
-                int k = 
-            }
+            cout << "NO" << nl; return;
         }
-        
     }
-    
+
+    cout << "YES" << nl;
 }
 int main()
 {
@@ -45,3 +38,4 @@ int main()
 
     return 0;
 }
+
