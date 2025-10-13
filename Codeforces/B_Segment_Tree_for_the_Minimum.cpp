@@ -12,7 +12,7 @@ struct ST
 
     auto merge(auto &l, auto &r) // Change this function
     { 
-        return l + r;
+        return min(l, r);
     }
     void build(int node, int st, int en, vector<ll> &a) // O(N)
     { 
@@ -46,10 +46,7 @@ struct ST
     { 
         if (st > r || en < l) // No overlapping and out of range
         { 
-            return 0; // <== careful 
-            /*
-            min: return LLONG_MAX •	max: return LLONG_MIN •	XOR: return 0
-            */
+            return 1E9; // <== careful 
         }
         if (l <= st && en <= r) // Complete overlapped (l-r in range)
         { 
@@ -77,13 +74,13 @@ void solve()
         int type; cin >> type;
         if (type == 1) 
         {
-            int idx; ll data; cin >> idx >> data;
-            st.update(1, 1, n, idx, data);
+            int idx, data; cin >> idx >> data;
+            st.update(1, 1, n, ++idx, data);
         }
         else 
         {
-            int l, r; cin >> l >> r; 
-            cout << st.query(1, 1, n, l, r) << endl;
+            int l, r; cin >> l >> r; l++, r++;
+            cout << st.query(1, 1, n, l, --r) << endl;
         }
     }
     return;

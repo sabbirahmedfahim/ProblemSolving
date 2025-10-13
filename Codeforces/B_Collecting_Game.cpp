@@ -1,46 +1,49 @@
+// resolved from AlgoBot
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
+#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> a(n);
-    map<int, int> freq;
+    vector<pair<int, int>> a(n);
+
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
-        freq[a[i]]++;
+        cin >> a[i].first; 
+        a[i].second = i;
     }
     
-    vector<int> b = a;
-    sort(all(b));
+    sort(all(a)); // value wise sorted and got new formation of indices
 
-    vector<int> ans;
+    vector<int> pref(n + 1);
+    pref[0] = a[0].first;
+    for (int i = 1; i < n; i++)
+    {
+        pref[i] = pref[i - 1] + a[i].first;
+    }
+    
+    stack<int> st;
+    vector<int> res(n);
+
     for (int i = 0; i < n; i++)
     {
-        int data = a[i];
-        int lo = 0, hi = n-1, res = -1;
-        while (lo <= hi)
+        st.push(a[i].second);
+
+        if(i == n - 1 || a[i + 1].first > pref[i])
         {
-            int mid = (lo + hi)/2;
-            if(b[mid] <= data) // b sorted
+            while (!st.empty())
             {
-                res = mid;
-                lo = mid + 1;
+                res[st.top()] = i;
+                st.pop();
             }
-            else hi = mid - 1;
-        }
-        if(res == -1) ans.push_back(0);
-        else 
-        {
-            if(freq[data] > 1) res--;
-            ans.push_back(res + 1);
         }
     }
-    print(ans);
+    
+    print(res);
 }
 int_fast32_t main()
 {
