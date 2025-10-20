@@ -17,7 +17,7 @@ struct ST
     void build(int node, int st, int en, vector<ll> &a) // O(N)
     { 
         if (st == en) 
-        {
+        {x
             t[node] = a[st]; 
             return;
         }
