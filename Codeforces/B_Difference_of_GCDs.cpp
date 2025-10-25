@@ -1,34 +1,41 @@
-// took hints from the editorial
+// took hints from the TLE Eliminators
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-int gcd(int a, int b) { while (b != 0) { int temp = b; b = a % b; a = temp; } return a; }
 void solve()
 {
-    int n, l, r; cin >> n >> l >> r;
-    
-    vector<int> res;
+    ll n, l, r; cin >> n >> l >> r;
 
-    for (int i = 1; i <= n && l <= r; l++)
+    vector<ll> res;
+    for (ll i = 1; i <= n; i++)
     {
-        if(res.size() == n) break;
+        ll lo = 1, hi = 1E9, curr = -1;
 
-        if(l % i == 0)
+        while (lo <= hi)
         {
-            res.push_back(l);
-            i++;
+            ll mid = lo + (hi - lo)/2;
+            if(i * mid >= l && i * mid <= r)
+            {
+                curr = i * mid;
+                hi = mid - 1;
+            }
+            else if(i * mid > r) hi = mid - 1;
+            else lo = mid + 1;
         }
+        
+        if(curr == -1)
+        {
+            cout << "NO" << nl; return;
+        }
+
+        res.push_back(curr);
     }
     
-    if(res.size() == n)
-    {
-        cout << "YES" <<nl;
-        print(res);
-    }
-    else cout << "NO" << nl;
+    cout << "YES" << nl;
+    print(res);
 }
 int main()
 {

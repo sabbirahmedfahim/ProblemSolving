@@ -1,3 +1,4 @@
+// my approach was right, just fixed the mathematical tiny calc & YYYYYYYEeeeeessss
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -19,7 +20,7 @@ void solve()
         {
             if(a[i] % j == 0) 
             {
-                if(divisors1.count(j))
+                if(divisors1.count(j) || divisors1.count(a[i] / j))
                 {
                     cout << 0 << nl; return;
                 }
@@ -32,7 +33,12 @@ void solve()
 
         for (int j = 2; j*j <= a[i]; j++)
         {
-            if(a[i] % j == 0) divisors1.insert(j);
+            if(a[i] % j == 0) 
+            {
+                int x = j, y = a[i] / j;
+                divisors1.insert(x);
+                if(x != y && y > 1) divisors1.insert(y);
+            }
         }
         if(a[i] != 1) divisors1.insert(a[i]);
     }
@@ -62,7 +68,12 @@ void solve()
         {
             for (int j = 2; j * j <= a[i]; j++)
             {
-                if(a[i] % j == 0) divisors2[j]++;
+                if(a[i] % j == 0) 
+                {
+                    int x = j, y = a[i]/j;
+                    divisors2[x]++;
+                    if(x != y && y > 1) divisors2[y]++;
+                }
             }
             if(a[i] != 1) divisors2[a[i]]++;
         }
@@ -73,8 +84,15 @@ void solve()
             {
                 if(a[i] % j == 0) 
                 {
+                    int x = j, y = a[i]/j;
                     divisors2[j]--;
                     if(divisors2[j] == 0) divisors2.erase(j);
+
+                    if(x != y && y > 1)
+                    {
+                        divisors2[y]--;
+                        if(divisors2[y] == 0) divisors2.erase(y);
+                    }
                 }
             }
             divisors2[a[i]]--;
@@ -84,7 +102,7 @@ void solve()
             int data = a[i] + 1;
             for (int j = 2; j * j <= data; j++)
             {
-                if(data % j == 0 && divisors2.count(j))
+                if(data % j == 0 && (divisors2.count(j) || divisors2.count(data / j)))
                 {
                     cout << 1 << nl; return;
                 }
@@ -96,7 +114,15 @@ void solve()
 
             for (int j = 2; j * j <= a[i]; j++) // restore divisors
             {
-                if(a[i] % j == 0) divisors2[j]++;
+                if(a[i] % j == 0) 
+                {
+                    int x = j, y = a[i]/j;
+                    divisors2[x]++;
+                    if(x != y && y > 1)
+                    {
+                        divisors2[y]++;
+                    }
+                }
             }
             if(a[i] != 1) divisors2[a[i]]++;
         }
@@ -110,40 +136,6 @@ void solve()
             if(a[i] != 1) divisors2[a[i]]++;
         }
         
-        for (int i = n - 1; i >= 0; i--)
-        {
-            for (int j = 2; j * j <= a[i]; j++) // remove divisors of a[i]
-            {
-                if(a[i] % j == 0) 
-                {
-                    divisors2[j]--;
-                    if(divisors2[j] == 0) divisors2.erase(j);
-                }
-            }
-            divisors2[a[i]]--;
-            if(divisors2[a[i]] == 0) divisors2.erase(a[i]); // remove
-
-            // check pos div match
-            int data = a[i] + 1;
-            for (int j = 2; j * j <= data; j++)
-            {
-                if(data % j == 0 && divisors2.count(j))
-                {
-                    cout << 1 << nl; return;
-                }
-            }
-            if(divisors2.count(data))
-            {
-                cout << 1 << nl; return;
-            }
-
-            for (int j = 2; j * j <= a[i]; j++) // restore divisors
-            {
-                if(a[i] % j == 0) divisors2[j]++;
-            }
-            if(a[i] != 1) divisors2[a[i]]++;
-        }
-
         cout << 2 << nl;
     }
 }
