@@ -1,8 +1,10 @@
+// Resolved from the Editorial
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
+#define int long long
 #define all(c) c.begin(),c.end()
-#define print(c) for(auto e : c) cerr << e << " "; cerr << nl
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
@@ -10,33 +12,18 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    map<int, int> prime_fact;
-    for(auto e : a)
+    for (int k = 2; ; k *= 2)
     {
-        set<int> divisors;
-        for (int i = 2; i * i <= e; i++)
-        {
-            while (e % i == 0)
-            {
-                divisors.insert(i);
-                e /= i;
-            }
-        }
-        if(e > 2) divisors.insert(e);
-        print(divisors);
+        set<int> st;
+        for(auto e : a) st.insert(e % k);
 
-        for(auto data : divisors)
+        if(st.size() == 2)
         {
-            prime_fact[data]++;
+            cout << k << nl; return;
         }
-    }
-
-    for(auto [x, y] : prime_fact)
-    {
-        cout << x << " : " << y << nl;
     }
 }
-int main()
+int_fast32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
