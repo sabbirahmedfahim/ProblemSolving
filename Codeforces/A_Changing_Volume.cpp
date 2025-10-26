@@ -6,20 +6,15 @@
 using namespace std;
 void solve()
 {
-    ll n; cin >> n;
+    int a, b; cin >> a >> b;
 
-    if(n & 1)
-    {
-        cout << "YES" << nl; return;
-    }
+    int diff = abs(a - b), res = 0;
 
-    while (n % 2 == 0)
-    {
-        n >>= 1;
-    }
-    
-    if(n == 1) cout << "NO" << nl;
-    else cout << "YES" << nl;
+    res += (diff - (diff % 5)) / 5; diff %= 5;
+    res += (diff - (diff % 2)) / 2; diff %= 2;
+    res += diff;
+
+    cout << res << nl;
 }
 int main()
 {

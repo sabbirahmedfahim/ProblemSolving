@@ -1,27 +1,43 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+void solve()
+{
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
 
+    int good = 0, curr = 0;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        if(a[i + 1] - a[i] <= k) 
+        {
+            curr++;
+            good = max(good, curr + 1);
+        }
+        else 
+        {
+            if(curr) good = max(good, curr + 1);
+            curr = 0;
+        }
+    }
+
+    cout << min(n - good, n - 1) << nl;
+}
 int main()
 {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
     int t; cin >> t;
-    while (t--)
+    for(int tt = 1; tt <= t; tt++)
     {
-        ll n, k; cin >> n >> k;
-        vector<ll> v(n);
-        for (int i = 0; i < n; i++) cin >> v[i];
-        sort(v.begin(), v.end());
-        ll mx = 0;
-        ll cnt = 0;
-        for (int i = 1; i < n; i++)
-        {
-            if(v[i] - v[i-1] <= k) cnt++;
-            else cnt = 0;
-            mx = max(cnt, mx);
-        }
-        cout << n - (mx + 1) << nl;
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
     }
 
     return 0;

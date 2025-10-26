@@ -1,43 +1,49 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
 #define nl '\n'
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    ll n, q; cin >> n >> q;
-    vector<ll> v(n);
-    for (int i = 0; i < n; i++) cin >> v[i];
+    int n, q; cin >> n >> q;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    ll tot_sum = accumulate(all(a), 0ll);
+
     vector<ll> prefixSum(n);
-    vector<ll> suffixSum(n);
-    prefixSum[0] = v[0];
-    suffixSum[n-1] = v[n-1];
-    for (int i = 1; i < n; i++) prefixSum[i] = prefixSum[i-1] + v[i];
-    for (int i = n-2; i >= 0; i--) suffixSum[i] = suffixSum[i+1] + v[i];
-    
+    prefixSum[0] = a[0];
+    for (int i = 1; i < n; i++)
+    {
+        prefixSum[i] = prefixSum[i - 1] + a[i];
+    }
+
     while (q--)
     {
-        ll l, r, k; cin >> l >> r >> k;
-        ll sum = 0;
-        ll cnt = (r-l)+1;
-        sum = sum + (k*cnt);
+        int l, r, k; cin >> l >> r >> k;
         l--, r--;
-        if(l != 0) 
-        {
-            sum += prefixSum[l-1];
-        }
-        if(r != n-1) 
-        {
-            sum += suffixSum[r+1];
-        }
-        if(sum % 2 == 1) cout << "YES" << nl;
+
+        ll toAdd = 1ll * (r - l + 1) * k;
+        ll toReduce = 0;
+        if(l != 0) toReduce = prefixSum[r] - prefixSum[l - 1];
+        else toReduce = prefixSum[r];
+
+        ll curr_sum = tot_sum - toReduce + toAdd;
+        if(curr_sum & 1) cout << "YES" << nl;
         else cout << "NO" << nl;
     }
+    
 }
 int main()
 {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
     int t; cin >> t;
-    while(t--) solve();
+    for(int tt = 1; tt <= t; tt++)
+    {
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
+    }
 
     return 0;
 }
