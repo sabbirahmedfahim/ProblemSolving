@@ -1,36 +1,36 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
+#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
-    sort(all(a));
+    int r, x, d, n; cin >> r >> x >> d >> n;
+    string s; cin >> s;
 
-    map<int, int> freq;
     int cnt = 0;
+    ll data = r;
     for (int i = 0; i < n; i++)
     {
-        if(freq.count(a[i] - 1))
+        if(s[i] == '1')
         {
-            freq[a[i] - 1]--;
-            freq[a[i]]++;
-            if(freq[a[i] - 1] == 0) freq.erase(a[i] - 1);
+            data = max(0ll, data - d);
+
+            cnt++;
         }
-        else 
+        else if(data < x)
         {
-            freq[a[i]]++;
+            data = max(0ll, data - d);
+
             cnt++;
         }
     }
     
     cout << cnt << nl;
 }
-int main()
+int_fast32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 

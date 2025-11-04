@@ -1,36 +1,39 @@
-#include <bits/stdc++.h>
-#define nl '\n'
-#define ll long long
-#define all(c) c.begin(),c.end()
-#define print(c) for(auto e : c) cout << e << " "; cout << nl
-using namespace std;
+#include <stdio.h>
+/*
+1-1E9 int
+1-1E18 long long
+*/
 void solve()
 {
-    ll n; cin >> n;
+    long long n; scanf("%lld", &n);
 
-    if(n & 1)
+    if(n % 2 != 0)
     {
-        cout << "YES" << nl; return;
+        printf("YES\n");
     }
+    else // even
+    {
+        while (n > 1)
+        {
+            n = n / 2;
 
-    while (n % 2 == 0)
-    {
-        n >>= 1;
+            if(n % 2 != 0) break;
+        }
+        /*
+        8 -> 4 -> 2 -> 1
+        */
+        
+        if(n == 1) printf("NO\n");
+        else printf("YES\n");
     }
-    
-    if(n == 1) cout << "NO" << nl;
-    else cout << "YES" << nl;
 }
-int main()
+int main() 
 {
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-    int t; cin >> t;
-    for(int tt = 1; tt <= t; tt++)
+    int t; scanf("%d", &t);
+    for (int i = 0; i < t; i++)
     {
-        // cout << "TEST CASE-" << tt << nl;
         solve();
     }
 
-    return 0;
+  return 0;
 }

@@ -1,23 +1,23 @@
-// 6. Create an interface called Bottle and add a method to it called 
-// open(). Create a class called CokeBottle and implement the Bottle 
-// and print the message “Coke bottle is opened”. Add a factory constructor 
-// to Bottle and return the object of CokeBottle. Instantiate CokeBottle 
-// using the factory constructor and call the open() on the object.
+import 'dart:io';
+void main()
+{
+  // print('Hello I Am "Check" ');
 
-abstract class Bottle {
-  void open();
-  factory Bottle() {
-    return CokeBottle();
-  }
-}
+  // const x = 10;
+  // print(x);
 
-class CokeBottle implements Bottle {
-  void open() {
-    print("Coke bottle is opened");
-  }
-}
+  // int data = int.parse(stdin.readLineSync()!);
+  // print(data);
 
-void main() {
-  var bottle = Bottle();
-  bottle.open();
+  // var data = stdin.readLineSync();
+  // print(data);
+
+  // String name = stdin.readLineSync()!; // ** extra !
+  // print(name);
+
+  // int x = 10, y = 3;
+  // print(x ~/ y);
+
+  int x = 10, y = 20;
+  if(x == 10 && x == 20) print("ok");
 }

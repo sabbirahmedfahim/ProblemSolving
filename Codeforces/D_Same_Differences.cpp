@@ -1,50 +1,32 @@
-// resolved from the editorial
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
+#define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+/*
+   a[j] - a[i] = j - i
+=> a[j] - j = a[i] - i
+
+*/
 void solve()
 {
     int n; cin >> n;
     vector<int> a(n + 1);
-
-    for (int i = 1; i <= n; i++) // 1 <= a[i] <= n is a hints?
+    for (int i = 1; i <= n; i++)
     {
         cin >> a[i];
     }
     
-
-    map<ll, ll> mp;
-    ll res = 0;
+    map<int, int> freq;
+    ll cnt = 0;
     for (int i = 1; i <= n; i++)
     {
-        int data = i - a[i];
-        res += mp[data];
-        mp[data]++; 
+        if(freq.count(a[i] - i)) cnt += freq[a[i] - i];
+
+        freq[a[i] - i]++;
     }
-    cout << res << nl;
-
-    // for(auto [key, val] : mp)
-    // {
-    //     cout << key << ' ' << val << nl;
-    // }
-    // cout << nl;
-
-    
-    // for (int i = 1; i < n+1; i++)
-    // {
-    //     for (int j = i+1; j < n+1; j++)
-    //     {
-    //         // if(j - i == a[j] - a[i])    
-    //         if(j - a[j] == i - a[i])    
-    //         {
-    //             cout << j << " - " << i << " ->> " << a[j] << " - " << a[i] << nl;    
-    //         }
-    //     }
-    // }
-    
+    cout << cnt << nl;
 }
 int main()
 {
