@@ -1,33 +1,51 @@
-// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
-#define all(v) v.begin(),v.end()
-#define print(v) for(auto data : v) cout << data << " "; cout << nl
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+void solve()
+{
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+
+    int twoOrOne = 0;
+    for(auto e : a) 
+    {
+        if(e <= 2) twoOrOne++;
+    }
+
+    int moreThanTwo = n - twoOrOne;
+
+    if(moreThanTwo == 0)
+    {
+        if(twoOrOne & 1) cout << "Mrinalini" << nl;
+        else cout << "Kadambari" << nl;
+        return;
+    }
+
+    if(moreThanTwo & 1) 
+    {
+        cout << "Mrinalini" << nl;
+    }
+    else //if(moreThanTwo % 2 == 0)
+    {
+        if(twoOrOne % 2 == 0) cout << "Mrinalini" << nl;
+        else cout << "Kadambari" << nl;
+    }
+    // else cout << "work" << nl;
+}
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int n; cin >> n;
-    vector<int> ans;
-
-    if(n & 1)
+    int t; cin >> t;
+    for(int tt = 1; tt <= t; tt++)
     {
-        // while (n >= 3)
-        // {
-        //     ans.push_back(2); n /= 2;
-        // }
-        for (int i = 2; i <= n/2; i++) ans.push_back(2);
-        ans.push_back(3);
+        // cout << "TEST CASE-" << tt << nl;
+        solve();
     }
-    else
-    {
-        for (int i = 1; i <= n/2; i++) ans.push_back(2);
-    }
-
-    cout << ans.size() << nl;
-    print(ans);
 
     return 0;
 }
