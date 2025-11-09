@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
-#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
@@ -11,40 +10,33 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    ll tot_sum = accumulate(all(a), 0ll);
-    // cerr << tot_sum << nl;
-
-    ll curr = 0;
-    for (int i = 0; i < n - 1; i++)
+    map<int, int> primeFactors;
+    for (int i = 0; i < n; i++)
     {
-        curr += a[i];
-
-        if(curr >= tot_sum)
+        int data = a[i];
+        for (int j = 2; j * j <= data; j++)
         {
-            cout << "NO" << nl;
-            return;
+            while (data % j == 0)
+            {
+                primeFactors[j]++;
+                data /= j;
+            }
         }
-
-        curr = max(0ll, curr);
-    }
-
-    curr = 0;
-    for (int i = 1; i < n; i++)
-    {
-        curr += a[i];
-
-        if(curr >= tot_sum)
-        {
-            cout << "NO" << nl;
-            return;
-        }
-
-        curr = max(0ll, curr);
+        if(data > 1) primeFactors[data]++;
     }
     
+    for(auto [x, y] : primeFactors)
+    {
+        if(y % n != 0)
+        {
+            cout << "NO" << nl; 
+            return;
+        }
+    }
+
     cout << "YES" << nl;
 }
-int_fast32_t main()
+int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 

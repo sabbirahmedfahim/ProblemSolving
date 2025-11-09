@@ -1,7 +1,7 @@
+// resolved from the editorial (good to read, it helped)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
-#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
@@ -11,40 +11,35 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    ll tot_sum = accumulate(all(a), 0ll);
-    // cerr << tot_sum << nl;
-
-    ll curr = 0;
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i < n; i++)
     {
-        curr += a[i];
-
-        if(curr >= tot_sum)
-        {
-            cout << "NO" << nl;
-            return;
-        }
-
-        curr = max(0ll, curr);
+        if(i % 2) a[i] = -a[i];
     }
+    // print(a);
+    
+    vector<ll> pref(n);
+    map<ll, ll> mp;
+    pref[0] = a[0];
+    mp[a[0]]++;
+    mp[0]++; // this because if there is a situation of sum1 - sum2 == 0
 
-    curr = 0;
     for (int i = 1; i < n; i++)
     {
-        curr += a[i];
+        pref[i] = pref[i - 1] + a[i];
 
-        if(curr >= tot_sum)
+        if(mp.count(pref[i]))
         {
-            cout << "NO" << nl;
+            cout << "YES" << nl; 
             return;
         }
 
-        curr = max(0ll, curr);
+        mp[pref[i]]++;
     }
+    // print(pref);
     
-    cout << "YES" << nl;
+    cout << "NO" << nl;
 }
-int_fast32_t main()
+int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
