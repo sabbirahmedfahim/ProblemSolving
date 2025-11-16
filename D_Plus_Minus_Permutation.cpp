@@ -4,34 +4,29 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-int LCM(int a, int b)
-{
-    return (a / __gcd(a, b)) * b; // safer against overflow
-}
 void solve()
 {
     ll n, x, y; cin >> n >> x >> y;
 
-    ll tot = n / x;
-    ll l = n - tot + 1, r = n;
-    l += n / LCM(x, y);
-    ll sum1 = ((r - l + 1) * (l + r)) / 2ll;
-    cerr << l << " : " << r << nl;
-    if(l > r) 
+    if(x == y)
     {
-        tot = n / y; tot -= n / LCM(x, y);
-        // cerr << tot << " : " << y << nl;
-        l = 1, r = tot;
-        cout << - ((r - l + 1) * (l + r)) / 2ll << nl; 
+        cout << 0 << nl;
         return;
     }
-    
-    tot = n / (y - LCM(x, y));
-    l = 1, r = l + tot - 1;
-    // cerr << l << " : " << r << " --> " << tot << nl;
-    ll sum2 = ((r - l + 1) * (l + r)) / 2ll;
 
-    cout << sum1 - sum2 << nl;
+    ll sameThings = n / (x * y);
+    // n -= sameThings; // n is changed
+
+    ll tot_by_x = (n / x) - sameThings, tot_by_y = (n / y) - sameThings;
+    // cerr << "# " << tot_by_x << " : " << tot_by_y << nl;
+    ll sum1 = (tot_by_y * (tot_by_y + 1)) / 2;
+
+    ll l = n - tot_by_x + 1, r = n;
+    ll sum2 = ((r + l) * (r - l + 1)) / 2;
+
+    // cerr << sum2 << " : " << sum1 << nl;
+
+    cout << sum2 - sum1 << nl;
 }
 int main()
 {

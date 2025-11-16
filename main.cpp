@@ -9,7 +9,7 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    cout << __builtin_clzll(1000ll);
+    cout << "OK";
 
     return 0;
 }
