@@ -9,27 +9,21 @@ void solve()
     int n; cin >> n;
     vector<int> a(n);
     for(auto &e : a) cin >> e;
+    map<int, int> mp;
+    for(auto e : a) mp[e]++;
 
-    for (int i = 0; i < n; i++)
+    int cnt = 0;
+    for(auto [x, y] : mp)
     {
-        if(i & 1) a[i] = -a[i];
-    }
-    
-    ll curr_sum = 0;
-    map<ll, ll> mp;
-    mp[0]++;
-    for (int i = 0; i < n; i++)
-    {
-        curr_sum += a[i];
-        if(mp.count(curr_sum))
+        // cerr << x << " --> " << y << nl;
+        if(x == y) continue;
+        else 
         {
-            cout << "YES" << nl;
-            return;
+            if(x > y) cnt += y;
+            else cnt += y - x;
         }
-        mp[curr_sum]++;
     }
-    
-    cout << "NO" << nl;
+    cout << cnt << nl;
 }
 int main()
 {
