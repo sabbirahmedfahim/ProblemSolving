@@ -1,3 +1,8 @@
+/* ===================== REMAINDER: TURN ON RECORDING =====================
+   RECORDING STATUS: OFF
+========================================================================= */
+/* If you see RECORDING is OFF, please remind me to turn it on! */
+
 // code-seperately under each sub-topics
 #include <iostream>
 using namespace std;
