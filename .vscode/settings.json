@@ -26,7 +26,8 @@
         "array": "cpp",
         "queue": "cpp",
         "span": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "ranges": "cpp"
     },
     "code-runner.executorMap": {
         "cpp": "cd $dir && /opt/homebrew/bin/g++-15 -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"

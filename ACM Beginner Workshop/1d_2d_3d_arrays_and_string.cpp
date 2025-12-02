@@ -1,5 +1,6 @@
 /* ===================== REMAINDER: TURN ON RECORDING =====================
    RECORDING STATUS: OFF
+   Voice Record : OFF
 ========================================================================= */
 /* If you see RECORDING is OFF, please remind me to turn it on! */
 
@@ -162,7 +163,7 @@ int main()
 /*
 - OJ
 - WA, AC, TLE, Runtime Error, MLE, Compilation Error, Presentation Error
-- Test Case, Constraints, Max Size,
+- Test Case, Constraints, Max Size
 - Odd-Even, Binary String, Palindrome, Subarray, Substring, Subsequence, Adjacent, 
 Sorted in non-decreasing order, Edge case, Frequency, Unique Elements, Distinct Elements, 
 0-indexed vs 1-indexed, Type Casting, Variable names matters
