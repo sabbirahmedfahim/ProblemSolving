@@ -9,9 +9,7 @@
 using namespace std;
 int main()
 {
-    
-
-    return 0;
+   
 }
 
 /* ============================================================================
@@ -39,11 +37,33 @@ int main()
 /* [NOT DONE] Accessing and modifying array elements */
 /* [NOT DONE] Common mistakes (index out of bounds, uninitialized values) */
 /* [NOT DONE] Loop operations: sum, max, min */
-/* [NOT DONE] Bubble Sort
+/* [NOT DONE] Common sort, reverse functions [#include <algorithm>]
 /* [NOT DONE] Frequency count using simple array (known as frequency array/counting array) */
 // int freq[10] = {0};
 /* [NOT DONE] Counting array for characters and ascci table */
-// char ch = 'a'; ch += 2; cout << ch;
+/* [NOT DONE] Printing ASCII value of a character */
+// char ch = 'A';
+// cout << ch << " -> ASCII: " << int(ch) << endl;
+/* [NOT DONE] Converting ASCII code to character */
+// int code = 97;
+// char c1 = char(code);
+// cout << "ASCII 97 -> Character: " << c1 << endl;
+/* [NOT DONE] Simple arithmetic with ASCII values */
+// char ch2 = 'a';
+// char nextChar = ch2 + 2;  // Moves 2 steps forward in ASCII
+// cout << ch2 << " + 2 -> " << nextChar << endl;
+/* [NOT DONE] Updating character using shorthand */
+// char ch3 = 'a';
+// ch3 += 2;
+// cout << "a += 2 -> " << ch3 << endl;
+/* [NOT DONE] Frequency of lowercase letters using ASCII */
+// int freq[26] = {0};
+// string s = "abcabc";
+// for(char c : s) {
+//     freq[c - 'a']++;
+// }
+// cout << "Frequencies of a,b,c: ";
+// cout << freq[0] << " " << freq[1] << " " << freq[2] << endl;
 /* [NOT DONE] Passing 1D arrays to functions */
 // void printArray(int a[], int n)
 /* [NOT DONE] Practice Problem */
@@ -112,7 +132,15 @@ int main()
 /* [NOT DONE] Indexing like arrays */
 /* [NOT DONE] Concatenation using + */
 /* [NOT DONE] Comparing strings */
-/* [NOT DONE] Bubble Sort
+/* [NOT DONE] Stringstream (#include <string>, #include <sstream>) */
+   // string s = "LU ACM Beginner Workshop";
+   // stringstream ss(s);
+   // string word;
+
+   // while (ss >> word)
+   // {
+   //    cout << word << endl;
+   // }
 
 /* ============================================================================
    ============================= STRING FUNCTIONS ==============================
