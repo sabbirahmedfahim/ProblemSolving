@@ -1,15 +1,12 @@
-/* ===================== REMAINDER: TURN ON RECORDING =====================
-   RECORDING STATUS: OFF
-   Voice Record : OFF
-========================================================================= */
-/* If you see RECORDING is OFF, please remind me to turn it on! */
-
 // code-seperately under each sub-topics
+
 #include <iostream>
 using namespace std;
 int main()
 {
    
+
+   return 0;
 }
 
 /* ============================================================================
@@ -18,6 +15,14 @@ int main()
 
 /* [NOT DONE] Definition & syntax of 1D array */
 /* [NOT DONE] Max Size of n-D Array (1E7 vs 1E6) */
+/* [NOT DONE] Declaring and initializing (static & runtime size) */
+// int b[] = {1,2,3,4,5};
+// int n; cin >> n; int arr[n];
+/* [NOT DONE] Taking input/output using loops */
+/* [NOT DONE] Accessing and modifying array elements */
+/* [NOT DONE] Common mistakes (index out of bounds, uninitialized values) */
+/* [NOT DONE] Loop operations: sum, max, min */
+/* [NOT DONE] Common sort, reverse functions [#include <algorithm>]
 /* [NOT DONE] Contiguous memory concept (how arrays are stored) */ 
 // #include <iostream>
 // using namespace std;
@@ -30,14 +35,6 @@ int main()
 
 //     return 0;
 // }
-/* [NOT DONE] Declaring and initializing (static & runtime size) */
-// int b[] = {1,2,3,4,5};
-// int n; cin >> n; int arr[n];
-/* [NOT DONE] Taking input/output using loops */
-/* [NOT DONE] Accessing and modifying array elements */
-/* [NOT DONE] Common mistakes (index out of bounds, uninitialized values) */
-/* [NOT DONE] Loop operations: sum, max, min */
-/* [NOT DONE] Common sort, reverse functions [#include <algorithm>]
 /* [NOT DONE] Frequency count using simple array (known as frequency array/counting array) */
 // int freq[10] = {0};
 /* [NOT DONE] Counting array for characters and ascci table */
@@ -67,8 +64,7 @@ int main()
 /* [NOT DONE] Passing 1D arrays to functions */
 // void printArray(int a[], int n)
 /* [NOT DONE] Practice Problem */
-// https://vjudge.net/contest/769606#problem/E
-// https://vjudge.net/contest/769606#problem/J
+// https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/V
 
 
 /* ============================================================================
@@ -77,12 +73,14 @@ int main()
 
 /* [NOT DONE] Definition & syntax of 2D array */
 /* [NOT DONE] Declaring & initializing 2D arrays */
+/* [NOT DONE] I suggest 1-based index for 2d array */
 /* [NOT DONE] Input: row-wise and column-wise */
 /* [NOT DONE] Row-major memory storage concept */
 // #include <iostream>
 // using namespace std;
 // int main(){
-//     int arr[2][3]={{1,2,3},{4,5,6}};
+//     int arr[2][3]={{1,2,3},
+//                    {4,5,6}};
 //     cout<<"Row-major addresses:\n";
 //     for(int i=0;i<2;i++){
 //         for(int j=0;j<3;j++){
@@ -103,14 +101,14 @@ int main()
 /* [NOT DONE] Counting occurrences of X in a matrix */
 /* [NOT DONE] Passing 2D arrays to functions (fixed column size rule) */
 // void print(int arr[][2])
-// https://www.spoj.com/problems/AR2AVG/en/
 
 
 /* ============================================================================
    ============================   3D ARRAY   ==================================
    ============================================================================ */
 
-/* [NOT DONE] Three-Dimensional Array = 3 levels of data */
+/* [NOT DONE] Three-Dimensional Array = 3 levels of data, Tuple */
+/* [NOT DONE] Input */
 /* [NOT DONE] Syntax: dataType arrayName[dim1][dim2][dim3]; */
 /* [NOT DONE] Example: Monthly sales tracking */
 // int sales[12][4][7];
@@ -128,7 +126,7 @@ int main()
 /* [NOT DONE] Introducing std::string and #include <string> */
 /* [NOT DONE] Declaration & initialization */
 /* [NOT DONE] Input: cin >> s; and getline(cin, s); */ 
-/* [NOT DONE] string.size() / string.length() */
+/* [NOT DONE] string.size(), string.length() */
 /* [NOT DONE] Indexing like arrays */
 /* [NOT DONE] Concatenation using + */
 /* [NOT DONE] Comparing strings */
@@ -141,6 +139,8 @@ int main()
    // {
    //    cout << word << endl;
    // }
+// https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/J
+// https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/P
 
 /* ============================================================================
    ============================= STRING FUNCTIONS ==============================
@@ -165,6 +165,13 @@ int main()
 /* [ ] s.empty()         // check if string is empty */
 /* [ ] s.clear()         // clear entire string */
 /* [ ] s.resize(new_size)             // resize string */
+/* [ ] s.substr(pos, len) */
+/* [ ] s.find("abc"), string::npos */
+/*
+s.insert(pos, "abc")     // insert substring
+s.erase(pos, len)        // erase len characters
+s.replace(pos, len, "xyz") // replace range
+*/
 
 
 /* ============================== ITERATORS =================================== */
@@ -182,7 +189,7 @@ int main()
 /* [ ] s.begin(), s.end()             // forward iterators */
 /* [ ] s.rbegin(), s.rend()           // reverse iterators */
 
-// https://vjudge.net/contest/769606#problem/L
+// https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/L
 
 /* ============================================================================
    ==============     All You Need To Know About Contest     ==================
