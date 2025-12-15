@@ -1,3 +1,4 @@
+// Resolved (not hard, I thought this approach will get TLE, didn't calculate the time complexity)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,71 +8,25 @@ using namespace std;
 void solve()
 {
     int n; string s; cin >> n >> s;
-    vector<char> a(n + 1);
-    for (int i = 1; i <= n; i++)
-    {
-        a[i] = s[i - 1];
-    }
-    // print(a);
+    vector<bool> vis(n, false);
 
-    ll cost = 0;
-    int prev = 0;
-    for (int i = 1; i <= n; i++)
+    ll ans = 0;
+    for (int i = 0; i < n; i++) // O(n log(n))
     {
-        if(a[i] == '0')
+        if(s[i] == '0')
         {
-            int mn = -1;
-            for (int j = 2; j * j <= i; j++)
+            for (int j = i + 1; j <= n; j += (i + 1)) // log(n)
             {
-                if(i % j == 0)
-                {
-                    mn = j;
-                    mn = max(mn, i / j);
-                }
+                if(s[j - 1] == '1') break;
+                if(vis[j - 1] == true) continue;
+
+                vis[j - 1] = true;
+                ans += (i + 1);
             }
-            // cerr << mn << nl;
-
-            if(i == 1 && mn == -1) mn = 1;
-            if(mn == -1)
-            {
-                prev = i;
-                cost += i;
-                for (int j = i + i; j <= n; j += i)
-                {
-                    if(a[j] == '1') break;
-
-                    a[j] = '1';
-                    cost += i;
-                }
-                
-            }
-            else 
-            {
-                if(mn >= prev) prev = mn;
-                else 
-                {
-                    mn = i;
-                    prev = mn;
-                }
-                // cerr << prev << " --> " << i << " : " << mn << nl;
-                
-                cost += mn;
-                for (int j = i + mn; j <= n; j += mn)
-                {
-                    if(a[j] == '1') break;
-
-                    a[j] = '1';
-                    cost += mn;
-                }
-                
-            }
-
-            // cerr << cost << nl;
         }
-        // cerr << i << " : " << prev << nl;
     }
     
-    cout << cost << nl;
+    cout << ans << nl;
 }
 int main()
 {

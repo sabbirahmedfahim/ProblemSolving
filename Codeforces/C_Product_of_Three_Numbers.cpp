@@ -1,31 +1,15 @@
-// used test case as hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-ll Pow(ll a, ll b) // O(log b)
-{ 
-    // a %= MOD;
-    // if (a < 0) a += MOD;
-    ll ans = 1;
-    while (b) {
-        if (b & 1) {
-            ans = ans * a;
-            // ans = (ans * a) % MOD;
-        }
-        a = a * a;
-        // a = (a * a) % MOD;
-        b >>= 1;
-    }
-    return ans;
-}
 void solve()
 {
     int n; cin >> n;
-    map<int, int> primeFact;
+    int realN = n;
 
+    map<int, int> primeFact;
     for (int i = 2; i * i <= n; i++)
     {
         while (n % i == 0)
@@ -35,70 +19,80 @@ void solve()
         }
     }
     if(n > 1) primeFact[n]++;
-
-    int a = -1, b = -1, c = -1;
-    for(auto &[x, y] : primeFact)
-    {
-        // cerr << x << " --> " << y << nl;
-        a = x; 
-        y--;
-        break;
-    }
     
-    if(primeFact[a] == 0) primeFact.erase(a);
+    // for(auto [x, y] : primeFact)
+    // {
+    //     cout << x << " --> " << y << nl;
+    // }
+    // cout<< nl;
 
-    int who;
-    for(auto &[x, y] : primeFact)
+    if(primeFact.size() == 1) // let, ok
     {
-        if(a == x)
+        int a, b, c;
+        for(auto &[x, y] : primeFact)
         {
-            if(y > 1) 
+            if(y < 6)
             {
-                b = x + x;
-                y -= 2;
-                who = x;
-                break;
+                cout << "NO" << nl;
+                return;
             }
+            a = x; b = a + a;
+            c = realN / (a * b);
         }
+
+        set<int> st;
+        st.insert(a); st.insert(b); st.insert(c);
+        if(st.count(1) || (a * b * c) != realN || st.size() < 3)
+        {
+            cout << "NO" << nl;
+            return;
+        }
+
+        cout << "YES" << nl;
+        cout << a << " " << b << " " << c << nl;
+    }
+    else if(primeFact.size() == 2)
+    {
+        int a = -1, b = -1, c = -1; 
+        for(auto &[x, y] : primeFact)
+        {
+            if(a == -1) a = x;
+            else if(b == -1) b = x;
+            else break;
+        }
+        c = realN / (a * b);
+
+        set<int> st;
+        st.insert(a); st.insert(b); st.insert(c);
+
+        if((a * b * c) != realN || st.count(1) || st.size() < 3) cout << "NO" << nl;
         else 
         {
-            b = x;
-            y--;
-            who = x;
-            break;
+            cout << "YES" << nl;
+            cout << a << " " << b << " " << c << nl;
         }
     }
-    
-    if(b != -1 && primeFact[who] == 0) primeFact.erase(who);
-    // for(auto &[x, y] : primeFact)
-    // {
-    //     cerr << x << " --> " << y << nl;
-    // }
-    // return;
-
-    // cout << a << " : " << b << nl;
-
-    for(auto [x, y] : primeFact)
+    else // let, ok
     {
-        // cerr << x << " --> " << y << nl;
-        if(c == -1) c = Pow(x, y);
-        else c *= Pow(x, y);
-    }
+        int a = -1, b = -1, c = -1; 
+        for(auto &[x, y] : primeFact)
+        {
+            if(a == -1) a = x;
+            else if(b == -1) b = x;
+            else break;
+        }
+        c = realN / (a * b);
 
-    // cout << a << " : " << b << " : " << c << nl;
-    set<int> st;
-    if(a != -1) st.insert(a);
-    if(b != -1) st.insert(b);
-    if(c != -1) st.insert(c);
+        set<int> st;
+        st.insert(a); st.insert(b); st.insert(c);
+        if((a * b * c) != realN || st.count(1) || st.size() < 3)
+        {
+            cout << "NO" << nl; return;
+        }
 
-    if(st.size() == 3) 
-    {
         cout << "YES" << nl;
-        print(st);
+        cout << a << " " << b << " " << c << nl;
     }
-    else cout << "NO" << nl;
-    
-    // cout << primeFact.size() << nl;
 }
 int main()
 {

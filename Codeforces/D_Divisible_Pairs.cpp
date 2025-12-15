@@ -1,3 +1,4 @@
+// Resolved from the Editorial (loved it)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -10,13 +11,28 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    int data = (x + y);
-    int cnt = 0;
-    for(auto e : a)
+    map<int, int> xx, yy;
+    for (int i = 0; i < n; i++)
     {
-        if(2 * e == data) cnt++;
+        xx[a[i] % x]++;
+        yy[a[i] % y]++;
     }
-    cout << cnt << nl;
+    
+    ll res = 0;
+    for (int i = 0; i < n; i++)
+    {        
+        if(xx.count(x - (a[i] % x))) xx[x - (a[i] % x)]--;
+        if(yy.count(a[i] % y)) yy[a[i] % y]--;
+
+        ll fromX = xx[x - (a[i] % x)];
+        ll fromY = yy[a[i] % y];
+
+        res += min(fromX, fromY);
+        xx.erase(x - (a[i] % x)); yy.erase(a[i] % y);
+        cerr << res << nl;
+    }
+    
+    cout << res << nl;
 }
 int main()
 {
