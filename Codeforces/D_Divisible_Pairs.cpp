@@ -6,30 +6,17 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
-    vector<ll> a(n);
+    int n, x, y; cin >> n >> x >> y;
+    vector<int> a(n);
     for(auto &e : a) cin >> e;
-    for (int i = 0; i < n; i++)
-    {
-        if(i & 1) a[i] = -a[i];
-    }
-    
-    set<ll> st;
-    st.insert(0);
-    ll curr_sum = 0;
-    for (int i = 0; i < n; i++)
-    {
-        curr_sum += a[i];
 
-        if(st.count(curr_sum))
-        {
-            cout << "YES" << nl;
-            return;
-        }
-        st.insert(curr_sum);
+    int data = (x + y);
+    int cnt = 0;
+    for(auto e : a)
+    {
+        if(2 * e == data) cnt++;
     }
-    
-    cout << "NO" << nl;
+    cout << cnt << nl;
 }
 int main()
 {

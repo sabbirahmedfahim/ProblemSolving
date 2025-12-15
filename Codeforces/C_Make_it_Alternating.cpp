@@ -1,79 +1,45 @@
-// resolved from the editorial 
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-const ll N = 2E5 + 5, MOD = 998244353;
-ll fact[N + 1], factInv[N + 1];
-ll Pow(ll a, ll b) // O(log b)
-{
-    ll ans = 1 % MOD;
-    a %= MOD;
-    if (a < 0) a += MOD;
-    while (b) 
-    {
-        if (b & 1) ans = (ans * a) % MOD;
-        a = (a * a) % MOD;
-        b >>= 1;
-    }
-    return ans;
-}
-void build_fact()
-{
-    fact[0] = fact[1] = 1;
-    for (ll i = 2; i <= N; i++) fact[i] = 1ll * (fact[i - 1] * i) % MOD;
-    
-    factInv[N] = Pow(fact[N], MOD-2);
-    for (ll i = N-1; i >= 0; i--) factInv[i] = (factInv[i + 1] * (i + 1)) % MOD;
-}
-ll nCr(ll n, ll r)
-{
-    if(n < r or n < 0 or r < 0) return 0;
-    return ((fact[n] * factInv[r]) % MOD) * factInv[n - r] % MOD;
-}
-ll nPr(ll n, ll r) // nPr = nCr * r!
-{
-    if(n < r or n < 0 or r < 0) return 0;
-    return (fact[n] * factInv[n - r]) % MOD;
-}
-
+const ll N = 2E5, MOD = 998244353;
 void solve()
 {
     string s; cin >> s;
+    int n = s.size();
 
-    ll tot_op = 0, totWays = 1;
-    vector<ll> ways;
-    for (int i = 0; i < s.size(); )
+    vector<int> diff;
+    int curr = 1;
+    for (int i = 1; i < n; i++)
     {
-        ll cnt = 1;
-        char ch = s[i];
-        i++;
-        while (i < s.size() && s[i] == ch)
+        if(s[i] != s[i - 1])
         {
-            cnt++; i++;
+            if(curr > 1) diff.push_back(curr);
+            curr = 1;
         }
-        if(cnt > 1)
+        else 
         {
-            // cerr << cnt << nl;
-            tot_op += cnt - 1;
-            ways.push_back(cnt);
+            curr++;
         }
     }
+    if(curr > 1) diff.push_back(curr);
 
-    // total ways is the product of all block sizes (its very much important to understand)
-    for (int i = 0; i < ways.size(); i++)
+    int tot_op = 0;
+    for (int i = 0; i < diff.size(); i++)
     {
-        totWays = (totWays * ways[i]) % MOD;
+        tot_op += diff[i] - 1;
     }
+    
 
-    totWays = (nPr(tot_op, tot_op) * totWays) % MOD; // == (fact[tot_op] * totWays)
-    /*
-    Learning --> nPr(n, n) = n! 
-    */
-
-    cout << tot_op << " " << max(1ll, totWays) << nl;
+    cout << tot_op << " ";
+    int tot_sequence_of_op = 1;
+    for (int i = 0; i < diff.size(); i++)
+    {
+        tot_sequence_of_op = (tot_sequence_of_op * )
+    }
+    
 }
 int main()
 {
