@@ -1,4 +1,3 @@
-// Resolved from the editorial
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -7,24 +6,26 @@
 using namespace std;
 void solve()
 {
-    int n, x, y; cin >> n >> x >> y;
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
+    int n, goods; string s; cin >> n >> goods >> s;
 
-    map<pair<int, int>, int> mp;
+    int zero = count(all(s), '0');
+    int one = count(all(s), '1');
 
-    ll cnt = 0;
-    for (int i = 0; i < n; i++)
+    if((zero / 2 + one / 2) < goods)
     {
-        int xx = a[i] % x;
-        int yy = a[i] % y;
+        cout << "NO" << nl; return;
+    }
 
-        cnt += mp[{(x - xx) % x, yy}];
-
-        mp[{xx, yy}]++;
+    int bads = n / 2 - goods;
+    if(min(zero, one) < bads)
+    {
+        cout << "NO" << nl; return;
     }
     
-    cout << cnt << nl;
+    zero -= bads; one -= bads;
+
+    if(zero % 2 == 0 && one % 2 == 0) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {
