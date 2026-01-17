@@ -7,27 +7,12 @@ using namespace std;
 void solve()
 {
     int n; cin >> n;
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
-
-    vector<int> b = a;
-    sort(all(b));
-    map<int, int> mp;
-    for (int i = 0; i < n; i++)
+    if(n <= 3)
     {
-        if(i & 1) mp[b[i]] = 2;
-        else mp[b[i]] = 1;
+        cout << n << nl; return;
     }
-    
-    for (int i = 0; i < n - 1; i++)
-    {
-        if(mp[a[i]] == mp[a[i + 1]])
-        {
-            cout << "NO" << nl; return;
-        }
-    }
-    
-    cout << "YES" << nl;
+    if(n % 6 == 0 || (n % 6) % 2 == 0) cout << 0 << nl;
+    else cout << 1 << nl;
 }
 int main()
 {

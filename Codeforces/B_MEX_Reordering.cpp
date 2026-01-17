@@ -10,17 +10,24 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    vector<int> bits(30);
-    for (int i = 0; i < n; i++)
+    int secondMax = 150;
+    for(auto e : a)
     {
-        for (int bit = 0; bit < 30; bit++)
-        {
-            bits[bit] += (a[i] >> bit) & 1;
-        }
+        if(e > 0) secondMax = min(e, secondMax);
     }
 
-    print(bits);
+    map<int,int> mp;
+    for(auto e : a) mp[e]++;
 
+    if(mp.count(0) && mp.count(1))
+    {
+        cout << "YES" << nl;
+    }
+    else if(mp.count(0) && mp[0] == 1 && secondMax > 1)
+    {
+        cout << "YES" << nl; 
+    }
+    else cout << "NO" << nl;
 }
 int main()
 {
