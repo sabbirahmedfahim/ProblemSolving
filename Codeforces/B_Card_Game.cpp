@@ -1,20 +1,27 @@
+// resolved from the editorial (-_-)
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+int getAns(int x, int y)
+{
+    if(x > y) return 1;
+    else if(x < y) return -1;
+    else return 0;
+}
 void solve()
 {
-    int a, b, c, d; cin >> a >> b >> c >> d;
-    int cnt = 0;
+    int a,b,c,d; cin >>a>>b>>c>>d;
 
-    if(a > c && b > d) cnt++;
-    if(a > d && a > d) cnt++;
-    if(b > c && a > d) cnt++;
-    if(b > d && a > c) cnt++;
+    int res = 0;
+    if((getAns(a, c) + getAns(b, d) > 0)) res++;
+    if((getAns(a, d) + getAns(b, c) > 0)) res++;
+    if((getAns(b, c) + getAns(a, d) > 0)) res++;
+    if((getAns(b, d) + getAns(a, c) > 0)) res++;
 
-    cout << cnt << nl;
+    cout << res << nl;
 }
 int main()
 {
@@ -23,7 +30,6 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        // cout << "TEST CASE-" << tt << nl;
         solve();
     }
 
