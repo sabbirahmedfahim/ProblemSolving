@@ -8,22 +8,15 @@ void solve()
 {
     int n; cin >> n;
 
-    int win = n, lose = 0, res = 0;
-
-    while(!(win == 1 && lose == 1))
+    bool ok = false;
+    while (n--)
     {
-        int willAdd = win / 2;
-        res += win / 2; res += lose / 2;
-
-        win = win / 2 + (win & 1); 
-        lose = lose / 2 + (lose & 1);
-
-        lose += willAdd;
-
-        // cerr << win << " : " << lose << nl;
+        int data; cin >> data;
+        if(data == 67) ok = true;
     }
-
-    cout << res + 1 << nl;
+    
+    if(ok) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {
