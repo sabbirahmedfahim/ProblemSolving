@@ -1,3 +1,4 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -8,46 +9,32 @@ void solve()
 {
     int x, y ; cin >> x >> y;
 
-    int ans;
+    if(abs(x - y) <= 1)
+    {
+        cout << 1 << nl;
+        for (int i = 0; i < x; i++) cout << 1 << ' ';
+        for (int i = 0; i < y; i++) cout << -1 << ' ';
+        cout << nl;
+
+        return;
+    }
+
+    int diff = abs(x - y);
+
+    set<int> st;
+    for (int i = 1; i * i <= diff; i++)
+    {
+        if(diff % i == 0)
+        {
+            st.insert(i);
+            st.insert(diff / i);
+        }
+    }
     
-    if(min(x, y) == 0)
-    {
-        int X = max(x, y);
-        ans = 2;
-        for (int i = 1; i < 29; i++)
-        {
-            if(pow(2, i) == X)
-            {
-                ans = max(ans, i);
-            }
-        }
-    }
-    else if(x % 2 != y % 2 || max(x, y) == 1) ans = 1;
-    else if(x == y) 
-    {
-        int X = max(x, y);
-        ans = 2;
-        for (int i = 1; i < 29; i++)
-        {
-            if(pow(2, i) == X)
-            {
-                ans = max(ans, i);
-            }
-        }
-    }
-    else ans = 2;
-
-    cout << ans << nl;
-
-    for (int i = 0; i < x; i++)
-    {
-        cout << 1 << ' ';
-    }
-    for (int i = 0; i < y; i++)
-    {
-        cout << -1 << ' ';
-    }
-    cout << nl; 
+    cout << st.size() << nl;
+    for (int i = 0; i < x; i++) cout << 1 << ' ';
+    for (int i = 0; i < y; i++) cout << -1 << ' ';
+    cout << nl;
 }
 int main()
 {
