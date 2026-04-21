@@ -1,26 +1,57 @@
-#include <bits/stdc++.h>
-
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-
-using namespace std;
-
-template <typename T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // less_equal for multiset
-
-int main() 
-{ 
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
-
-    
-
-    return 0;
-}
-
-/* 
-k-th smallest element (0-based) → *o_mulset.find_by_order(x)
-count of elements strictly < x → o_mulset.order_of_key(x)
-
-erase from multiset → 
-o_mulset.erase(o_mulset.find_by_order(o_mulset.order_of_key(x)));
-*/
+class NODE
+{
+public:
+    int val;
+    NODE *next;
+    NODE(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+    }
+};
+class myQueue
+{
+public:
+    NODE *head = NULL;
+    NODE *tail = NULL;
+    int sz = 0;
+    void push(int val)
+    {
+        sz++;
+        NODE *newNode = new NODE(val);
+        if (head == NULL)
+        {
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+        tail->next = newNode;
+        tail = newNode;
+    }
+    void pop()
+    {
+        sz--;
+        NODE *deleteNode = head;
+        head = head->next;
+        delete deleteNode;
+        // if (head == NULL) // visual representation needed
+        // {
+        //     tail = NULL;
+        // }
+    }
+    int front()
+    {
+        return head->val;
+    }
+    int size()
+    {
+        return sz;
+    }
+    bool empty()
+    {
+        if (sz == 0)
+            return true;
+        else
+            return false;
+    }
+};
