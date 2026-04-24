@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+#define nl '\n'
+#define ll long long
+#define all(c) c.begin(),c.end()
+#define print(c) for(auto e : c) cout << e << " "; cout << nl
+using namespace std;
+const int N = 1E3 + 5;
+char mat[N][N]; // change data type ***
+bool vis[N][N];
+int n, m;
+int si, sj, di, dj;
+vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+bool is_valid(int ci, int cj)
+{
+    return (ci < n && ci >= 0 && cj < m && cj >= 0);
+}
+
+int cntApartments = 0;
+void dfs(int si, int sj)
+{
+    vis[si][sj] = true;
+    cntApartments++;
+
+    for (int i = 0; i < 4; i++)
+    {
+        int ci = si + d[i].first;  
+        int cj = sj + d[i].second; 
+ 
+        if(is_valid(ci, cj) && !vis[ci][cj] && mat[ci][cj] == '.') // change data type ***
+        {
+            dfs(ci, cj);
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+    {
+        string s; cin >> s;
+        for (int j = 0; j < m; j++)
+        {
+            mat[i][j] = s[j];
+        }
+    }
+    memset(vis, false, sizeof(vis));
+ 
+    vector<int> apartments;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if(vis[i][j] == false && mat[i][j] == '.')
+            {
+                cntApartments = 0;
+
+                dfs(i, j);
+
+                apartments.push_back(cntApartments);
+            }
+        }
+    }
+
+    if(apartments.empty()) 
+    {
+        cout << 0 << nl; return 0;
+    }
+
+    sort(all(apartments));
+    print(apartments);
+ 
+    return 0;
+}

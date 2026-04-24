@@ -6,7 +6,18 @@
 using namespace std;
 void solve()
 {
+    string s; cin >> s;
+
+    int cnt = 0;
+    for (int i = 1; i < s.size(); i++)
+    {
+        if(s[i] == s[i - 1]) cnt++;
+    }
+
+    // cerr << cnt << nl;
     
+    if(cnt > 2) cout << "NO" << nl;
+    else cout << "YES" << nl;
 }
 int main()
 {
