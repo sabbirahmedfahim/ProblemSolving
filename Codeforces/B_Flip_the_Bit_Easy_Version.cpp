@@ -1,3 +1,4 @@
+// resolved
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -6,50 +7,23 @@
 using namespace std;
 void solve()
 {
-    int n, k; cin >> n >> k;
+    int n, k; cin >> n >> k; 
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
     int idx; cin >> idx; idx--;
-
-    int cost = 0;
-    if(a[idx] != k) 
-    {
-        a[idx] = k; cost++;
-    }
-
     int left = 0, right = 0;
-
-    int prev = a[idx];
-    for (int i = idx - 1; i >= 0; i--)
-    {
-        if(a[i] != prev) left++;
-
-        prev = a[i];
-    }
-    
-    prev = a[idx];
-    for (int i = idx + 1; i < n; i++)
-    {
-        if(a[i] != prev) right++;
-
-        prev = a[i];
-    }
-
-    int kombe = 0;
 
     for (int i = 0; i < idx; i++)
     {
-        if(a[i] == k) kombe++;
-        break; 
+        if(a[i] != a[i + 1]) left++;
     }
     for (int i = n - 1; i > idx; i--)
     {
-        if(a[i] == k) kombe++;
-        break; 
+        if(a[i] != a[i - 1]) right++;
     }
 
-    cout << max(left, right) + cost - (abs(left - right) % 2 == 1) << nl;
+    cout << max(left, right) + (max(left, right) & 1) << nl;
 }
 int main()
 {
