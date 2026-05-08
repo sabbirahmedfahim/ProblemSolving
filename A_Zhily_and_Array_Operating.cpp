@@ -4,27 +4,25 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-
-bool isRoy(deque<int> a, bool who, int p1, int p2)
-{
-    // if(a.empty()) return false;
-    if()
-
-    if(who)
-    {
-        bool nibo 
-    }
-}
 void solve()
 {
-    int n; cin >> n;
-    deque<int> a(n);
+    int n; cin >>n;
+    vector<ll> a(n);
     for(auto &e : a) cin >> e;
 
-    deque<int> vis(n, false);
+    for (int i = n - 1; i > 0; i--)
+    {
+        ll data = a[i] + a[i - 1];
+        if(data > a[i - 1]) a[i - 1] = data;
+    }
+    
+    int cnt = 0;
+    for(auto e : a)
+    {
+        if(e > 0) cnt++;
+    }
 
-    if(isRoy(a, true, 2, 2)) cout << "Roy" << nl;
-    else cout << "Hridoy" << nl;
+    cout << cnt << nl;
 }
 int main()
 {
