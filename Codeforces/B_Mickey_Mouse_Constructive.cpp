@@ -1,39 +1,42 @@
-// resolved
+// fixed mathematical issues
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-void solve()
+void solve(int g)
 {
-    int x, y ; cin >> x >> y;
+    int x, y; cin >> x >> y; // x -> 1, y -> -1
+    int realX = x, realY = y;
+    if(x > y) swap(x, y);
 
-    if(abs(x - y) <= 1)
+    int cnt = 0;
+    if(x == y)
     {
         cout << 1 << nl;
-        for (int i = 0; i < x; i++) cout << 1 << ' ';
-        for (int i = 0; i < y; i++) cout << -1 << ' ';
+        for (int i = 0; i < realX; i++) cout << 1 << " ";
+        for (int i = 0; i < realY; i++) cout << -1 << " ";
         cout << nl;
 
         return;
     }
 
-    int diff = abs(x - y);
+    int Y = y - x;
 
-    set<int> st;
-    for (int i = 1; i * i <= diff; i++)
+    for (int i = 1; i * i <= Y; i++)
     {
-        if(diff % i == 0)
+        if(Y % i == 0) 
         {
-            st.insert(i);
-            st.insert(diff / i);
+            cnt++;
+            
+            if(Y / i != i) cnt++;
         }
     }
-    
-    cout << st.size() << nl;
-    for (int i = 0; i < x; i++) cout << 1 << ' ';
-    for (int i = 0; i < y; i++) cout << -1 << ' ';
+
+    cout << cnt << nl;
+    for (int i = 0; i < realX; i++) cout << 1 << " ";
+    for (int i = 0; i < realY; i++) cout << -1 << " ";
     cout << nl;
 }
 int main()
@@ -43,7 +46,7 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        solve();
+        solve(tt);
     }
 
     return 0;
