@@ -1,9 +1,20 @@
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
+#define int ll
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+int getPenalty(vector<int> & x)
+{
+    int penalty = 0;
+    for (int i = 0; i < x.size() - 1; i++)
+    {
+        if(x[i] < x[i + 1]) penalty++;
+    }
+    
+    return penalty;
+}
 void solve()
 {
     int n; cin >> n;
@@ -11,59 +22,38 @@ void solve()
     for(auto &e : a) cin >> e;
 
     vector<int> one, two, three, four;
-    one.push_back(a.back());
-
-    for (int i = n - 2; i >= 0; i--)
-    {
-        if(one.back() <= a[i] && !two.empty() && two.back() <= a[i]) 
-        {
-            if(a[i] - one.back() <= a[i] - two.back()) one.push_back(a[i]);
-            else two.push_back(a[i]);
-        }
-        else if(one.back() <= a[i]) one.push_back(a[i]);
-        else two.push_back(a[i]);
-    }
-    reverse(all(one)); reverse(all(two));
     
-    three.push_back(a[0]);
+    one.push_back(a[0]);
     for (int i = 1; i < n; i++)
     {
-        if(three.back() >= a[i] && !four.empty() && four.back() >= a[i]) 
+        if(!two.empty() && one.back() >= a[i] && two.back() >= a[i])
         {
-            if(three.back() - a[i] <= four.back() - a[i]) four.push_back(a[i]);
-            else four.push_back(a[i]);
+            if(one.back() > two.back()) two.push_back(a[i]);
+            else one.push_back(a[i]);
         }
-        else if(three.back() >= a[i]) three.push_back(a[i]);
-        else four.push_back(a[i]);
+        else if(two.empty())
+        {
+            if(i + 1 < n && a[i] >= a[i + 1]) 
+            {
+                if(one.back() > a[i + 1]) two.push_back(a[i]);
+                else one.push_back(a[i]);
+            }
+            else if(one.back() >= a[i]) one.push_back(a[i]);
+            else two.push_back(a[i]);
+        }
+        else if(one.back() >= a[i]) one.push_back(a[i]);
+        else if(one.back() > two.back()) two.push_back(a[i]);
+        else one.push_back(a[i]);
     }
-
-    // print(one); print(two); 
-    // cout << nl;
-    // print(three); print(four);
     
-    int cnt1 = 0, cnt2 = 0;
-    for (int i = 1; i < one.size(); i++)
-    {
-        if(one[i - 1] < one[i]) cnt1++;
-    }
-    for (int i = 1; i < two.size(); i++)
-    {
-        if(two[i - 1] < two[i]) cnt1++;
-    }
+    int cnt1 = getPenalty(one);
+    if(!two.empty()) cnt1 += getPenalty(two);
 
-    for (int i = 1; i < three.size(); i++)
-    {
-        if(three[i - 1] < three[i]) cnt2++;
-    }
-    for (int i = 1; i < four.size(); i++)
-    {
-        if(four[i - 1] < four[i]) cnt2++;
-    }
+    // print(one); print(two);
 
-    // cerr << cnt1 << " " << cnt2 << nl;
-    cout << min(cnt1, cnt2) << nl;
+    cout << cnt1 << nl;
 }
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
