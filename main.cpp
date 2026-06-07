@@ -1,36 +1,51 @@
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long
+#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
     int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin>>e;
 
-    map<int, int> mp;
-    for (int i = 2; i * i <= n; i++)
+    vector<int> bits(30);
+    for(auto e : a)
     {
-        while(n % i == 0)
+        for (int bit = 0; bit < 30; bit++)
         {
-            mp[i]++;
-            n /= i;
+            bits[bit] ^= (e >> bit) & 1;
         }
     }
-    
-    if(n > 1) mp[n]++;
 
-    // if(mp.empty()) mp[n]++;
-
-    int m = 1;
-    for(auto [x, y] : mp)
+    // print(bits);
+    int mx = 0;
+    for(auto e : a)
     {
-        if(y & 1) m *= x;
+        int curr = 0;
+        for (int bit = 0; bit < 30; bit++)
+        {
+            bits[bit] ^= (e >> bit) & 1;
+        }
+        for (int bit = 0; bit < 30; bit++)
+        {
+            if(bits[bit]) curr += (1 << bit);
+        }
+
+        print(bits);
+
+        mx = max(mx, curr);
+
+        for (int bit = 0; bit < 30; bit++)
+        {
+            bits[bit] ^= (e >> bit) & 1;
+        }
     }
 
-    cout << m << nl;
+    cout << mx << nl;
 }
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 

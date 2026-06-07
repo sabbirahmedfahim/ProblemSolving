@@ -1,0 +1,1 @@
+{"name":"Local: C","url":"/Users/sabbirahmedfahim/Documents/Programming/ProblemSolving/C.cpp","tests":[{"id":1780678890841,"input":"3 2 9\n2 7\n","output":"2"},{"id":1780678899900,"input":"1 2 4\n8 4\n","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/sabbirahmedfahim/Documents/Programming/ProblemSolving/C.cpp","group":"local","local":true}
