@@ -6,7 +6,13 @@
 using namespace std;
 void solve()
 {
-    
+    int n; string s; cin >> n >> s;
+
+    int l = count(all(s), '(');
+    int r = count(all(s), ')');
+
+    if(l == r) cout << "YES" << nl;
+    else cout << "NO" << nl;
 }
 int main()
 {

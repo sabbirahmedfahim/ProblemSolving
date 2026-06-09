@@ -6,7 +6,13 @@
 using namespace std;
 void solve()
 {
-    
+    int x, y; cin >> x >> y;
+
+    if((x & 1) && (y & 1))
+    {
+        cout << "NO" << nl;
+    }
+    else cout << "YES" << nl;
 }
 int main()
 {

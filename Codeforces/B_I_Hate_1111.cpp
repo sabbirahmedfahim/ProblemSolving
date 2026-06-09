@@ -1,3 +1,4 @@
+// resolved from the Editorial
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -6,7 +7,20 @@
 using namespace std;
 void solve()
 {
+    int n; cin >> n;
+
+    for (int i = 1; i <= 20; i++)
+    {
+        if(n % 11 == 0)
+        {
+            cout << "YES" << nl; return;
+        }
+
+        n -= 111;
+        if(n < 0) break;
+    }
     
+    cout << "NO" << nl;
 }
 int main()
 {

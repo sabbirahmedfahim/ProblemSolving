@@ -6,7 +6,20 @@
 using namespace std;
 void solve()
 {
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
+    sort(all(a)); reverse(all(a));
+
+    for (int i = 0; i < n - 2; i++)
+    {
+        if(a[i] % a[i + 1] != a[i + 2])
+        {
+            cout << -1 << nl; return;
+        }
+    }
     
+    cout << a[0] << " " << a[1] << nl;
 }
 int main()
 {

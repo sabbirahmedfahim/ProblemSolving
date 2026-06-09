@@ -10,83 +10,55 @@ void solve()
     int n, k; cin >> n >> k;
     vector<int> a(n);
     for(auto &e : a) cin >> e;
+    sort(all(a));
 
-    if(k >= 3) // ok
+    if(k >= 3)
     {
         cout << 0 << nl; return;
     }
 
     if(k == 1)
     {
-        sort(all(a));
         int ans = a[0];
-        for (int i = 0; i < n - 1; i++)
-        {
-            ans = min(ans, a[i + 1] - a[i]);
-        }
-        
+        for (int i = 0; i < n - 1; i++) ans = min(ans, a[i + 1] - a[i]);
         cout << ans << nl;
     }
     
     if(k == 2)
     {
         vector<int> allPossibleAns;
-        sort(all(a));
         allPossibleAns.push_back(a[0]); // jodi array smallest value hoy
 
         vector<int> mins;
-        for (int i = 0; i < n - 1; i++)
-        {
-            mins.push_back(a[i + 1] - a[i]);
-            // cerr << a[i] << " " << a[i + 1] << nl;
-        }
-        sort(all(mins));
-
-        allPossibleAns.push_back(mins.front());
-
-        // print(mins);
-        // print(allPossibleAns);
-        // cout << nl;
-
-        // binary search ...??
         for (int i = 0; i < n; i++)
         {
-            if(a[i] <= (ll)mins.back()) 
+            // mins.push_back(a[i + 1] - a[i]);
+            for (int j = 0; j < n; j++)
             {
-                int lo = 0, hi = (ll) mins.size() - 1, res = -1;
-                while(lo <= hi)
-                {
-                    int mid = lo + (hi - lo) / 2ll;
-                    if(mins[mid] >= a[i]) 
-                    {
-                        res = mins[mid];
-                        hi = mid - 1;
-                    }
-                    else lo = mid + 1;
-                }
+                if(i == j) continue;
 
-                allPossibleAns.push_back(res - a[i]);
+                mins.push_back(abs(a[i] - a[j]));
             }
-            if(a[i] >= (ll)mins.front()) 
-            {
-                int lo = 0, hi = mins.size() - 1, res = -1;
-                while(lo <= hi)
-                {
-                    int mid = lo + (hi - lo) / 2ll;
-                    if(mins[mid] <= a[i]) 
-                    {
-                        res = mins[mid];
-                        lo = mid + 1;
-                    }
-                    else hi = mid - 1;
-                }
-                
-                allPossibleAns.push_back(a[i] - res);
-            }
+        }
+        sort(all(mins));
+        allPossibleAns.push_back(mins.front());
+        sort(all(allPossibleAns)); reverse(all(allPossibleAns));
 
-            // print(allPossibleAns);
+        sort(all(a));
+        for (int i = 0; i < a.size(); i++)
+        {
+            auto it = lower_bound(all(mins), a[i]);
+
+            if(it != mins.end()) allPossibleAns.push_back(abs(*it - a[i]));
+        }
+        for (int i = 0; i < mins.size(); i++)
+        {
+            auto it = lower_bound(all(a), mins[i]);
+
+            if(it != a.end()) allPossibleAns.push_back(abs(*it - mins[i]));
         }
         
+
         sort(all(allPossibleAns));
         cout << allPossibleAns.front() << nl;
     }

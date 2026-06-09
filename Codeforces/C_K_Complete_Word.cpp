@@ -1,7 +1,6 @@
-// resolved [i should solve it again]
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
+#define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
@@ -9,37 +8,53 @@ void solve()
 {
     int n, k; string s; cin >> n >> k >> s;
 
-    int res = 0;
-    for (int i = 0; i < k/2; i++)
-    {
-        map<char, int> mp;
-        for (int j = i; j < n; j+=k) mp[s[j]]++;
-        for (int j = k-i-1; j < n; j+=k) mp[s[j]]++;
+    map<char, int> mp;
 
-        int mx_occ = 0, tot_occ = 0;
-        for(auto [key, val] : mp)
+    int ans = 0;
+    vector<char> adj[k];
+    for (int i = 0; i < k; i++)
+    {
+        mp.clear();
+        for (int j = i; j < n; j += k)
         {
-            mx_occ = max(mx_occ, val);
-            tot_occ += val;
+            mp[s[j]]++;
+            adj[i].push_back(s[j]);
         }
-        res += (tot_occ - mx_occ);
+
+        int mx = 0, tot = 0;
+        char who;
+        for(auto [x, y] : mp)
+        {
+            // cerr << x << " : " << y << nl;
+            if(mx < y)
+            {
+                mx = y; who = x;
+            }
+            tot += y;
+        }
+        // cerr << nl;
+
+        ans += tot - mx;
+
+        for (int j = i; j < n; j += k)
+        {
+            s[j] = who;
+        }
+    }
+
+    cout << s << nl;
+    for (int i = 0, j = n - 1; i <= j; i++, j--)
+    {
+        if(s[i] != s[j]) ans++;
     }
     
-    if(k & 1)
-    {
-        map<char, int> mp;
-        for (int j = k/2; j < n; j+=k) mp[s[j]]++;
+    
+    cout << ans << nl;
 
-        int mx_occ = 0, tot_occ = 0;
-        for(auto [key, val] : mp)
-        {
-            mx_occ = max(mx_occ, val);
-            tot_occ += val;
-        }
-        res += (tot_occ - mx_occ);
-    }
-
-    cout << res << nl;
+    // for(auto e : adj)
+    // {
+    //     print(e);
+    // }
 }
 int main()
 {
@@ -48,7 +63,6 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        // cout << "TEST CASE-" << tt << nl;
         solve();
     }
 
