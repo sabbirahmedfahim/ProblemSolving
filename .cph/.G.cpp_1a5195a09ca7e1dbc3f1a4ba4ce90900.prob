@@ -1,0 +1,1 @@
+{"name":"Local: G","url":"/Users/sabbirahmedfahim/Documents/Programming/ProblemSolving/G.cpp","tests":[{"id":1780981860237,"input":"2 3\n+ 0 + 3 - 5\n+ 1 - 0 - 12\n","output":"2 2 1 \n1 1 3 \n0 2 17 \n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/sabbirahmedfahim/Documents/Programming/ProblemSolving/G.cpp","group":"local","local":true}
