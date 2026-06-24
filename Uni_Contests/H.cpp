@@ -4,22 +4,27 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
+int digitSum(int x)
+{
+    int sum = 0;
+    while (x)
+    {
+        sum += x % 10;
+        x /= 10;
+    }
+    
+    return sum;
+}
 void solve()
 {
-    int n; string s; cin >> n >> s;
+    int n; cin >> n;
 
-    map<char, int> mp;
-    for(auto e : s) mp[e]++;
-    
-    for(auto [x, y] : mp)
+    while (n > 9)
     {
-        if(y > 1) 
-        {
-            cout << "NO" << nl; return;
-        }
+        n = digitSum(n);
     }
-
-    cout << "YES" << nl;
+    
+    cout << n << nl;
 }
 int main()
 {

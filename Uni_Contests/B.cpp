@@ -9,31 +9,23 @@ int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int n; cin >> n; n++;
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
+    int n; cin >> n;
+    // vector<int> a(n);
+    // for(auto &e : a) cin >> e;
 
-    vector<int> dp(n, 1E9);
-
-    dp[0] = 0;
-    for (int i = 1; i < n; i++) // skip i == 0 as first element
+    int tmp = n; 
+    bool ok = false;
+    while (tmp)
     {
-        for (int j = 1; j * j <= a[i]; j++)
-        {
-            if(a[i] % j == 0)
-            {
-                int ekhta = i - j;
-                if(ekhta >= 0 && dp[ekhta] != 1E9) dp[ekhta] = min(dp[i], 1 + dp[ekhta]);
+        if(tmp % 10 == 7) ok = true;
 
-                int arekta = i - (a[i] / j);
-                if(arekta >= 0 && dp[arekta] != 1E9) dp[arekta] = min(dp[i], 1 + dp[arekta]);
-            }
-        }
+        tmp /= 10;
     }
-
-    if(dp[n - 1] == 1E9) cout << -1 << nl;
-    else cout << dp[n] << nl;
     
+    if(!ok && n % 7 != 0) cout << 0 << nl;
+    if(!ok && n % 7 == 0) cout << 1 << nl;
+    if(ok && n % 7 != 0) cout << 2 << nl;
+    if(ok && n % 7 == 0) cout << 3 << nl;
 
     return 0;
 }

@@ -6,20 +6,18 @@
 using namespace std;
 void solve()
 {
-    int n; string s; cin >> n >> s;
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &e : a) cin >> e;
 
-    map<char, int> mp;
-    for(auto e : s) mp[e]++;
-    
-    for(auto [x, y] : mp)
+    int curr_mn = a[0], res = 0;
+    for (int i = 0; i < n; i++)
     {
-        if(y > 1) 
-        {
-            cout << "NO" << nl; return;
-        }
+        curr_mn = min(curr_mn, a[i]);
+        res += curr_mn;
     }
-
-    cout << "YES" << nl;
+    
+    cout << res << nl;
 }
 int main()
 {
