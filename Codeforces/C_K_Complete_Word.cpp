@@ -1,3 +1,4 @@
+// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define ll long long
@@ -6,55 +7,62 @@
 using namespace std;
 void solve()
 {
-    int n, k; string s; cin >> n >> k >> s;
+    int n, k; cin >> n >> k;
+    string s; cin >> s;
+    string realS = s;
 
-    map<char, int> mp;
-
-    int ans = 0;
-    vector<char> adj[k];
-    for (int i = 0; i < k; i++)
+    map<int, vector<char>> mp;
+    for (int i = 0; i < n; i += k)
     {
-        mp.clear();
-        for (int j = i; j < n; j += k)
+        int l = i, r = i + k - 1, idx = 0;
+        while (l <= r)
         {
-            mp[s[j]]++;
-            adj[i].push_back(s[j]);
-        }
+            mp[idx].push_back(s[l]);
+            mp[idx].push_back(s[r]);
 
-        int mx = 0, tot = 0;
-        char who;
-        for(auto [x, y] : mp)
+            idx++, l++, r--;
+        }
+    }
+    
+    map<int, pair<char, int>> karKe;
+    for(auto [x, y] : mp)
+    {
+        map<char, int> freq;
+        for(auto e : y) freq[e]++;
+
+        char who; int mx = 0;
+        for(auto e : freq)
         {
-            // cerr << x << " : " << y << nl;
-            if(mx < y)
+            if(mx < e.second)
             {
-                mx = y; who = x;
+                mx = e.second;
+                who = e.first;
             }
-            tot += y;
         }
-        // cerr << nl;
 
-        ans += tot - mx;
-
-        for (int j = i; j < n; j += k)
-        {
-            s[j] = who;
-        }
+        karKe[x] = {who, mx};
     }
 
-    cout << s << nl;
-    for (int i = 0, j = n - 1; i <= j; i++, j--)
+    for (int i = 0; i < n; i += k)
     {
-        if(s[i] != s[j]) ans++;
-    }
-    
-    
-    cout << ans << nl;
+        int l = i, r = i + k - 1, idx = 0;
+        while (l <= r)
+        {
+            s[l] = karKe[idx].first;
+            s[r] = karKe[idx].first;
 
-    // for(auto e : adj)
-    // {
-    //     print(e);
-    // }
+            idx++, l++, r--;
+        }
+    }
+
+    // cout << s << nl;
+
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i] != realS[i]) cnt++;
+    }
+    cout << cnt << nl;
 }
 int main()
 {
@@ -68,3 +76,7 @@ int main()
 
     return 0;
 }
+/*
+wu(d)ixiaoxingxi(n)(g)h(e)clp
+ng(d)edgnngdedgn(n)(g)d(e)dgn
+*/
