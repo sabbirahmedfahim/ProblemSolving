@@ -1,29 +1,25 @@
+// resolved from the TLE eliminators (recommended! it really makes sense)
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long
+#define int long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n; cin>>n;
-    vector<int> a(n);
-    for(auto &e : a) cin >> e;
+    int n; cin >> n; 
 
-    for (int i = 0; i < n; i++)
+    int ans = 0;
+    int curr = 1;
+    while (n >= curr)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            if(__gcd(a[i], a[j]) <= 2)
-            {
-                cout << "Yes" << nl; return;
-            }
-        }
+        ans += n / curr;
+        curr *= 2ll;
     }
-    
-    cout << "No" << nl;
+
+    cout << ans << nl;
 }
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
