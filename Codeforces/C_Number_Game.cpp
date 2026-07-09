@@ -1,53 +1,40 @@
 #include <bits/stdc++.h>
 #define nl '\n'
-#define ll long long int
+#define ll long long
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
 void solve()
 {
-    int n; cin >> n; deque<int> dq(n); for(auto &e : dq) cin >> e; sort(all(dq));
+    int n; cin >> n;
 
-    auto canWePlace = [&](int mid)
+    if(n == 1 || n == 2)
     {
-        // mid -> candidate k
+        if(n == 1) cout << "FastestFinger" << nl;
+        else cout << "Ashishgup" << nl;
+        return;
+    }
 
-        deque<int> tmp = dq;
+    if(n & 1)
+    {
+        cout << "Ashishgup" << nl; return;
+    }
 
-        for (int i = 1; i <= mid; i++)
+    for (int i = 2; i * i <= n; i++)
+    {
+        if(n % i == 0)
         {
-            int data = mid - i + 1;
-            // if(tmp.empty() || data > tmp.back()) return false;
-
-            bool isFound = false;
-            for (int j = tmp.size()-1; j >= 0; j--)
+            int j = n / i;
+            if(i == 2 || j == 2) continue;
+            if(((i & 1) || (j & 1)) && (i % 2 == 0 || j % 2 == 0))
             {
-                if(tmp[j] <= data)
-                {
-                    tmp[j] = -1; sort(all(tmp)); 
-                    tmp.pop_front(); isFound = true;
-                    break;
-                }
+                // cerr << i << " : " << j;
+                cout << "Ashishgup" << nl; return;
             }
-            if(isFound == false) return false;
-            tmp.front() += data; sort(all(tmp));
         }
-        return true;
-    };
-
-    int l = 0, r = 105, mid, ans = -1;
-
-    while (l <= r)
-    {
-        mid = l + (r-l)/2;
-        if(canWePlace(mid))
-        {
-            ans = mid; l = mid + 1;
-        }
-        else r = mid - 1;
     }
     
-    cout << ans << nl;
+    cout << "FastestFinger" << nl;
 }
 int main()
 {
@@ -56,7 +43,6 @@ int main()
     int t; cin >> t;
     for(int tt = 1; tt <= t; tt++)
     {
-        // cout << "TEST CASE-" << tt << nl;  
         solve();
     }
 
