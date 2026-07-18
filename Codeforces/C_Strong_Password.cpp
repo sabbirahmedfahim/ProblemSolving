@@ -4,60 +4,53 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-set<string> allPossibleStr;
-void fun(map<int, vector<char>> mp, int idx, string curr)
-{
-    if(idx == mp.size())
-    {
-        allPossibleStr.insert(curr); return;
-    }
-
-    for(auto e : mp[idx])
-    {
-        fun(mp, idx + 1, curr + e);
-    }
-}
 void solve()
 {
-    allPossibleStr.clear();
-
     string s; cin >> s;
+
+    map<char, deque<int>> mp;
+    for (int i = 0; i < s.size(); i++)
+    {
+        mp[s[i]].push_back(i);
+    }
+    
     int m; cin >> m;
-    string x, y; cin >> x >> y;
+    string x, y; cin >> x >> y; 
 
-    map<int, vector<char>> mp;
-
+    int currIdx = -1;
     for (int i = 0; i < m; i++)
     {
-        char From = x[i], To = y[i];
-        for (char j = From; j <= To; j++)
+        int mx = currIdx;
+        char c;
+        for (char ch = x[i]; ch <= y[i]; ch++)
         {
-            mp[i].push_back(j);
-        }
-    }
+            while (!mp[ch].empty() && currIdx > mp[ch].front())
+            {
+                mp[ch].pop_front();
+            }
+            
+            if(mp[ch].empty())
+            {
+                cout << "YES" << nl; return;
+            }
 
-    fun(mp, 0, "");
-    
-    // print(allPossibleStr);
-
-    for(auto e : allPossibleStr)
-    {
-        deque<char> dq;
-        for(auto data : e) dq.push_back(data);
-
-        for(auto data : s) 
-        {
-            if(dq.front() == data) dq.pop_front();
-
-            if(dq.empty()) break;
+            if(mx < mp[ch].front())
+            {
+                c = ch;
+                mx = mp[ch].front();
+            }
         }
 
-        if(!dq.empty())
+        if(mx == currIdx)
         {
             cout << "YES" << nl; return;
         }
-    }
 
+        currIdx = mx;
+        mp[c].pop_front();
+        if(mp[c].empty()) mp.erase(c);
+    }
+    
     cout << "NO" << nl;
 }
 int main()
