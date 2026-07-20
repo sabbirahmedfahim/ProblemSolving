@@ -4,19 +4,15 @@
 #define all(c) c.begin(),c.end()
 #define print(c) for(auto e : c) cout << e << " "; cout << nl
 using namespace std;
-void solve()
-{
-    
-}
+
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int t; cin >> t;
-    for(int tt = 1; tt <= t; tt++)
-    {
-        solve();
-    }
+    string s = "Ab";
+    
+    int data = s[0];
+    cout << data;
 
     return 0;
 }
