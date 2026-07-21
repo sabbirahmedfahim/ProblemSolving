@@ -1,4 +1,3 @@
-// took hints
 #include <bits/stdc++.h>
 #define nl '\n'
 #define int long long
@@ -10,22 +9,29 @@ int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-    int n; cin >> n;
+    int n, k; cin >> n>>k;
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    a[0] = 1, a[n - 1] = 1;
+    set<int> st;
+    for(auto e : a) st.insert(e);
 
-    for (int i = 1; i < n; i++)
+    sort(all(a));
+
+    int cnt = 0;
+    set<int> vis;
+    for (int i = 0; i < n; i++)
     {
-        a[i] = min(a[i], a[i - 1] + 1);
-    }
-    for (int i = n - 2; i >= 0; i--)
-    {
-        a[i] = min(a[i], a[i + 1] + 1);
+        if(vis.count(a[i])) continue;
+        if(st.count(a[i] * k)) 
+        {
+            vis.insert(a[i] * k);
+        }
+
+        cnt++;
     }
     
-    cout << *max_element(all(a)) << nl;
+    cout << cnt << nl;
 
     return 0;
 }
