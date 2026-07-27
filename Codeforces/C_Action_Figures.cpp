@@ -8,51 +8,46 @@ void solve()
 {
     int n; string s; cin >> n >> s;
 
-    int toAdd = 0, sum = 0;
-    set<int> posOfOnes;
+    set<int> posOfOnes, posOfZeros;
     for (int i = 0; i < n; i++)
     {
-        posOfOnes.insert(i);
+        if(s[i] == '1') posOfOnes.insert(i);
+        else posOfZeros.insert(i);
     }
-    for (int i = n - 1; i > 0; i--)
+    // print(posOfOnes); 
+    // print(posOfZeros);
+    
+    int ans = 0;
+    for (int i = n - 1; i >= 0; i--)
     {
-        if(s[i] == s[i - 1] && *posOfOnes.begin() < i - 1)
-        {
-            sum += *posOfOnes.begin() + 1;
-            s[*posOfOnes.begin()] = '2';
-            s[i] = '2';
-            posOfOnes.erase(posOfOnes.begin());
+        int curr = 0;
+        if(s[i] == '1')
+        {   
+            auto it = posOfZeros.lower_bound(i);
+            
+            if(it != posOfZeros.begin())
+            {
+                it--;
+
+                curr += *it + 1;
+                // cerr << *it << ' ' << i  << " = " << curr << nl;
+                posOfZeros.erase(it);
+                posOfOnes.erase(i);
+            }
+
+            ans += curr;
         }
-        else break;
     }
     
+    vector<int> vec;
+    for(auto e : posOfOnes) vec.push_back(e);
+    for(auto e : posOfZeros) ans += e + 1;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < vec.size()/2 + (vec.size() & 1); i++)
     {
-        if(s[i] == '2') continue;
-
-        if(s[i] == '0') toAdd += i + 1;
-        else if(toAdd && s[i] == '1')
-        {
-            sum += toAdd;
-            toAdd = 0;
-            s[i] = '0';
-        }
+        ans += vec[i] + 1;
     }
-    // cerr << sum << " : " << s << nl;
-    
-
-    vector<int> addMore;
-    for (int i = 0; i < n; i++)
-    {
-        if(s[i] == '1') addMore.push_back(i + 1);
-    }
-    for (int i = 0; i < addMore.size() / 2 + (addMore.size() & 1); i++)
-    {
-        sum += addMore[i];
-    }
-
-    cout << sum << nl;
+    cout << ans << nl;
 }
 int32_t main()
 {
