@@ -10,15 +10,12 @@ void solve()
     // p = min(p, n);
 
     int mnDis = n - x;
-
-    for (int i = 1; i <= min(p, 10000ll); i++)
+    if(mnDis > (p * (p + 1)/2)) 
     {
-        int sum = (i * (i + 1ll)) / 2;
-        if((sum - mnDis) % n == 0)
-        {
-            cout << "Yes" << nl; return;
-        }
+        cout << "No" << nl; return;
     }
+    // cout << "have ans" << nl; return;   
+
     cout << "No" << nl;
 }
 int32_t main()
@@ -33,13 +30,3 @@ int32_t main()
 
     return 0;
 }
-/*
-1 -> 1
-2 -> 3
-3 -> 6
-4 -> 0
-5 -> 5
-7 -> 8
-
-0 1 3 5 6 8 
-*/
