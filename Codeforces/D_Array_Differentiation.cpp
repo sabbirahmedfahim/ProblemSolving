@@ -10,32 +10,35 @@ void solve()
     vector<int> a(n);
     for(auto &e : a) cin >> e;
 
-    vector<int> diff;
     set<int> st;
+    for(auto e : a)
+    {
+        if(e == 0) continue;
+        st.insert(e);
+    }
+
+    if(st.size() != n)
+    {
+        cout << "YES" << nl; return;
+    }
+
+    st.clear();
+    for(auto e : a) st.insert(e);
     for (int i = 0; i < n; i++)
     {
-        st.insert(a[i]);
         for (int j = 0; j < n; j++)
         {
-            diff.push_back(a[i] - a[j]);
-        }
-    }
-    
-    int cnt = 0;
-    for (int i = 0; i < diff.size(); i++)
-    {
-        for (int j = 0; j < diff.size(); j++)
-        {
-            if(st.count(diff[i] - diff[j]) || st.count(diff[j] - diff[i]))
+            if(i == j) continue;
+
+            int x = a[i] - a[j], y = a[j] - a[i];
+            if(st.count(x) || st.count(y))
             {
-                cnt++;
+                cout << "YES" << nl; return;
             }
         }
     }
-    // cout << cnt << nl;
-
-    if(cnt < n) cout << "NO" << nl;
-    else cout << "YES" << nl;
+    
+    cout << "NO" << nl;
 }
 int main()
 {
@@ -49,3 +52,9 @@ int main()
 
     return 0;
 }
+/*
+-2 4 5 => -6, 2, -7, 3, -1, 1
+2 4 5  => -2, 6, -3, 7, -1, 9
+
+
+*/

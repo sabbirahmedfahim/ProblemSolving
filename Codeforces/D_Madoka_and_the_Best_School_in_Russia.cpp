@@ -13,14 +13,9 @@ void solve()
     int cnt = 0;
     for (int i = 2; i * i <= x; i++)
     {
-        if(x % i == 0 && i % d == 0 && (x / i) % d == 0 && (i / d) % d != 0 && ((x / i) / d) % d != 0)
+        if(d % i == 0)
         {
-            // cerr << i << ' ' << x / i << nl;
-            cnt++;
-        }
-        if(x % i == 0 && i % d == 0 && (x / i) % d == 0)
-        {
-            cerr << "#" << i << ' ' << x / i << nl;
+            
         }
     }
     

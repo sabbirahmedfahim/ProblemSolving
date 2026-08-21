@@ -6,9 +6,21 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
+    vector<int> a(3);
+    for(auto &e : a) cin >> e;
+    sort(all(a));
+    // print(a); return;
 
-    cout << n / 2 << nl;
+    int mn = a.back() - a.front();
+    for (int i = 0; i < 100; i++)
+    {
+        a[2] = a[0] + a[1];
+        sort(all(a));
+
+        mn = min(mn, abs(a.back() - a.front()));
+    }
+
+    cout << mn << nl;
 }
 int main()
 {

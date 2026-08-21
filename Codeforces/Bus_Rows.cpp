@@ -6,9 +6,21 @@
 using namespace std;
 void solve()
 {
-    int n; cin >> n;
+    int n, m, x; cin >> n >> m >> x;
 
-    cout << n / 2 << nl;
+    int curr = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            curr++;
+
+            if(curr == x)
+            {
+                cout << min(i, n - i + 1) << nl; return;
+            }
+        }
+    }
 }
 int main()
 {

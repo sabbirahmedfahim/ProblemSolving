@@ -6,24 +6,27 @@
 using namespace std;
 void solve()
 {
-    int n,k; cin >> n >> k;
-    string x, y; cin >> x >> y;
+    int n; cin >> n;
 
-    map<char, int> mp;
-    for(auto e : x) mp[e]++;
-
-    if(x == y)
+    if(n % 3 == 0)
     {
-        cout << "Yes" << nl; return;
+        cout << 0 << nl; return;
     }
 
-    int totZinX = count(all(x), 'z'), totZinY = count(all(y), 'z');
-    if(totZinX > totZinY || k == n)
+    if((n + 1) % 3 == 0)
     {
-        cout << "No" << nl; return;
+        cout << 1 << nl; return;
     }
 
-    cout << "Yes" << nl;
+    if(n % 5 == 0) n += 5;
+    else n += 5 - (n % 5);
+
+    if(n % 3 == 0)
+    {
+        cout << 1 << nl; return;
+    }
+
+    cout << 2 << nl;
 }
 int main()
 {
