@@ -1,5 +1,6 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
+
     "files.associations": {
         "vector": "cpp",
         "map": "cpp",
@@ -29,7 +30,8 @@
         "string_view": "cpp",
         "ranges": "cpp"
     },
+
     "code-runner.executorMap": {
-        "cpp": "cd $dir && /opt/homebrew/bin/g++-15 -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+        "cpp": "cd \"$dir\" && /opt/homebrew/bin/g++-16 -std=c++17 \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\""
     }
 }
